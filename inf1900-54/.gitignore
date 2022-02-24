@@ -1,6 +1,0 @@
-*.o
-*.d
-*.map
-*.hex
-*.elf
-.vscode
