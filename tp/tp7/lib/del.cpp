@@ -1,14 +1,14 @@
 
-#include "DEL.h"
+#include "del.h"
 
-void DEL::DEL(uint8_t port,uint8_t pin1, uint8_t pin2)
+void del::del(uint8_t port,uint8_t pin1, uint8_t pin2)
 {
     port_ = port;
     pin1_ = pin1; //0
     pin2_ = pin2; //1
 }
 
-void DEL::DEL_GREEN()
+void del::delGreen()
 {
 
     port_ |= (1 << pin2_);
@@ -16,7 +16,7 @@ void DEL::DEL_GREEN()
 
 }
 
-void DEL::DEL_RED()
+void del::delRed()
 {
 
     port_ |= (1 << pin1_);
@@ -24,18 +24,18 @@ void DEL::DEL_RED()
 
 }
 
-void DEL::DEL_OFF()
+void del::delOff()
 {
     port_ &= ~((1 << pin2_) | (1 << pin1_));
 }
 
-void DEL::DEL_YELLOW() 
+void del::delYellow() 
 {
-    DEL_OFF();
+    delOff();
     while (true) {
-        DEL_GREEN();
+        delGreen();
         _delay_ms(5);
-        DEL_RED():
+        delRed():
         _delay_ms(5);
     }
 }
