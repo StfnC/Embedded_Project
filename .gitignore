@@ -3,4 +3,5 @@
 *.map
 *.hex
 *.elf
+*.a
 .vscode
