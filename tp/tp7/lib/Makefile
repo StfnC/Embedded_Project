@@ -23,13 +23,13 @@ MCU=atmega324pa
 
 # Nom de votre projet
 # (utilisez un seul mot, exemple: 'monprojet')
-PROJECTNAME=
+PROJECTNAME=libgg
 
 # Fichiers sources
 # Utilisez le suffixe .cpp pour les fichiers C++
 # Listez tous les fichiers a compiler, separes par
 # un espace. exemple: 'tp1.c tp2.cpp':
-PRJSRC= main.cpp
+PRJSRC=can.cpp memoire_24.cpp moteurPWM.cpp usart_communication.cpp
 
 # Inclusions additionnels (ex: -I/path/to/mydir)
 INC=
@@ -70,7 +70,8 @@ AVRDUDE=avrdude
 REMOVE=rm -f
 # HEXFORMAT -- format pour les fichiers produient .hex
 HEXFORMAT=ihex
-
+# Pour creer la librairie statique
+LIBRARY=ar
 
 
 ####### Options de compilation #######
@@ -87,6 +88,8 @@ CXXFLAGS=-fno-exceptions
 # Linker pour lier les librairies utilisees
 LDFLAGS=-Wl,-Map,$(TRG).map -mmcu=$(MCU)
 
+# Flags pour la creation de la librairie
+LIBFLAGS=-crs
 
 
 ####### Cible (Target) #######
@@ -95,6 +98,7 @@ LDFLAGS=-Wl,-Map,$(TRG).map -mmcu=$(MCU)
 TRG=$(PROJECTNAME).elf
 HEXROMTRG=$(PROJECTNAME).hex
 HEXTRG=$(HEXROMTRG) $(PROJECTNAME).ee.hex
+LIBTRG=$(PROJECTNAME).a
 
 
 
@@ -128,7 +132,11 @@ OBJDEPS=$(CFILES:.c=.o) \
 
 # Make all permet simplement de compiler le projet
 #
-all: $(TRG) $(HEXROMTRG)
+all: $(LIBTRG) $(TRG) $(HEXROMTRG)
+
+# Creation de la librairie statique
+$(LIBTRG): $(OBJDEPS)
+	$(LIBRARY) $(LIBFLAGS) $(LIBTRG) $<
 
 # Implementation de la cible
 $(TRG): $(OBJDEPS)
@@ -164,7 +172,7 @@ install: $(HEXROMTRG)
 # Make clean permet d'effacer tout les fichiers generes
 # lors de la compilation
 clean:
-	$(REMOVE) $(TRG) $(TRG).map $(OBJDEPS) $(HEXTRG) *.d
+	$(REMOVE) $(TRG) $(TRG).map $(OBJDEPS) $(HEXTRG) *.d *a
 
 # Pour plus d'information sur les phony target, consulter:
 # http://bit.ly/1WBQe61
