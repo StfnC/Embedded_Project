@@ -34,7 +34,7 @@ PRJSRC=lib_test.cpp
 # Inclusions additionnels (ex: -I/path/to/mydir)
 INC=-I ../lib/
 
-LIBINC=-L ../lib/
+LIBINC= -L ../lib/
 
 # Libraires a lier (ex: -lmylib)
 # FIXME: Rework this

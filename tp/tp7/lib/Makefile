@@ -136,7 +136,7 @@ all: $(LIBTRG)
 
 # Creation de la librairie statique
 $(LIBTRG): $(OBJDEPS)
-	$(LIBRARY) $(LIBFLAGS) $(LIBTRG) $<
+	$(LIBRARY) $(LIBFLAGS) $(LIBTRG) $(OBJDEPS)
 
 # Implementation de la cible
 $(TRG): $(OBJDEPS)
