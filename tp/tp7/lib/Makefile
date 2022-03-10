@@ -130,9 +130,9 @@ OBJDEPS=$(CFILES:.c=.o) \
 # make all, make install et make clean
 .PHONY: all install clean 
 
-# Make all permet simplement de compiler le projet
+# Make all permet simplement de creer la librairie statique
 #
-all: $(LIBTRG) $(TRG) $(HEXROMTRG)
+all: $(LIBTRG)
 
 # Creation de la librairie statique
 $(LIBTRG): $(OBJDEPS)
