@@ -1,8 +1,9 @@
-
+#include <util/delay.h>
 #include "del.h"
 
-void del::del(uint8_t port,uint8_t pin1, uint8_t pin2)
+del::del(uint8_t port,uint8_t pin1, uint8_t pin2)
 {
+    // FIXME: Maybe use initialization list
     port_ = port;
     pin1_ = pin1; //0
     pin2_ = pin2; //1
@@ -35,7 +36,7 @@ void del::delYellow()
     while (true) {
         delGreen();
         _delay_ms(5);
-        delRed():
+        delRed();
         _delay_ms(5);
     }
 }
