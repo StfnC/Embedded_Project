@@ -36,7 +36,7 @@ INC=-I ../lib/ -L ../lib/
 
 # Libraires a lier (ex: -lmylib)
 # FIXME: Rework this
-LIBS=-l gg
+LIBS=-l rene
 
 # Niveau d'optimization
 # Utilisez s (size opt), 1, 2, 3 ou 0 (off)
