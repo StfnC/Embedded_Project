@@ -32,7 +32,9 @@ PROJECTNAME=lib_test
 PRJSRC=lib_test.cpp
 
 # Inclusions additionnels (ex: -I/path/to/mydir)
-INC=-I ../lib/ -L ../lib/
+INC=-I ../lib/
+
+LIBINC=-L ../lib/
 
 # Libraires a lier (ex: -lmylib)
 # FIXME: Rework this
@@ -134,7 +136,7 @@ all: $(TRG) $(HEXROMTRG)
 # Implementation de la cible
 $(TRG): $(OBJDEPS)
 	$(CC) $(LDFLAGS) -o $(TRG) $(OBJDEPS) \
-	-lm $(LIBS)
+	-lm $(LIBS) $(LIBINC)
 
 # Production des fichiers object
 # De C a objet
