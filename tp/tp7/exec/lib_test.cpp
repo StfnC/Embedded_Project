@@ -1,11 +1,11 @@
 #include <avr/io.h>
-#include <usart_communication.h>
+#include <usart.h>
 
 int main() {
-    UsartInitialization();
+    usart usartCommunication;
 
     while (true) {
-        UsartTransmission(0xFF);
+        usartCommunication.transmit(0xFF);
     }
     
     return 0;

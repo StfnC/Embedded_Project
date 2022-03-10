@@ -1,8 +1,12 @@
-#include "usart_communication.h"
+#include "usart.h"
 
 #include <avr/io.h>
 
-void UsartInitialization(void) {
+usart::usart() {
+    usart::initialization();
+}
+
+void usart::initialization(void) {
     // 2400 bauds. Nous vous donnons la valeur des deux
 
     // premiers registres pour vous éviter des complications.
@@ -21,7 +25,7 @@ void UsartInitialization(void) {
     UCSR0C |= (1 << UCSZ01) | (1 << UCSZ00);
 }
 
-void UsartTransmission(uint8_t data) {
+void usart::transmit(uint8_t data) {
     // Copy pasted from p.174 of the ATmega documentation
 
     while (!(UCSR0A & (1 << UDRE0)))
@@ -29,7 +33,7 @@ void UsartTransmission(uint8_t data) {
     UDR0 = data;
 }
 
-uint8_t UsartReception(void) {
+uint8_t usart::receive(void) {
     // Copy pasted from p.177 of the ATmega documentation
 
     /* Wait for data to be received */
@@ -39,8 +43,8 @@ uint8_t UsartReception(void) {
     return UDR0;
 }
 
-void sendTextMessage(uint8_t message[], uint8_t messageLength) {
-    for(uint8_t i = 0; i < messageLength - 1; i++) {
-        UsartTransmission(message[i]);
+void usart::transmitTextMessage(uint8_t message[], uint8_t messageLength) {
+    for (uint8_t i = 0; i < messageLength - 1; i++) {
+        usart::transmit(message[i]);
     }
 }
