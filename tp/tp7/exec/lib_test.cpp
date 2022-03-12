@@ -3,6 +3,8 @@
 #include <avr/io.h>
 #include <led.h>
 
+// FIXME: Write headers for all files, don't forget the pinout
+
 int main() {
     DDRA |= (1 << DDA0) | (1 << DDA1);
 
