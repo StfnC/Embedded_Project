@@ -22,7 +22,7 @@ void led::setOff()
     *port_ &= ~((1 << pin2_) | (1 << pin1_));
 }
 
-void led::setYellow() 
+void led::setAmber() 
 {
     setGreen();
     _delay_ms(GREEN_AMBER_DELAY);

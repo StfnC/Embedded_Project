@@ -9,7 +9,7 @@ class led
 	   void setGreen();
 	   void setRed();
 	   void setOff();
-	   void setYellow();
+	   void setAmber();
 
 	private:
 	   static const uint8_t GREEN_AMBER_DELAY = 8;

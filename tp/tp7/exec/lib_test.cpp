@@ -9,7 +9,7 @@ int main() {
     led del0(&PORTA, DDA0, DDA1);
 
     while (true) {
-        del0.setYellow();
+        del0.setAmber();
     }
 
     return 0;
