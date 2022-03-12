@@ -8,9 +8,14 @@ int main() {
 
     led del0(&PORTA, DDA0, DDA1);
 
-    while (true) {
-        del0.setAmber();
+    uint16_t count = 0;
+
+    while (count < 65000) {
+        del0.setGreen();
+        count++;
     }
+
+    del0.setOff();
 
     return 0;
 }
