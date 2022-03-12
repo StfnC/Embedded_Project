@@ -9,24 +9,16 @@
 int main() {
     MotorsController motors;
 
-    motors.setRightPercentage(10);
-    _delay_ms(2000);
     motors.setRightPercentage(50);
-    _delay_ms(2000);
-    motors.setRightPercentage(80);
-    _delay_ms(2000);
-    motors.setRightPercentage(100);
-    _delay_ms(2000);
-    motors.setRightPercentage(0);
-    _delay_ms(2000);
-    motors.setLeftPercentage(10);
-    _delay_ms(2000);
     motors.setLeftPercentage(50);
     _delay_ms(2000);
-    motors.setLeftPercentage(80);
+    motors.changeRightDirection();
+    motors.changeLeftDirection();
     _delay_ms(2000);
-    motors.setLeftPercentage(100);
+    motors.changeRightDirection();
+    motors.changeLeftDirection();
     _delay_ms(2000);
+    motors.setRightPercentage(0);
     motors.setLeftPercentage(0);
 
     return 0;

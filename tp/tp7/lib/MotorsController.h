@@ -7,7 +7,9 @@ class MotorsController {
         ~MotorsController() = default;
 
         void setLeftPercentage(uint8_t percentage);
+        void changeLeftDirection();
         void setRightPercentage(uint8_t percentage);
+        void changeRightDirection();
 
         uint8_t getLeftPercentage();
         uint8_t getRightPercentage();

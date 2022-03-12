@@ -7,8 +7,8 @@ MotorsController::MotorsController() : leftSpeed_(0), rightSpeed_(0) {
 void MotorsController::initialization() {
     cli();
 
-    // To output on OC0A and OC0B
-    DDRB |= (1 << DDB3) | (1 << DDB4);
+    // To output on OC0A and OC0B and for the direction
+    DDRB |= (1 << DDB3) | (1 << DDB4) | (1 << DDB5) | (1 << DDB6);
 
     // Mode 1 from p.130 of the Atmel documentation
     TCCR0A |= (1 << COM0A1) | (1 << COM0B1) | (1 << WGM00);
@@ -24,6 +24,14 @@ void MotorsController::setLeftPercentage(uint8_t percentage) {
         leftSpeed_ = convertPercentageToTimerValue(percentage);
         adjustLeftMotorSpeed();
     }
+}
+
+void MotorsController::changeLeftDirection() {
+    PORTB ^= (1 << DDB6); 
+}
+
+void MotorsController::changeRightDirection() {
+    PORTB ^= (1 << DDB5); 
 }
 
 void MotorsController::setRightPercentage(uint8_t percentage) {
