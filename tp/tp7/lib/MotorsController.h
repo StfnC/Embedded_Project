@@ -6,13 +6,15 @@ class MotorsController {
         MotorsController();
         ~MotorsController() = default;
 
-        void adjustLeftMotorSpeed(uint8_t percentage);
-        void adjustRightMotorSpeed(uint8_t percentage);
+        void setLeftPercentage(uint8_t percentage);
+        void setRightPercentage(uint8_t percentage);
 
     private:
-        uint8_t leftSpeed;
-        uint8_t rightSpeed;
+        uint8_t leftSpeed_;
+        uint8_t rightSpeed_;
 
         void initialization();
         uint8_t convertPercentageToTimerValue(uint8_t percentage);
+        void adjustLeftMotorSpeed();
+        void adjustRightMotorSpeed();
 };

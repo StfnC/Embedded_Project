@@ -9,25 +9,25 @@
 int main() {
     MotorsController motors;
 
-    motors.adjustRightMotorSpeed(10);
+    motors.setRightPercentage(10);
     _delay_ms(2000);
-    motors.adjustRightMotorSpeed(50);
+    motors.setRightPercentage(50);
     _delay_ms(2000);
-    motors.adjustRightMotorSpeed(80);
+    motors.setRightPercentage(80);
     _delay_ms(2000);
-    motors.adjustRightMotorSpeed(100);
+    motors.setRightPercentage(100);
     _delay_ms(2000);
-    motors.adjustRightMotorSpeed(0);
+    motors.setRightPercentage(0);
     _delay_ms(2000);
-    motors.adjustLeftMotorSpeed(10);
+    motors.setLeftPercentage(10);
     _delay_ms(2000);
-    motors.adjustLeftMotorSpeed(50);
+    motors.setLeftPercentage(50);
     _delay_ms(2000);
-    motors.adjustLeftMotorSpeed(80);
+    motors.setLeftPercentage(80);
     _delay_ms(2000);
-    motors.adjustLeftMotorSpeed(100);
+    motors.setLeftPercentage(100);
     _delay_ms(2000);
-    motors.adjustLeftMotorSpeed(0);
+    motors.setLeftPercentage(0);
 
     return 0;
 }
