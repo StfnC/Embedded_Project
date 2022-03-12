@@ -33,8 +33,20 @@ void MotorsController::setRightPercentage(uint8_t percentage) {
     }
 }
 
+uint8_t MotorsController::getLeftPercentage() {
+    return convertTimerValueToPercentage(leftSpeed_);
+}
+
+uint8_t MotorsController::getRightPercentage() {
+    return convertTimerValueToPercentage(rightSpeed_);
+}
+
 uint8_t MotorsController::convertPercentageToTimerValue(uint8_t percentage) {
-    return static_cast<uint8_t>(percentage * 255 / 100);
+    return static_cast<uint8_t>(percentage * MAX_TIMER_VALUE / 100);
+}
+
+uint8_t MotorsController::convertTimerValueToPercentage(uint8_t timerValue) {
+    return static_cast<uint8_t>(timerValue * 100 / MAX_TIMER_VALUE);
 }
 
 void MotorsController::adjustLeftMotorSpeed() {
