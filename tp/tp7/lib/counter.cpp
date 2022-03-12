@@ -47,6 +47,10 @@ void CounterInterrupt::setOff()
 
 void setDuration(uint16_t duration)
 {
+    
     uint8_t durationTimer = duration * ONE_SECOND_PRESCALER_VALUE;
-    OCR1A = durationTimer;
+    if (durationTimer <=  65535)
+    { 
+        OCR1A = durationTimer;
+    }
 }
