@@ -1,5 +1,5 @@
 #include "counter.h"
-const uint8_t ONE_SECOND_PRESCALER_VALUE = 7812.5;
+const uint16_t ONE_SECOND_PRESCALER_VALUE = 0x1E84;
 
 
 CounterInterrupt::CounterInterrupt()
@@ -45,7 +45,7 @@ void CounterInterrupt::setOff()
     TCCR1A &= ~(_BV(COM1A1) | _BV(COM1A0));
 }
 
-void setDuration(uint8_t duration)
+void setDuration(uint16_t duration)
 {
     uint8_t durationTimer = duration * ONE_SECOND_PRESCALER_VALUE;
     OCR1A = durationTimer;

@@ -8,12 +8,14 @@ public:
     CounterInterrupt();
     ~CounterInterrupt();
 
-    void setDuration(uint8_t duration);
+    void setDuration(uint16_t duration);
 
     void setNormal();
     void setCtc();
+    void setOff();
+
+
     void setToggle();
     void setToLow();
     void setToHigh();
-    void setOff();
 };

@@ -1,8 +1,10 @@
 #include "interruptions.h"
 
 
-buttonInterrupt::buttonInterrupt(uint8_t interruptNumber, InterruptMode mode)
+ButtonInterrupt::ButtonInterrupt(uint8_t interruptNumber, InterruptMode mode)
 {
+    cli();
+
     EIMSK |= _BV(interruptNumber);
     
     switch (mode)
@@ -14,11 +16,17 @@ buttonInterrupt::buttonInterrupt(uint8_t interruptNumber, InterruptMode mode)
         case InterruptMode::AnyEdgeInterrupt:
             EICRA &= ~(_BV(ISC01) << (2 * interruptNumber));
             EICRA |= (_BV(ISC00) << (2 * interruptNumber));
+            break;
 
         case InterruptMode::FallingEdgeInterrupt:
             EICRA &= ~(_BV(ISC00) << (2 * interruptNumber));
             EICRA |= (_BV(ISC01) << (2 * interruptNumber));      
+            break;
 
         case InterruptMode::RisingEdgeInterrupt:
             EICRA |= _BV(ISC00) | _BV(ISC01);
+            break;
+    }
+
+    sei();
 }
