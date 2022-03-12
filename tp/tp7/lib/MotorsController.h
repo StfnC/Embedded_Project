@@ -10,8 +10,9 @@ class MotorsController {
         void adjustRightMotorSpeed(uint8_t percentage);
 
     private:
-        uint8_t leftPercentage;
-        uint8_t rightPercentage;
+        uint8_t leftSpeed;
+        uint8_t rightSpeed;
 
         void initialization();
+        uint8_t convertPercentageToTimerValue(uint8_t percentage);
 };
