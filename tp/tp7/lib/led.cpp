@@ -1,12 +1,8 @@
 #include <util/delay.h>
 #include "led.h"
 
-led::led(volatile uint8_t* port, uint8_t pin1, uint8_t pin2)
+led::led(volatile uint8_t* port, uint8_t pin1, uint8_t pin2) : port_(port), pin1_(pin1), pin2_(pin2)
 {
-    // FIXME: Maybe use initialization list
-    port_ = port;
-    pin1_ = pin1; //0
-    pin2_ = pin2; //1
 }
 
 void led::setGreen()
