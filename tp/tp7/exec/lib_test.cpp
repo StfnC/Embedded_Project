@@ -1,12 +1,16 @@
+#define F_CPU 8000000
+
 #include <avr/io.h>
-#include <usart.h>
+#include <del.h>
 
 int main() {
-    usart usartCommunication;
+    DDRA |= (1 << DDA0) | (1 << DDA1);
+
+    del del0(&PORTA, DDA0, DDA1);
 
     while (true) {
-        usartCommunication.transmit(0xFF);
+        del0.delGreen();
     }
-    
+
     return 0;
 }

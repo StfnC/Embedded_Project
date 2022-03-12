@@ -3,7 +3,7 @@
 class del
 {
 	public:
-	   del(uint8_t port,uint8_t pin1, uint8_t pin2);
+	   del(volatile uint8_t* port,uint8_t pin1, uint8_t pin2);
 	   ~del();
 	   
 	   void delGreen();
@@ -12,7 +12,7 @@ class del
 	   void delYellow();
 
 	private:
-	   uint8_t port_;
+	   volatile uint8_t* port_;
 	   uint8_t pin1_;
 	   uint8_t pin2_;
 };
