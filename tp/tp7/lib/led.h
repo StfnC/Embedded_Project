@@ -12,6 +12,8 @@ class led
 	   void setYellow();
 
 	private:
+	   static const uint8_t GREEN_AMBER_DELAY = 8;
+	   static const uint8_t RED_AMBER_DELAY = 5; 
 	   volatile uint8_t* port_;
 	   uint8_t pin1_;
 	   uint8_t pin2_;

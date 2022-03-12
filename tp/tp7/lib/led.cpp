@@ -24,11 +24,8 @@ void led::setOff()
 
 void led::setYellow() 
 {
-    setOff();
-    while (true) {
-        setGreen();
-        _delay_ms(5);
-        setRed();
-        _delay_ms(5);
-    }
+    setGreen();
+    _delay_ms(GREEN_AMBER_DELAY);
+    setRed();
+    _delay_ms(RED_AMBER_DELAY);
 }
