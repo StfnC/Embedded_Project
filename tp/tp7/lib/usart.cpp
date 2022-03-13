@@ -1,22 +1,34 @@
+/**
+ * Implementation of the usart methods
+ * 
+ * \file usart.cpp
+ * \author Stefan Cotargasanu
+ * \date March 13 2022
+ *
+ * Pins:
+ *  Input:
+ *      -D0
+ * 
+ *  Output:
+ *      -D1
+ * 
+ */
+
 #include "usart.h"
 
 #include <avr/io.h>
 
 void usart::initialization(void) {
-    // 2400 bauds. Nous vous donnons la valeur des deux
-
-    // premiers registres pour vous éviter des complications.
-
     UBRR0H = 0;
 
     UBRR0L = 0xCF;
 
-    // permettre la réception et la transmission par le UART0
+    // Allow reception and transmission through UART0
     UCSR0A |= (1 << RXC0) | (1 << TXC0);
 
     UCSR0B |= (1 << TXEN0);
 
-    // Format des trames: 8 bits, 1 stop bits, sans parité
+    // 8 data bits, 1 stop bit, no parity
 
     UCSR0C |= (1 << UCSZ01) | (1 << UCSZ00);
 }
