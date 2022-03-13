@@ -11,11 +11,15 @@
 
 class usart {
     public:
-        static void transmit(uint8_t data);
+        usart();
+        ~usart() = default;
 
-        static uint8_t receive(void);
+        void transmit(uint8_t data);
 
-        static void transmitTextMessage(uint8_t message[], uint8_t messageLength);
+        uint8_t receive(void);
+
+        void transmitTextMessage(uint8_t message[], uint8_t messageLength);
         
-        static void initialization(void);
+    private:
+        void initialization(void);
 };

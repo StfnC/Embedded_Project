@@ -18,6 +18,10 @@
 
 #include <avr/io.h>
 
+usart::usart() {
+    usart::initialization();
+}
+
 void usart::initialization(void) {
     UBRR0H = 0;
 
