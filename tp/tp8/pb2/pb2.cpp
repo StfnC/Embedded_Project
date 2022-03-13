@@ -47,6 +47,7 @@
 #define F_CPU 8000000
 #include <avr/io.h>
 #include <util/delay.h>
+#include <debug.h>
 
 #include "Etat.hpp"
 
@@ -99,6 +100,10 @@ void gererEtatEteint(Etat& etatPresent) {
 }
 
 int main() {
+    DEBUG_INIT;
+    uint8_t msgEtatAllumeRouge[] = "STATE: ALLUME_ROUGE\n";
+    uint8_t msgEtatAllumeVert[] = "STATE: ALLUME_VERT\n";
+    uint8_t msgEtatEteint[] = "STATE: ETEINT\n";
     // Inspiré par le code d'un des chargés sur le TP1 (pour set les modes des pins et pour lire les pins)
 
     DDRA |= (1 << DDA0) | (1 << DDA1);
@@ -110,12 +115,15 @@ int main() {
     while (true) {
         switch (etatPresent) {
             case Etat::ALLUME_ROUGE:
+                DEBUG_PRINT_MESSAGE(msgEtatAllumeRouge, 21);
                 gererEtatAllumeRouge(etatPresent);
                 break;
             case Etat::ALLUME_VERT:
+                DEBUG_PRINT_MESSAGE(msgEtatAllumeVert, 20);
                 gererEtatAllumeVert(etatPresent);
                 break;
             case Etat::ETEINT:
+                DEBUG_PRINT_MESSAGE(msgEtatEteint, 15);
                 gererEtatEteint(etatPresent);
                 break;
         }
