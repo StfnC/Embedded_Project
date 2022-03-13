@@ -2,10 +2,6 @@
 
 #include <avr/io.h>
 
-usart::usart() {
-    usart::initialization();
-}
-
 void usart::initialization(void) {
     // 2400 bauds. Nous vous donnons la valeur des deux
 
