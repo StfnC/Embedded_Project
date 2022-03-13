@@ -1,3 +1,12 @@
+/**
+ * Definition of the CounterInterrupt class and the associated enums
+ * 
+ * \file counter.h
+ * \author Faneva Rakotoarivony
+ * \date March 13 2022
+ *
+ */
+
 #include <avr/interrupt.h>
 
 /* Set counter on Timer 1 */

@@ -1,3 +1,12 @@
+/**
+ * Implementation of the CounterInterrupt methods
+ * 
+ * \file counter.cpp
+ * \author Faneva Rakotoarivony
+ * \date March 13 2022
+ *
+ */
+
 #include "counter.h"
 const uint16_t ONE_SECOND_PRESCALER_VALUE = 7812.5;
 
