@@ -1,3 +1,12 @@
+/**
+ * Definition of the led class
+ * 
+ * \file led.h
+ * \author Lina Belloui and Stefan Cotargasanu
+ * \date March 13 2022
+ *
+ */
+
 #include <avr/io.h>
 
 class led {

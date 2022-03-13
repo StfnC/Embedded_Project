@@ -1,3 +1,12 @@
+/**
+ * Implementation of the led methods
+ * 
+ * \file led.cpp
+ * \author Lina Belloui and Stefan Cotargasanu
+ * \date March 13 2022
+ *
+ */
+
 #include "led.h"
 
 #include <util/delay.h>
