@@ -8,5 +8,4 @@ class usart {
 
         static void transmitTextMessage(uint8_t message[], uint8_t messageLength);
         static void initialization(void);
-
 };

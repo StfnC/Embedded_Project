@@ -1,24 +1,19 @@
 
 #include <avr/interrupt.h>
 
-enum class InterruptMode
-{
+enum class InterruptMode {
     LowLevelInterrupt,
     AnyEdgeInterrupt,
     FallingEdgeInterrupt,
     RisingEdgeInterrupt
 };
 
-class ButtonInterrupt
-{
-public:
-
-    
+class ButtonInterrupt {
+   public:
     ButtonInterrupt(uint8_t interruptNumber, InterruptMode mode);
-    ~ButtonInterrupt(){}
-    
+    ~ButtonInterrupt() {}
 
-private:
+   private:
     uint8_t eicraValue_;
     uint8_t eimskValue_;
 };

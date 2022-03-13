@@ -27,11 +27,11 @@ void MotorsController::setLeftPercentage(uint8_t percentage) {
 }
 
 void MotorsController::changeLeftDirection() {
-    PORTB ^= (1 << DDB6); 
+    PORTB ^= (1 << DDB6);
 }
 
 void MotorsController::changeRightDirection() {
-    PORTB ^= (1 << DDB5); 
+    PORTB ^= (1 << DDB5);
 }
 
 void MotorsController::setRightPercentage(uint8_t percentage) {
