@@ -1,3 +1,11 @@
+/**
+ * Definition of the ButtonInterrupt class and the associated enum
+ * 
+ * \file interruptions.h
+ * \author Faneva Rakotoarivony
+ * \date March 13 2022
+ *
+ */
 
 #include <avr/interrupt.h>
 

@@ -1,3 +1,21 @@
+/**
+ * Implementation of the ButtonInterrupt methods
+ * 
+ * \file interruptions.cpp
+ * \author Faneva Rakotoarivony
+ * \date March 13 2022
+ *
+ * Pins:
+ *  Input:
+ *      -B2
+ *      -D2
+ *      -D3
+ * 
+ *  Output:
+ *      -
+ * 
+ */
+
 #include "interruptions.h"
 
 ButtonInterrupt::ButtonInterrupt(uint8_t interruptNumber, InterruptMode mode) {
