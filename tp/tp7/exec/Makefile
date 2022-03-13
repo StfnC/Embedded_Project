@@ -127,11 +127,17 @@ OBJDEPS=$(CFILES:.c=.o) \
 # En plus de la commande make qui permet de compiler
 # votre projet, vous pouvez utilisez les commandes
 # make all, make install et make clean
-.PHONY: all install clean 
+.PHONY: all install clean debug
 
 # Make all permet simplement de compiler le projet
 #
 all: $(TRG) $(HEXROMTRG)
+
+# Commande pour compiler en mode debug
+# Base sur cette reponse StackOverflow: https://stackoverflow.com/a/1080180
+debug: CFLAGS += -DDEBUG
+debug: CXXFLAGS += -DDEBUG
+debug: all
 
 # Implementation de la cible
 $(TRG): $(OBJDEPS)
