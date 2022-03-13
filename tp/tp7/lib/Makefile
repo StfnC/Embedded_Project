@@ -29,7 +29,7 @@ PROJECTNAME=librene
 # Utilisez le suffixe .cpp pour les fichiers C++
 # Listez tous les fichiers a compiler, separes par
 # un espace. exemple: 'tp1.c tp2.cpp':
-PRJSRC=can.cpp memoire_24.cpp MotorsController.cpp usart.cpp led.cpp
+PRJSRC=can.cpp memoire_24.cpp MotorsController.cpp usart.cpp led.cpp interruptions.cpp
 
 # Inclusions additionnels (ex: -I/path/to/mydir)
 INC=
