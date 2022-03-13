@@ -1,3 +1,22 @@
+/**
+ * Implementation of the MotorsController methods
+ * 
+ * \file MotorsController.cpp
+ * \author Stefan Cotargasanu
+ * \date March 13 2022
+ *
+ * Pins:
+ *  Input:
+ *      -
+ * 
+ *  Output:
+ *      -B3
+ *      -B4
+ *      -B5
+ *      -B6
+ * 
+ */
+
 #include "MotorsController.h"
 
 MotorsController::MotorsController() : leftSpeed_(0), rightSpeed_(0) {

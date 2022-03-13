@@ -1,3 +1,12 @@
+/**
+ * Definition of the MotorsController class
+ * 
+ * \file MotorsController.h
+ * \author Stefan Cotargasanu
+ * \date March 13 2022
+ * 
+ */
+
 #include <avr/interrupt.h>
 #include <avr/io.h>
 
