@@ -2,6 +2,7 @@
 
 #include <avr/io.h>
 #include <util/delay.h>
+
 #include <usart.h>
 
 #ifdef DEBUG
@@ -12,14 +13,20 @@
 #define DEBUG_PRINT(message, length) do {} while(0)
 #endif
 
+
 // FIXME: Write headers for all files, don't forget the pinout
+volatile uint8_t counter = 0;
+ 
+
 
 int main() {
+
     uint8_t msg[] = "Hello Debug!";
     uint8_t msgLength = 13;
     DEBUG_INIT;
 
     DEBUG_PRINT(msg, msgLength);
+
 
     return 0;
 }
