@@ -1,6 +1,20 @@
 #include <avr/interrupt.h>
 
 /* Set counter on Timer 1 */
+enum class CompareMode
+{
+    Toggle,
+    SetToLow,
+    SetToHigh,
+    Off
+};
+
+enum class GenerationMode 
+{
+    Normal, 
+    ClearTimerCompare
+};
+
 
 class CounterInterrupt
 {
@@ -9,13 +23,6 @@ public:
     ~CounterInterrupt();
 
     void setDuration(uint16_t duration);
-
-    void setNormal();
-    void setCtc();
-    void setOff();
-
-
-    void setToggle();
-    void setToLow();
-    void setToHigh();
+    void setCompareMode(CompareMode compareMode);
+    void setGenerationMode(GenerationMode generationMode);
 };
