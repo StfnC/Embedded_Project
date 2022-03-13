@@ -29,7 +29,7 @@ PROJECTNAME=librene
 # Utilisez le suffixe .cpp pour les fichiers C++
 # Listez tous les fichiers a compiler, separes par
 # un espace. exemple: 'tp1.c tp2.cpp':
-PRJSRC=can.cpp memoire_24.cpp MotorsController.cpp usart.cpp led.cpp interruptions.cpp
+PRJSRC=can.cpp memoire_24.cpp MotorsController.cpp usart.cpp led.cpp interruptions.cpp counter.cpp
 
 # Inclusions additionnels (ex: -I/path/to/mydir)
 INC=
@@ -62,14 +62,8 @@ AVRDUDE_PROGRAMMERID=usbasp
 
 #compilateur utilise
 CC=avr-gcc
-#pour copier le contenu d'un fichier objet vers un autre
-OBJCOPY=avr-objcopy
-#pour permettre le transfert vers le microcontroleur
-AVRDUDE=avrdude
 #pour supprimer les fichiers lorsque l'on appel make clean
 REMOVE=rm -f
-# HEXFORMAT -- format pour les fichiers produient .hex
-HEXFORMAT=ihex
 # Pour creer la librairie statique
 LIBRARY=ar
 
@@ -95,11 +89,7 @@ LIBFLAGS=-crs
 ####### Cible (Target) #######
 
 #Nom des cibles par defaut
-TRG=$(PROJECTNAME).elf
-HEXROMTRG=$(PROJECTNAME).hex
-HEXTRG=$(HEXROMTRG) $(PROJECTNAME).ee.hex
-LIBTRG=$(PROJECTNAME).a
-
+TRG=$(PROJECTNAME).a
 
 
 ####### Definition de tout les fichiers objets #######
@@ -127,21 +117,15 @@ OBJDEPS=$(CFILES:.c=.o) \
 # Creation des cibles Phony (Phony Target)
 # En plus de la commande make qui permet de compiler
 # votre projet, vous pouvez utilisez les commandes
-# make all, make install et make clean
-.PHONY: all install clean 
+# make all et make clean
+.PHONY: all clean 
 
 # Make all permet simplement de creer la librairie statique
-#
-all: $(LIBTRG)
+all: $(TRG)
 
 # Creation de la librairie statique
-$(LIBTRG): $(OBJDEPS)
-	$(LIBRARY) $(LIBFLAGS) $(LIBTRG) $(OBJDEPS)
-
-# Implementation de la cible
 $(TRG): $(OBJDEPS)
-	$(CC) $(LDFLAGS) -o $(TRG) $(OBJDEPS) \
-	-lm $(LIBS)
+	$(LIBRARY) $(LIBFLAGS) $(TRG) $(OBJDEPS)
 
 # Production des fichiers object
 # De C a objet
@@ -157,22 +141,10 @@ $(TRG): $(OBJDEPS)
 # Pour plus d'information sur cette section, consulter:
 # http://bit.ly/2580FU8
 
-# Production des fichiers hex a partir des fichiers elf
-%.hex: %.elf
-	$(OBJCOPY) -j .text -j .data \
-		-O $(HEXFORMAT) $< $@
-
-# Make install permet de compiler le projet puis
-# d'ecrire le programme en memoire flash dans votre
-# microcontroleur. Celui-ci doit etre branche par cable USB
-install: $(HEXROMTRG)				
-	$(AVRDUDE) -c $(AVRDUDE_PROGRAMMERID)   \
-	-p $(MCU) -P -e -U flash:w:$(HEXROMTRG)
-
 # Make clean permet d'effacer tout les fichiers generes
 # lors de la compilation
 clean:
-	$(REMOVE) $(TRG) $(TRG).map $(OBJDEPS) $(HEXTRG) *.d *a
+	$(REMOVE) $(TRG) $(OBJDEPS) *.d
 
 # Pour plus d'information sur les phony target, consulter:
 # http://bit.ly/1WBQe61
