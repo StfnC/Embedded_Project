@@ -1,3 +1,12 @@
+/**
+ * Definition of the Debug class and the associated macros
+ * 
+ * \file debug.h
+ * \author Faneva Rakotoarivony and Stefan Cotargasanu
+ * \date March 13 2022
+ *
+ */
+
 #include "usart.h"
 
 #ifdef DEBUG

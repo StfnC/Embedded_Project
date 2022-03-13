@@ -1,3 +1,12 @@
+/**
+ * Implementation of the Debug methods
+ * 
+ * \file debug.cpp
+ * \author Faneva Rakotoarivony and Stefan Cotargasanu
+ * \date March 13 2022
+ *
+ */
+
 #include "debug.h"
 
 usart Debug::transmitter_;
