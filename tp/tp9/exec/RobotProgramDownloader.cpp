@@ -3,7 +3,7 @@
 #include <memoire_24.h>
 #include <usart.h>
 
-RobotProgramDownloader::RobotProgramDownloader() : receptor_(), memory_(), receivedData_(false), totalBytes_(0xFFFF) {
+RobotProgramDownloader::RobotProgramDownloader() : receivedData_(false), receptor_(), memory_(), totalBytes_(0xFFFF) {
 }
 
 void RobotProgramDownloader::acceptProgramData() {
