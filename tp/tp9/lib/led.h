@@ -7,6 +7,8 @@
  *
  */
 
+#pragma once
+
 #include <avr/io.h>
 
 class led {

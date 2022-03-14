@@ -7,6 +7,8 @@
  *
  */
 
+#pragma once
+
 #include <avr/interrupt.h>
 
 /* Set counter on Timer 1 */
