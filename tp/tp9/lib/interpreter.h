@@ -35,7 +35,8 @@ private:
     MotorsController motorsController_;
     Memoire24CXXX memoire_;
     
+    uint16_t numberInstructions;
     uint16_t currentAdress_;
-    uint16_t loopAdress_;
+    uint16_t loopAddress_;
     uint8_t  counter = 0;
 };
