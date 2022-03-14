@@ -55,7 +55,19 @@ uint8_t usart::receive(void) {
     return UDR0;
 }
 
-void usart::transmitTextMessage(uint8_t message[], uint8_t messageLength) {
+void usart::transmitTextMessage(uint8_t message[], uint8_t messageLength){
+    for (uint8_t i = 0; i < messageLength - 1; i++) {
+        usart::transmit(message[i]);
+    }
+}
+
+void usart::transmitTextMessage(char message[], uint8_t messageLength){
+    for (uint8_t i = 0; i < messageLength - 1; i++) {
+        usart::transmit(message[i]);
+    }
+}
+
+void usart::transmitTextMessage(char* message, uint8_t messageLength){
     for (uint8_t i = 0; i < messageLength - 1; i++) {
         usart::transmit(message[i]);
     }
