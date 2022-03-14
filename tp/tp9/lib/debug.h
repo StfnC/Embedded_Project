@@ -7,6 +7,8 @@
  *
  */
 
+#pragma once
+
 #include "usart.h"
 
 #ifdef DEBUG
