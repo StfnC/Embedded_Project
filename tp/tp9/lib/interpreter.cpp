@@ -4,28 +4,34 @@ Interpreter::Interpreter() : transmitter_(),
                              motorsController_(),
                              memoire_() {}
 
+uint8_t Interpreter::read8Bits()
+{
+    uint8_t* numberPtr;
+    memoire_.lecture(currentAdress_, numberPtr);
+    currentAdress_ += 8;
+    return *numberPtr;
+}
+
+uint16_t Interpreter::getNumberInstructions()
+{
+    uint8_t firstNumberHalf = read8Bits();
+    uint16_t numberInstructions;     
+    numberInstructions = static_cast<uint16_t>(firstNumberHalf) << 8;
+
+    uint8_t secondNumberHalf = read8Bits();
+    numberInstructions += static_cast<uint16_t>(secondNumberHalf);
+}
+
 void Interpreter::interpretCode(uint16_t address)
 {
-
     address = currentAdress_;
-    uint8_t *firstNumberHalf;
-    memoire_.lecture(address, firstNumberHalf);
-    numberInstructions = static_cast<uint16_t>(*firstNumberHalf) << 8;
-    uint8_t *secondNumberHalf;
-    currentAdress_ += 8;
-    memoire_.lecture(address, secondNumberHalf);
-    currentAdress_ += 8;
-    numberInstructions += static_cast<uint16_t>(*secondNumberHalf);
+    uint16_t numberInstructions = getNumberInstructions();
 
     for (uint8_t i = 0; i < numberInstructions; i++)
     {
-        uint8_t *instruction;
-        memoire_.lecture(address, instruction);
-        currentAdress_ += 8;
-        uint8_t *operand;
-        memoire_.lecture(address, operand);
-        currentAdress_ += 8;
-        interpreter(*instruction, *operand);
+        uint8_t instruction = read8Bits();
+        uint8_t operand = read8Bits();
+        interpreter(instruction, operand);
     }
 }
 
@@ -85,11 +91,11 @@ void Interpreter::interpreter(uint8_t instruction, uint8_t operand)
         case 0xC1:
             fbc();
             break;
-    
+
         case 0xFF:
             fin();
             break;
-    
+
         default:
             fin();
             break;

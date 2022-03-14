@@ -14,6 +14,10 @@ class Interpreter
     void interpretCode(uint16_t startAdress);
 
 private:
+    uint8_t  read8Bits();
+    uint16_t getNumberInstructions();
+
+
     void dbt();
     void att(uint8_t operand);
     void dal(uint8_t operand);
@@ -38,5 +42,5 @@ private:
     uint16_t numberInstructions;
     uint16_t currentAdress_;
     uint16_t loopAddress_;
-    uint8_t  counter = 0;
+    uint8_t  counter_ = 0;
 };
