@@ -30,7 +30,7 @@ void usart::initialization(void) {
     // Allow reception and transmission through UART0
     UCSR0A |= (1 << RXC0) | (1 << TXC0);
 
-    UCSR0B |= (1 << TXEN0);
+    UCSR0B |= (1 << RXEN0) | (1 << TXEN0);
 
     // 8 data bits, 1 stop bit, no parity
 
