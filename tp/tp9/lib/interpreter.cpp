@@ -12,6 +12,10 @@ uint8_t Interpreter::read8Bits()
     return *numberPtr;
 }
 
+uint16_t Interpreter::read16Bits()
+{
+    
+}
 uint16_t Interpreter::getNumberInstructions()
 {
     uint8_t firstNumberHalf = read8Bits();
@@ -19,7 +23,7 @@ uint16_t Interpreter::getNumberInstructions()
     numberInstructions = static_cast<uint16_t>(firstNumberHalf) << 8;
 
     uint8_t secondNumberHalf = read8Bits();
-    numberInstructions += static_cast<uint16_t>(secondNumberHalf);
+    numberInstructions |= static_cast<uint16_t>(secondNumberHalf);
 }
 
 void Interpreter::interpretCode(uint16_t address)
@@ -27,7 +31,7 @@ void Interpreter::interpretCode(uint16_t address)
     address = currentAdress_;
     uint16_t numberInstructions = getNumberInstructions();
 
-    for (uint8_t i = 0; i < numberInstructions; i++)
+    for (uint16_t i = 0; i < numberInstructions; i++)
     {
         uint8_t instruction = read8Bits();
         uint8_t operand = read8Bits();
