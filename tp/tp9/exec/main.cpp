@@ -1,5 +1,6 @@
 #define F_CPU 8000000
 
+#include <debug.h>
 #include <led.h>
 #include <memoire_24.h>
 #include <usart.h>
@@ -8,14 +9,13 @@
 #include "RobotProgramDownloader.h"
 
 int main() {
+    DEBUG_INIT;
     Memoire24CXXX memory;
     usart usart;
     RobotProgramDownloader program;
-    uint8_t dataBuffer;
+    uint8_t dataBuffer = 0x00;
 
     program.acceptProgramData();
-
-    _delay_ms(5000);
 
     memory.lecture(0x0000, &dataBuffer);
     usart.transmit(dataBuffer);
