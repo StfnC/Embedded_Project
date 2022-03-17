@@ -12,10 +12,6 @@ uint8_t Interpreter::read8Bits()
     return *numberPtr;
 }
 
-uint16_t Interpreter::read16Bits()
-{
-    
-}
 uint16_t Interpreter::getNumberInstructions()
 {
     uint8_t firstNumberHalf = read8Bits();
@@ -24,6 +20,7 @@ uint16_t Interpreter::getNumberInstructions()
 
     uint8_t secondNumberHalf = read8Bits();
     numberInstructions |= static_cast<uint16_t>(secondNumberHalf);
+    return numberInstructions;
 }
 
 void Interpreter::interpretCode(uint16_t address)
@@ -108,9 +105,10 @@ void Interpreter::interpreter(uint8_t instruction, uint8_t operand)
 
 void Interpreter::dbt()
 {
-    execute_ = true;
-    transmitter_ = usart();
-    motorsController_ = MotorsController();
+    char message[31];
+    int n;
+    n = sprintf(message, "L'instruction DAL est executée");
+    transmitter_.transmitTextMessage(message, n);
 }
 
 void Interpreter::att(uint8_t operand)
