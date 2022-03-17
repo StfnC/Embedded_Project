@@ -25,14 +25,9 @@ void RobotProgramDownloader::acceptProgramData() {
 
     for (uint16_t i = 2; i < totalBytes_; i++) {
         dataBuffer = receptor_.receive();
-        _delay_ms(5);
-        DEBUG_PRINT_VARIABLE(0x0000 + i * sizeof(uint8_t));
         memory_.ecriture(0x0000 + i * sizeof(uint8_t), dataBuffer);
         _delay_ms(5);
-        DEBUG_PRINT_VARIABLE(0xFF);
     }
-
-    // DEBUG_PRINT_VARIABLE(0xFF);
 
     receivedData_ = true;
 }
