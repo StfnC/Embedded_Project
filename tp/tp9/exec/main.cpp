@@ -17,9 +17,17 @@ int main() {
 
     program.acceptProgramData();
 
+    usart.transmit(0xAA);
+
     memory.lecture(0x0000, &dataBuffer);
+
     usart.transmit(dataBuffer);
+    usart.transmit(dataBuffer);
+
     memory.lecture(0x0000 + sizeof(uint8_t), &dataBuffer);
+    usart.transmit(dataBuffer);
+
+    memory.lecture(0x0000, &dataBuffer);
     usart.transmit(dataBuffer);
 
     return 0;
