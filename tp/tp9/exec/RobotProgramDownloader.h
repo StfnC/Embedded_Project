@@ -10,4 +10,6 @@ class RobotProgramDownloader {
         usart receptor_;
         Memoire24CXXX memory_;
         uint16_t totalBytes_;
+
+        void writeTotalBytes();
 };
