@@ -17,13 +17,14 @@ int main() {
 
     program.acceptProgramData();
 
+    // _delay_ms(3000);
     usart.transmit(0xAA);
 
-    memory.lecture(0x0000, &dataBuffer);
-    usart.transmit(dataBuffer);
-
-    memory.lecture(0x0000 + sizeof(uint8_t), &dataBuffer);
-    usart.transmit(dataBuffer);
+    for (uint16_t i = 0; i < 30; i++) {
+        _delay_ms(5);
+        dataBuffer = memory.lecture(0x0000 + i * sizeof(uint8_t), &dataBuffer);
+        usart.transmit(dataBuffer);
+    }
 
     return 0;
 }
