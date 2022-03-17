@@ -6,6 +6,7 @@
 #include <util/delay.h>
 #include <avr/interrupt.h>
 
+#include <conter.h>
 #include "notes.h"
 
 class Notes {
@@ -15,11 +16,14 @@ class Notes {
 		void notePWM(int note);
 		void offNote();
 		void playNote(int note, double temps);
+
+    private:
+        conter();
 };
 
 
-const uint8_t // note latine = fréquence // note midi
-    La1 = 110, //45
+const uint8_t La1 = 110, 
+//45// note latine = fréquence // note midi
     LaD1 = 116.541, //46
     Si1 = 123.471, //47
     Do2 = 130.813,//48
@@ -57,7 +61,7 @@ const uint8_t // note latine = fréquence // note midi
     SolD4 = 830.609, //80
     La4 = 880; //81
 
-const double active[] = // en ms
+const double active[] = // en ms // pwm 
 {
 	4.545, 
     4.290, 
@@ -137,5 +141,4 @@ const double period[] = // en ms
     1.20, 
     1.14
 };
-
 #endif
