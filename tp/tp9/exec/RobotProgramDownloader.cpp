@@ -7,7 +7,7 @@
 #include <usart.h>
 #include <util/delay.h>
 
-RobotProgramDownloader::RobotProgramDownloader() : receivedData_(false), receptor_(), memory_(), totalBytes_(0x0000) {
+RobotProgramDownloader::RobotProgramDownloader() : receptor_(), memory_(), totalBytes_(0x0000) {
 }
 
 void RobotProgramDownloader::acceptProgramData() {
@@ -29,10 +29,4 @@ void RobotProgramDownloader::acceptProgramData() {
         _delay_ms(5);
     }
 
-    receivedData_ = true;
-}
-
-bool RobotProgramDownloader::receivedData() {
-    // FIXME: Is this really useful?
-    return receivedData_;
 }
