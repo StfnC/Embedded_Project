@@ -12,4 +12,5 @@ class RobotProgramDownloader {
         uint16_t totalBytes_;
 
         void writeTotalBytes();
+        void writeProgramToMemory();
 };
