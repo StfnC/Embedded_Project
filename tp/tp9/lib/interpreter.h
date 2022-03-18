@@ -34,13 +34,11 @@ class Interpreter
 public:
     Interpreter();
     void interpreter(uint8_t instruction, uint8_t operand);
-    void interpretCode(uint16_t startAdress);
+    void interpretCode();
+    uint16_t getNumberInstructions();
 
 private:
     uint8_t  read8Bits();
-    uint16_t getNumberInstructions();
-
-
 
     void dbt();
     void att(uint8_t operand);

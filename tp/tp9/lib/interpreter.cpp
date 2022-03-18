@@ -6,28 +6,28 @@ Interpreter::Interpreter() : transmitter_(),
 
 uint8_t Interpreter::read8Bits()
 {
-    uint8_t* numberPtr;
+    uint8_t *numberPtr;
     memoire_.lecture(currentAdress_, numberPtr);
-    currentAdress_ += 8;
+    currentAdress_ += sizeof(uint8_t);
     return *numberPtr;
 }
 
 uint16_t Interpreter::getNumberInstructions()
 {
     uint8_t firstNumberHalf = read8Bits();
-    uint16_t numberInstructions;     
+    uint16_t numberInstructions;
     numberInstructions = static_cast<uint16_t>(firstNumberHalf) << 8;
-
+    _delay_ms(5);
     uint8_t secondNumberHalf = read8Bits();
     numberInstructions |= static_cast<uint16_t>(secondNumberHalf);
-    return numberInstructions;
+    return numberInstructions - 1;
 }
 
-void Interpreter::interpretCode(uint16_t address)
+void Interpreter::interpretCode()
 {
-    address = currentAdress_;
     uint16_t numberInstructions = getNumberInstructions();
-
+    _delay_ms(5);
+    // transmitter_.transmit(numberInstructions);
     for (uint16_t i = 0; i < numberInstructions; i++)
     {
         uint8_t instruction = read8Bits();
@@ -38,8 +38,10 @@ void Interpreter::interpretCode(uint16_t address)
 
 void Interpreter::interpreter(uint8_t instruction, uint8_t operand)
 {
-    switch (instruction)
+    if (execute_ || instruction == 0x01)
     {
+        switch (instruction)
+        {
         case 0x01:
             dbt();
             break;
@@ -96,153 +98,104 @@ void Interpreter::interpreter(uint8_t instruction, uint8_t operand)
         case 0xFF:
             fin();
             break;
-
-        default:
-            fin();
-            break;
         }
-}   
+    }
+}
 
 void Interpreter::dbt()
 {
-    char message[31];
-    int n;
-    n = sprintf(message, "L'instruction DAL est executée");
-    transmitter_.transmitTextMessage(message, n);
+    transmitter_.transmit(0x01);
+    execute_ = true;
 }
 
 void Interpreter::att(uint8_t operand)
 {
-    if (execute_)
+    transmitter_.transmit(0x02);
+
+    for (uint8_t i = 0; i < operand; i++)
     {
-        for (uint8_t i = 0; i < operand; i++)
-        {
-            _delay_ms(25);
-        }
+        _delay_ms(25);
     }
 }
 
 void Interpreter::dal(uint8_t operand)
 {
-    if (execute_)
-    {
-        char message[31];
-        int n;
-        n = sprintf(message, "L'instruction DAL est executée");
-        transmitter_.transmitTextMessage(message, n);
-    }
+    transmitter_.transmit(0x44);
 };
 
 void Interpreter::det(uint8_t operand)
 {
-    if (execute_)
-    {
-        char message[31];
-        int n;
-        n = sprintf(message, "L'instruction DET est executée");
-        transmitter_.transmitTextMessage(message, n);
-    }
+    transmitter_.transmit(0x45);
 }
 
 void Interpreter::sgo(uint8_t operand)
 {
-    if (execute_)
-    {
-        char message[31];
-        int n;
-        n = sprintf(message, "L'instruction SGO est executée");
-        transmitter_.transmitTextMessage(message, n);
-    }
+    transmitter_.transmit(0x48);
 }
 
 void Interpreter::sar(uint8_t operand)
 {
-    if (execute_)
-    {
-        char message[31];
-        int n;
-        n = sprintf(message, "L'instruction SAR est executée");
-        transmitter_.transmitTextMessage(message, n);
-    }
+    transmitter_.transmit(0x09);
 }
 
 void Interpreter::mar()
 {
-    if (execute_)
-    {
-        motorsController_.setLeftPercentage(0);
-        motorsController_.setRightPercentage(0);
-    }
+    transmitter_.transmit(0x61);
+    motorsController_.setLeftPercentage(0);
+    motorsController_.setRightPercentage(0);
 }
 
 void Interpreter::mav(uint8_t operand)
 {
-    if (execute_)
-    {
-        uint8_t percentage = operand / 255 * 100;
-        motorsController_.setLeftPercentage(percentage);
-        motorsController_.setRightPercentage(percentage);
-    }
+    transmitter_.transmit(0x62);
+
+    uint8_t percentage = operand / 255 * 100;
+    motorsController_.setLeftPercentage(percentage);
+    motorsController_.setRightPercentage(percentage);
+    _delay_ms(5);
 }
 
 void Interpreter::mre(uint8_t operand)
 {
-    if (execute_)
-    {
-        uint8_t percentage = operand / 255 * 100;
-        motorsController_.changeLeftDirection();
-        motorsController_.changeRightDirection();
-        motorsController_.setLeftPercentage(percentage);
-        motorsController_.setRightPercentage(percentage);
-    }
+    transmitter_.transmit(0x63);
+
+    uint8_t percentage = operand / 255 * 100;
+    motorsController_.changeLeftDirection();
+    motorsController_.changeRightDirection();
+    motorsController_.setLeftPercentage(percentage);
+    motorsController_.setRightPercentage(percentage);
 }
 
 void Interpreter::trd()
 {
-    if (execute_)
-    {
-        char message[31];
-        int n;
-        n = sprintf(message, "L'instruction TRD est executée");
-        transmitter_.transmitTextMessage(message, n);
-    }
+    transmitter_.transmit(0x64);
 }
 
 void Interpreter::trg()
 {
-    if (execute_)
-    {
-        char message[31];
-        int n;
-        n = sprintf(message, "L'instruction TRG est executée");
-        transmitter_.transmitTextMessage(message, n);
-    }
+    transmitter_.transmit(0x65);
 }
 
 void Interpreter::dbc(uint8_t operand)
 {
-    if (execute_)
-    {
-        loopAddress_ = currentAdress_;
-        counter_ = operand;
-    }
+    transmitter_.transmit(0xC0);
+
+    loopAddress_ = currentAdress_;
+    counter_ = operand;
 }
 
 void Interpreter::fbc()
 {
-    if (execute_)
+    transmitter_.transmit(0xC1);
+
+    if (counter_ != 0)
     {
-        if (counter_ != 0)
-        {
-            currentAdress_ = loopAddress_;
-        }
+        currentAdress_ = loopAddress_;
     }
 }
 
 void Interpreter::fin()
 {
-    if (execute_)
-    {
-        execute_ = false;
-    }
+    transmitter_.transmit(0xFF);
+    // execute_ = false;
 }
