@@ -4,16 +4,14 @@ Interpreter::Interpreter() : transmitter_(),
                              motorsController_(),
                              memoire_() {}
 
-uint8_t Interpreter::read8Bits()
-{
+uint8_t Interpreter::read8Bits() {
     uint8_t *numberPtr;
     memoire_.lecture(currentAdress_, numberPtr);
     currentAdress_ += sizeof(uint8_t);
     return *numberPtr;
 }
 
-uint16_t Interpreter::getNumberInstructions()
-{
+uint16_t Interpreter::getNumberInstructions() {
     uint8_t firstNumberHalf = read8Bits();
     uint16_t numberInstructions;
     numberInstructions = static_cast<uint16_t>(firstNumberHalf) << 8;
@@ -23,11 +21,8 @@ uint16_t Interpreter::getNumberInstructions()
     return numberInstructions - 1;
 }
 
-void Interpreter::interpretCode()
-{
+void Interpreter::interpretCode() {
     uint16_t numberInstructions = getNumberInstructions();
-    _delay_ms(5);
-    // transmitter_.transmit(numberInstructions);
     for (uint16_t i = 0; i < numberInstructions; i++)
     {
         uint8_t instruction = read8Bits();
@@ -36,80 +31,77 @@ void Interpreter::interpretCode()
     }
 }
 
-void Interpreter::interpreter(uint8_t instruction, uint8_t operand)
-{
-    if (execute_ || instruction == 0x01)
+void Interpreter::interpreter(uint8_t instruction, uint8_t operand) {
+    if (execute_ || instruction == Operations::dbt)
     {
         switch (instruction)
         {
-        case 0x01:
+        case Operations::dbt:
             dbt();
             break;
 
-        case 0x02:
+        case Operations::att:
             att(operand);
             break;
 
-        case 0x44:
+        case Operations::dal:
             dal(operand);
             break;
 
-        case 0x45:
+        case Operations::det:
             det(operand);
             break;
 
-        case 0x48:
+        case Operations::sgo:
             sgo(operand);
             break;
 
-        case 0x09:
+        case Operations::sar:
             sar(operand);
             break;
 
-        case 0x60:
-        case 0x61:
+        case Operations::mar1:
+        case Operations::mar2:
             mar();
             break;
 
-        case 0x62:
+        case Operations::mav:
             mav(operand);
             break;
 
-        case 0x63:
+        case Operations::mre:
             mre(operand);
             break;
 
-        case 0x64:
+        case Operations::trd:
             trd();
             break;
 
-        case 0x65:
+        case Operations::trg:
             trg();
             break;
 
-        case 0xC0:
+        case Operations::dbc:
             dbc(operand);
             break;
 
-        case 0xC1:
+        case Operations::fbc:
             fbc();
             break;
 
-        case 0xFF:
+        case Operations::fin:
             fin();
             break;
         }
     }
 }
 
-void Interpreter::dbt()
-{
+void Interpreter::dbt() {
     transmitter_.transmit(0x01);
     execute_ = true;
 }
 
-void Interpreter::att(uint8_t operand)
-{
+void Interpreter::att(uint8_t operand) {
     transmitter_.transmit(0x02);
 
     for (uint8_t i = 0; i < operand; i++)
@@ -118,35 +110,29 @@ void Interpreter::att(uint8_t operand)
     }
 }
 
-void Interpreter::dal(uint8_t operand)
-{
+void Interpreter::dal(uint8_t operand) {
     transmitter_.transmit(0x44);
 };
 
-void Interpreter::det(uint8_t operand)
-{
+void Interpreter::det(uint8_t operand) {
     transmitter_.transmit(0x45);
 }
 
-void Interpreter::sgo(uint8_t operand)
-{
+void Interpreter::sgo(uint8_t operand) {
     transmitter_.transmit(0x48);
 }
 
-void Interpreter::sar(uint8_t operand)
-{
+void Interpreter::sar(uint8_t operand) {
     transmitter_.transmit(0x09);
 }
 
-void Interpreter::mar()
-{
+void Interpreter::mar() {
     transmitter_.transmit(0x61);
     motorsController_.setLeftPercentage(0);
     motorsController_.setRightPercentage(0);
 }
 
-void Interpreter::mav(uint8_t operand)
-{
+void Interpreter::mav(uint8_t operand) {
     transmitter_.transmit(0x62);
 
     uint8_t percentage = operand / 255 * 100;
@@ -155,8 +141,7 @@ void Interpreter::mav(uint8_t operand)
     _delay_ms(5);
 }
 
-void Interpreter::mre(uint8_t operand)
-{
+void Interpreter::mre(uint8_t operand) {
     transmitter_.transmit(0x63);
 
     uint8_t percentage = operand / 255 * 100;
@@ -166,26 +151,22 @@ void Interpreter::mre(uint8_t operand)
     motorsController_.setRightPercentage(percentage);
 }
 
-void Interpreter::trd()
-{
+void Interpreter::trd() {
     transmitter_.transmit(0x64);
 }
 
-void Interpreter::trg()
-{
+void Interpreter::trg() {
     transmitter_.transmit(0x65);
 }
 
-void Interpreter::dbc(uint8_t operand)
-{
+void Interpreter::dbc(uint8_t operand) {
     transmitter_.transmit(0xC0);
 
     loopAddress_ = currentAdress_;
     counter_ = operand;
 }
 
-void Interpreter::fbc()
-{
+void Interpreter::fbc() {
     transmitter_.transmit(0xC1);
 
     if (counter_ != 0)
@@ -194,8 +175,7 @@ void Interpreter::fbc()
     }
 }
 
-void Interpreter::fin()
-{
+void Interpreter::fin() {
     transmitter_.transmit(0xFF);
-    // execute_ = false;
+    execute_ = false;
 }
