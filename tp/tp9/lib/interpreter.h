@@ -3,6 +3,7 @@
 #include <avr/io.h>
 #include <counter.h>
 #include <led.h>
+// #include <Notes.h>
 #include <MotorsController.h>
 #include <util/delay.h>
 #include <usart.h>
@@ -15,7 +16,6 @@ class Interpreter {
 public:
     Interpreter();
     void interpreter(uint8_t instruction, uint8_t operand);
-    void interpretCode();
     uint16_t getNumberInstructions();
 
 private:
@@ -26,7 +26,7 @@ private:
     void dal(uint8_t operand);
     void det(uint8_t operand);
     void sgo(uint8_t operand);
-    void sar(uint8_t operand);
+    void sar();
     void mar();
     void mav(uint8_t operand);
     void mre(uint8_t operand);
@@ -41,7 +41,9 @@ private:
     usart transmitter_;
     MotorsController motorsController_;
     Memoire24CXXX memoire_;
-
+    // Notes song_;
+    
+    uint16_t rotationTime_ = 500;
     uint16_t numberInstructions = 0;
     uint16_t currentAdress_ = 0;
     uint16_t loopAddress_ = 0;
