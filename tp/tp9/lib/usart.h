@@ -6,9 +6,7 @@
  * \date March 13 2022
  * 
  */
-
 #pragma once
-
 #include <avr/io.h>
 
 class usart {

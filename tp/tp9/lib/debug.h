@@ -6,16 +6,14 @@
  * \date March 13 2022
  *
  */
-
 #pragma once
-
 #include "usart.h"
 
 #ifdef DEBUG
 #define DEBUG_INIT Debug::initDebug()
 #define DEBUG_PRINT_MESSAGE(message, length) Debug::printMessage(message, length)
 #define DEBUG_COMPARE_SIGNAL(port, pin, value) Debug::compareSignal(port, pin, value)
-#define DEBUG_PRINT_VARIABLE(variable) Debug::printVariable(message)
+#define DEBUG_PRINT_VARIABLE(variable) Debug::printVariable(variable)
 
 #else
 #define DEBUG_INIT do {} while(0)
