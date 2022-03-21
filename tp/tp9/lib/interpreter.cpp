@@ -202,7 +202,7 @@ void Interpreter::trg() {         // tourner à gauche
 void Interpreter::dbc(uint8_t operand) {    // début de boucle
     transmitter_.transmit(0xC0);
 
-    loopAddress_ = currentAdress_ + 2 * sizeof(uint8_t);
+    loopAddress_ = currentAdress_;
     counter_ = operand + 1;
 }
 
