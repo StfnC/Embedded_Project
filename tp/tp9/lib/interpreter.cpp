@@ -176,7 +176,7 @@ void Interpreter::trd() {         // tourner à droite
     motorsController_.setLeftPercentage(percentage);
 
     // Replace by _delay_loop2
-    // _delay_ms(rotationTime_);       // duree de rotation
+    _delay_ms(ROTATION_TIME);       // duree de rotation
 
     motorsController_.setRightPercentage(rightPercent);
     motorsController_.setLeftPercentage(leftPercent);
