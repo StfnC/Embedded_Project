@@ -1,10 +1,28 @@
 // Parcours de test pour le TP9
 
 DBT;
+
 DBC 2;
 DAL 1;
 ATT 40;
 DET 1;
 ATT 40;
 FBC;
+
+MAV 255;
+ATT 40;
+TRD;
+ATT 40;
+TRD;
+MAR;
+
+ATT 40;
+
+MRE 255;
+ATT 40;
+TRD;
+ATT 40;
+TRD;
+MAR;
+
 FIN;
