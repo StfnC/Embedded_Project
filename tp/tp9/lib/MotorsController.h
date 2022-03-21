@@ -24,6 +24,8 @@ class MotorsController {
         void changeLeftDirection(Direction direction);
         void setRightPercentage(uint8_t percentage);
         void changeRightDirection(Direction direction);
+        void invertRightDirection();
+        void invertLeftDirection();
 
         uint8_t getLeftPercentage();
         uint8_t getRightPercentage();

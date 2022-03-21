@@ -67,6 +67,14 @@ void MotorsController::changeRightDirection(Direction direction) {
     }
 }
 
+void MotorsController::invertRightDirection() {
+    PORTB ^= (1 << DDB5);
+}
+
+void MotorsController::invertLeftDirection() {
+    PORTB ^= (1 << DDB6);
+}
+
 void MotorsController::setRightPercentage(uint8_t percentage) {
     if (percentage >= 0 && percentage <= 100) {
         rightSpeed_ = convertPercentageToTimerValue(percentage);
