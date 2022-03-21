@@ -1,6 +1,6 @@
 /**
  * Implementation of the MotorsController methods
- * 
+ *
  * \file MotorsController.cpp
  * \author Stefan Cotargasanu
  * \date March 13 2022
@@ -8,13 +8,13 @@
  * Pins:
  *  Input:
  *      -
- * 
+ *
  *  Output:
  *      -B3
  *      -B4
  *      -B5
  *      -B6
- * 
+ *
  */
 
 #include "MotorsController.h"
@@ -45,12 +45,26 @@ void MotorsController::setLeftPercentage(uint8_t percentage) {
     }
 }
 
-void MotorsController::changeLeftDirection() {
-    PORTB ^= (1 << DDB6);
+void MotorsController::changeLeftDirection(Direction direction) {
+    switch (direction) {
+        case Direction::Forward:
+            PORTB &= ~(1 << DDB6);
+            break;
+        case Direction::Reverse:
+            PORTB |= (1 << DDB6);
+            break;
+    }
 }
 
-void MotorsController::changeRightDirection() {
-    PORTB ^= (1 << DDB5);
+void MotorsController::changeRightDirection(Direction direction) {
+    switch (direction) {
+        case Direction::Forward:
+            PORTB &= ~(1 << DDB5);
+            break;
+        case Direction::Reverse:
+            PORTB |= (1 << DDB5);
+            break;
+    }
 }
 
 void MotorsController::setRightPercentage(uint8_t percentage) {

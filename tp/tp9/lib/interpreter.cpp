@@ -147,6 +147,8 @@ void Interpreter::mav(uint8_t operand) {   // avancer
     transmitter_.transmit(0x62);
     transmitter_.transmit(operand);
     uint8_t percentage = (operand / 255) * 100;
+    motorsController_.changeLeftDirection(Direction::Forward);
+    motorsController_.changeRightDirection(Direction::Forward);
     motorsController_.setLeftPercentage(percentage);
     motorsController_.setRightPercentage(percentage);
     _delay_ms(20);
@@ -157,8 +159,8 @@ void Interpreter::mre(uint8_t operand) {   // reculer
     transmitter_.transmit(0x63);
 
     uint8_t percentage = operand / 255 * 100;
-    motorsController_.changeLeftDirection();
-    motorsController_.changeRightDirection();
+    motorsController_.changeLeftDirection(Direction::Reverse);
+    motorsController_.changeRightDirection(Direction::Reverse);
     motorsController_.setLeftPercentage(percentage);
     motorsController_.setRightPercentage(percentage);
 }

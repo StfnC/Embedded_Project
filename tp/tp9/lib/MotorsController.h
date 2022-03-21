@@ -10,15 +10,20 @@
 #include <avr/interrupt.h>
 #include <avr/io.h>
 
+enum class Direction {
+    Forward,
+    Reverse
+};
+
 class MotorsController {
     public:
         MotorsController();
         ~MotorsController() = default;
 
         void setLeftPercentage(uint8_t percentage);
-        void changeLeftDirection();
+        void changeLeftDirection(Direction direction);
         void setRightPercentage(uint8_t percentage);
-        void changeRightDirection();
+        void changeRightDirection(Direction direction);
 
         uint8_t getLeftPercentage();
         uint8_t getRightPercentage();
