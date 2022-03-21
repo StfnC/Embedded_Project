@@ -17,6 +17,7 @@ public:
     Interpreter();
     void interpreter(uint8_t instruction, uint8_t operand);
     uint16_t getNumberInstructions();
+    void interpretLine();
 
 private:
     uint8_t read8Bits();

@@ -1,14 +1,22 @@
 #include "interpreter.h"
 
 Interpreter::Interpreter() : transmitter_(),
-                             motorsController_(),
-                             memoire_() {}
+    memoire_() {
+    motorsController_ = MotorsController();
+}
 
 uint8_t Interpreter::read8Bits() {
-    uint8_t *numberPtr;
+    uint8_t* numberPtr;
     memoire_.lecture(currentAdress_, numberPtr);
     currentAdress_ += sizeof(uint8_t);
     return *numberPtr;
+}
+
+void Interpreter::interpretLine() {
+    uint8_t operation = read8Bits();
+    uint8_t operand = read8Bits();
+    interpreter(operation, operand);
+    _delay_ms(5000);
 }
 
 uint16_t Interpreter::getNumberInstructions() {
@@ -126,7 +134,7 @@ void Interpreter::sar() { // arrêter de jouer la sonorité
     // song_.offNote();
 }
 
-void Interpreter::mar() {                // arrête les deux moteurs 
+void Interpreter::mar() {                // arrête les deux moteurs
     transmitter_.transmit(0x60);
     motorsController_.setRightPercentage(0);
     transmitter_.transmit(0x61);
@@ -137,10 +145,12 @@ void Interpreter::mar() {                // arrête les deux moteurs
 
 void Interpreter::mav(uint8_t operand) {   // avancer
     transmitter_.transmit(0x62);
-
-    uint8_t percentage = operand / 255 * 100;
+    transmitter_.transmit(operand);
+    uint8_t percentage = (operand / 255) * 100;
     motorsController_.setLeftPercentage(percentage);
     motorsController_.setRightPercentage(percentage);
+    _delay_ms(20);
+
 }
 
 void Interpreter::mre(uint8_t operand) {   // reculer
@@ -160,7 +170,7 @@ void Interpreter::trd() {         // tourner à droite
     uint8_t leftPercent = motorsController_.getLeftPercentage();
 
     motorsController_.setRightPercentage(0);
-    uint8_t percentage = 50 / 255 * 100;
+    uint8_t percentage = 135 / 255 * 100;
     motorsController_.setLeftPercentage(percentage);
 
     // Replace by _delay_loop2
@@ -177,7 +187,7 @@ void Interpreter::trg() {         // tourner à gauche
     uint8_t leftPercent = motorsController_.getLeftPercentage();
 
     motorsController_.setLeftPercentage(0);
-    uint8_t percentage = 50 / 255 * 100;
+    uint8_t percentage = 135 / 255 * 100;
     motorsController_.setRightPercentage(percentage);
 
 
