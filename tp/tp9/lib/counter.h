@@ -25,7 +25,7 @@ enum class GenerationMode {
 class CounterInterrupt {
    public:
     CounterInterrupt();
-    ~CounterInterrupt();
+    ~CounterInterrupt() = default;
 
     void setDuration(uint16_t duration);
     void setCompareMode(CompareMode compareMode);
