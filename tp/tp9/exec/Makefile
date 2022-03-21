@@ -136,7 +136,7 @@ all: $(TRG) $(HEXROMTRG)
 # Base sur cette reponse StackOverflow: https://stackoverflow.com/a/1080180
 debug: CFLAGS += -DDEBUG
 debug: CXXFLAGS += -DDEBUG
-debug: all
+debug: clean all
 
 # Implementation de la cible
 $(TRG): $(OBJDEPS)
