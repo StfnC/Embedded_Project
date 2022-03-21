@@ -10,7 +10,7 @@
 class Notes {
 	public:
 		Notes();
-        ~Notes() {}
+        ~Notes() = default;
 		void notePWM(int note);
 		void stopNote();
 		void playNote(uint8_t note);
