@@ -1,3 +1,12 @@
+/**
+ * Definition of the Partition class
+ * 
+ * \file MotorsController.h
+ * \author Stefan Cotargasanu
+ * \date March 22 2022
+ *  
+ */
+
 #pragma once
 #include <avr/io.h>
 #include <util/delay.h>

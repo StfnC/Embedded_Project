@@ -1,3 +1,12 @@
+/**
+ * Implementation of the RobotProgramDownloader methods
+ * 
+ * \file MotorsController.h
+ * \author Stefan Cotargasanu
+ * \date March 22 2022
+ *  
+ */
+
 #define F_CPU 8000000
 
 #include "RobotProgramDownloader.h"

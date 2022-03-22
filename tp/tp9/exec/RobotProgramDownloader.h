@@ -1,3 +1,12 @@
+/**
+ * Definition of the RobotProgramDownloader class
+ * 
+ * \file MotorsController.h
+ * \author Stefan Cotargasanu
+ * \date March 22 2022
+ *  
+ */
+
 #include <memoire_24.h>
 #include <usart.h>
 
