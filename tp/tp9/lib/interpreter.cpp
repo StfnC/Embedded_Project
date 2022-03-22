@@ -16,7 +16,6 @@ void Interpreter::interpretLine() {
     uint8_t operation = read8Bits();
     uint8_t operand = read8Bits();
     interpreter(operation, operand);
-    _delay_ms(5000);
 }
 
 uint16_t Interpreter::getNumberInstructions() {
@@ -171,13 +170,14 @@ void Interpreter::trd() {         // tourner à droite
     uint8_t rightPercent = motorsController_.getRightPercentage();
     uint8_t leftPercent = motorsController_.getLeftPercentage();
 
-    motorsController_.setRightPercentage(0);
-    uint8_t percentage = 135 / 255 * 100;
-    motorsController_.setLeftPercentage(percentage);
+    motorsController_.setRightPercentage(100);
+    motorsController_.invertRightDirection();
 
-    // Replace by _delay_loop2
+    motorsController_.setLeftPercentage(100);
+
     _delay_ms(ROTATION_TIME);       // duree de rotation
 
+    motorsController_.invertRightDirection();
     motorsController_.setRightPercentage(rightPercent);
     motorsController_.setLeftPercentage(leftPercent);
 }
@@ -188,17 +188,16 @@ void Interpreter::trg() {         // tourner à gauche
     uint8_t rightPercent = motorsController_.getRightPercentage();
     uint8_t leftPercent = motorsController_.getLeftPercentage();
 
-    motorsController_.setLeftPercentage(0);
-    uint8_t percentage = 135 / 255 * 100;
-    motorsController_.setRightPercentage(percentage);
+    motorsController_.setRightPercentage(100);
 
+    motorsController_.setLeftPercentage(100);
+    motorsController_.invertLeftDirection();
 
-    // Replace by _delay_loop2
-    // _delay_ms(rotationTime_);
+    _delay_ms(ROTATION_TIME);       // duree de rotation
 
-    motorsController_.setLeftPercentage(leftPercent);
     motorsController_.setRightPercentage(rightPercent);
-
+    motorsController_.invertLeftDirection();
+    motorsController_.setLeftPercentage(leftPercent);
 }
 
 void Interpreter::dbc(uint8_t operand) {    // début de boucle
@@ -220,5 +219,5 @@ void Interpreter::fbc() {                   // fin de boucle
 
 void Interpreter::fin() {
     transmitter_.transmit(0xFF);
-    // execute_ = false;
+    execute_ = false;
 }

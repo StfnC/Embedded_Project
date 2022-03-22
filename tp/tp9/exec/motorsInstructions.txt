@@ -3,8 +3,6 @@
 DBT;
 
 MAV 150;
-ATT 20;
-TRD;
 ATT 40;
 MAR;
 

@@ -1,11 +1,11 @@
 #define F_CPU 8000000
 
+#include <util/delay.h>
 #include <debug.h>
 #include <interpreter.h>
 #include <led.h>
 #include <memoire_24.h>
 #include <usart.h>
-#include <util/delay.h>
 
 #include "RobotProgramDownloader.h"
 
@@ -19,7 +19,7 @@ int main() {
     // programmer.acceptProgramData();
 
     Interpreter interpreter;
-    uint8_t nInstructions = interpreter.getNumberInstructions();
+    uint16_t nInstructions = interpreter.getNumberInstructions();
 
     for (uint16_t i = 0; i < nInstructions; i++) {
         interpreter.interpretLine();

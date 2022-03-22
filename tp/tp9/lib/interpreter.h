@@ -44,7 +44,7 @@ private:
     Memoire24CXXX memoire_;
     // Notes song_;
     
-    static const uint16_t ROTATION_TIME = 3000;
+    static const uint16_t ROTATION_TIME = 4000;
     uint16_t numberInstructions = 0;
     uint16_t currentAdress_ = 0;
     uint16_t loopAddress_ = 0;
