@@ -2,8 +2,6 @@
 
 DBT;
 
-MAV 150;
-ATT 40;
-MAR;
+TRG;
 
 FIN;
