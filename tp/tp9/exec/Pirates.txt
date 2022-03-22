@@ -1,0 +1,315 @@
+att 4;
+        dbt;
+        sar;
+        att 4;
+
+        sgo 60;
+        att 4;
+        sar;
+        att 4;
+
+        sgo 62;
+        att 8;
+        sar;
+        att 8;
+
+        sgo 62;
+        att 8;
+        sar;
+        att 8;
+
+        sgo 62;
+        att 4;
+        sar;
+        att 4;
+
+        sgo 64;
+        att 4;
+        sar;
+        att 4;
+
+        sgo 65;
+        att 8;
+        sar;
+        att 8;
+
+        sgo 65;
+        att 8;
+        sar;
+        att 8;
+
+        sgo 65;
+        att 4;
+        sar;
+        att 4;
+
+        sgo 67;
+        att 4;
+        sar;
+        att 4;
+
+        sgo 64;
+        att 8;
+        sar;
+        att 8;
+
+        sgo 64;
+        att 8;
+        sar;
+        att 8;
+
+        sgo 62;
+        att 4;
+        sar;
+        att 4;
+
+        sgo 60;
+        att 4;
+        sar;
+        att 4;
+
+        sgo 60;
+        att 4;
+        sar;
+        att 4;
+
+        sgo 62;
+        att 8;
+        sar;
+        att 8;
+
+        att 8;
+
+        sgo 55;
+        att 4;
+        sar;
+        att 4;
+
+        sgo 60;
+        att 4;
+        sar;
+        att 4;
+
+        sgo 62;
+        att 8;
+        sar;
+        att 8;
+
+        sgo 62;
+        att 8;
+        sar;
+        att 8;
+
+        sgo 62;
+        att 4;
+        sar;
+        att 4;
+
+        sgo 64;
+        att 4;
+        sar;
+        att 4;
+
+        sgo 65;
+        att 8;
+        sar;
+        att 8;
+
+        sgo 65;
+        att 8;
+        sar;
+        att 8;
+
+        sgo 65;
+        att 4;
+        sar;
+        att 4;
+
+        sgo 67;
+        att 4;
+        sar;
+        att 4;
+
+        sgo 64;
+        att 8;
+        sar;
+        att 8;
+
+        sgo 64;
+        att 8;
+        sar;
+        att 8;
+
+        sgo 62;
+        att 4;
+        sar;
+        att 4;
+
+        sgo 60;
+        att 4;
+        sar;
+        att 4;
+
+        sgo 62;
+        att 10;
+        sar;
+        att 10;
+
+        att 8;
+
+        //autre pause 
+
+        sgo 55;
+        att 4;
+        sar;
+        att 4;
+
+        sgo 60;
+        att 4;
+        sar;
+        att 4;
+
+        sgo 62;
+        att 8;
+        sar;
+        att 8;
+
+        sgo 62;
+        att 8;
+        sar;
+        att 8;
+
+        sgo 62;
+        att 4;
+        sar;
+        att 4;
+
+        sgo 65;
+        att 4;
+        sar;
+        att 4;
+
+        sgo 67;
+        att 8;
+        sar;
+        att 8;
+
+        sgo 67;
+        att 8;
+        sar;
+        att 8;
+
+        sgo 67;
+        att 4;
+        sar;
+        att 4;
+
+        sgo 69;
+        att 4;
+        sar;
+        att 4;
+
+        sgo 71;
+        att 8;
+        sar;
+        att 8;
+
+        sgo 71;
+        att 8;
+        sar;
+        att 8;
+
+        sgo 69;
+        att 4;
+        sar;
+        att 4;
+
+        sgo 67;
+        att 4;
+        sar;
+        att 4;
+
+        sgo 69;
+        att 4;
+        sar;
+        att 4;
+
+        sgo 62;
+        att 8;
+        sar;
+        att 8;
+
+        att 8;
+
+        sgo 62;
+        att 4;
+        sar;
+        att 4;
+
+        sgo 64;
+        att 4;
+        sar;
+        att 4;
+
+        sgo 65;
+        att 8;
+        sar;
+        att 8;
+
+        sgo 65;
+        att 8;
+        sar;
+        att 8;
+
+        sgo 67;
+        att 8;
+        sar;
+        att 8;
+
+        sgo 69;
+        att 4;
+        sar;
+        att 4;
+
+        sgo 62;
+        att 8;
+        sar;
+        att 8;
+
+        att 8;
+
+        sgo 62;
+        att 4;
+        sar;
+        att 4;
+
+        sgo 65;
+        att 4;
+        sar;
+        att 4;
+
+        sgo 64;
+        att 8;
+        sar;
+        att 8;
+
+        sgo 64;
+        att 8;
+        sar;
+        att 8;
+
+        sgo 65;
+        att 4;
+        sar;
+        att 4;
+
+        sgo 62;
+        att 4;
+        sar;
+        att 4;
+
+        sgo 62;
+        att 10;
+        sar;
+        att 10;
+        fin;

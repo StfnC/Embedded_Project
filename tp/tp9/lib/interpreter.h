@@ -17,12 +17,13 @@
 class Interpreter {
 public:
     Interpreter();
-    void interpreter(uint8_t instruction, uint8_t operand);
-    uint16_t getNumberInstructions();
-    void interpretLine();
+    void interpretCode();
 
 private:
     uint8_t read8Bits();
+    void readNumberInstructions();
+    void interpretLine();
+    void interpreter(uint8_t instruction, uint8_t operand);
 
     void dbt();
     void att(uint8_t operand);
@@ -47,7 +48,7 @@ private:
     // Notes song_;
     
     static const uint16_t ROTATION_TIME = 500;
-    uint16_t numberInstructions = 0;
+    uint16_t numberInstructions_ = 0;
     uint16_t currentAdress_ = 0;
     uint16_t loopAddress_ = 0;
     uint8_t counter_ = 0;

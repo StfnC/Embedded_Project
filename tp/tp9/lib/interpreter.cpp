@@ -12,20 +12,26 @@ uint8_t Interpreter::read8Bits() {
     return *numberPtr;
 }
 
+void Interpreter::interpretCode() {
+    readNumberInstructions();
+
+    for (uint16_t i = 0; i < numberInstructions_; i++) {
+        interpretLine();
+    }
+}
+
 void Interpreter::interpretLine() {
     uint8_t operation = read8Bits();
     uint8_t operand = read8Bits();
     interpreter(operation, operand);
 }
 
-uint16_t Interpreter::getNumberInstructions() {
+void Interpreter::readNumberInstructions() {
     uint8_t firstNumberHalf = read8Bits();
-    uint16_t numberInstructions;
-    numberInstructions = static_cast<uint16_t>(firstNumberHalf) << 8;
-    _delay_ms(5);
+    numberInstructions_ = static_cast<uint16_t>(firstNumberHalf) << 8;
     uint8_t secondNumberHalf = read8Bits();
-    numberInstructions |= static_cast<uint16_t>(secondNumberHalf);
-    return numberInstructions - 1;
+    numberInstructions_ |= static_cast<uint16_t>(secondNumberHalf);
+    numberInstructions_ -= 1;
 }
 
 
