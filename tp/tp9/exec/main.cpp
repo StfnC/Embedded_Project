@@ -9,6 +9,9 @@
 #include "Partition.h"
 
 int main() {
+    // RobotProgramDownloader program;
+    // program.acceptProgramData();
+
     DDRA |= (1 << DDA0) | (1 << DDA1);
     BuzzerController::initBuzzer();
     Interpreter interpreter;

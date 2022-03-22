@@ -53,7 +53,7 @@ private:
     MotorsController motorsController_;
     Memoire24CXXX memoire_;
     
-    static const uint16_t ROTATION_TIME = 490;
+    static const uint16_t ROTATION_TIME = 515;
     uint16_t numberInstructions_ = 0;
     uint16_t currentAdress_ = 0;
     uint16_t loopAddress_ = 0;
