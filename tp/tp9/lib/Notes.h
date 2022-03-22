@@ -1,9 +1,9 @@
 
 #pragma once
-#include <avr/io.h>
 #include <util/delay.h>
+#include <avr/io.h>
 #include <avr/interrupt.h>
-
+#include <usart.h>
 #include <counter.h>
 
 
@@ -11,12 +11,12 @@ class Notes {
 	public:
 		Notes();
         ~Notes() = default;
-		void notePWM(int note);
 		void stopNote();
 		void playNote(uint8_t note);
 
     private:
         CounterInterrupt counter_;
+        usart transmitter_;
 };
 
 
