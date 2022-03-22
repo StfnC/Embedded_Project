@@ -123,14 +123,12 @@ void Interpreter::det(uint8_t operand) { // eteindre del
 
 void Interpreter::sgo(uint8_t operand) { // jouer une sonorité
     transmitter_.transmit(0x48);
-
-    // ...............
-
+    BuzzerController::playNote(operand);
 }
 
 void Interpreter::sar() { // arrêter de jouer la sonorité
     transmitter_.transmit(0x09);
-    // song_.offNote();
+    BuzzerController::stopNote();
 }
 
 void Interpreter::mar() {                // arrête les deux moteurs

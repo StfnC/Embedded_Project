@@ -12,6 +12,7 @@
 #include <memoire_24.h>
 #include <debug.h>
 #include "operations.h"
+#include <BuzzerController.h>
 
 class Interpreter {
 public:
