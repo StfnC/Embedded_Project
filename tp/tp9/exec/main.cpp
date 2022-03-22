@@ -9,9 +9,7 @@
 #include "RobotProgramDownloader.h"
 
 int main() {
-    // RobotProgramDownloader downloader;
-    // downloader.acceptProgramData();
-
+    DDRA |= (1 << DDA0) | (1 << DDA1);
     BuzzerController::initBuzzer();
     Interpreter interpreter;
     interpreter.interpretCode();

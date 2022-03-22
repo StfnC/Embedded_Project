@@ -1,4 +1,4 @@
-// Parcours de test pour le TP9
+// Test routine for the TP9
 
 DBT;
 
@@ -40,5 +40,318 @@ TRG;
 ATT 40;
 TRG;
 MAR;
+
+SAR;
+ATT 4;
+
+SGO 60;
+ATT 4;
+SAR;
+ATT 4;
+
+SGO 62;
+ATT 8;
+SAR;
+ATT 8;
+
+SGO 62;
+ATT 8;
+SAR;
+ATT 8;
+
+SGO 62;
+ATT 4;
+SAR;
+ATT 4;
+
+SGO 64;
+ATT 4;
+SAR;
+ATT 4;
+
+SGO 65;
+ATT 8;
+SAR;
+ATT 8;
+
+SGO 65;
+ATT 8;
+SAR;
+ATT 8;
+
+SGO 65;
+ATT 4;
+SAR;
+ATT 4;
+
+SGO 67;
+ATT 4;
+SAR;
+ATT 4;
+
+SGO 64;
+ATT 8;
+SAR;
+ATT 8;
+
+SGO 64;
+ATT 8;
+SAR;
+ATT 8;
+
+SGO 62;
+ATT 4;
+SAR;
+ATT 4;
+
+SGO 60;
+ATT 4;
+SAR;
+ATT 4;
+
+SGO 60;
+ATT 4;
+SAR;
+ATT 4;
+
+SGO 62;
+ATT 8;
+SAR;
+ATT 8;
+
+ATT 8;
+
+SGO 55;
+ATT 4;
+SAR;
+ATT 4;
+
+SGO 60;
+ATT 4;
+SAR;
+ATT 4;
+
+SGO 62;
+ATT 8;
+SAR;
+ATT 8;
+
+SGO 62;
+ATT 8;
+SAR;
+ATT 8;
+
+SGO 62;
+ATT 4;
+SAR;
+ATT 4;
+
+SGO 64;
+ATT 4;
+SAR;
+ATT 4;
+
+SGO 65;
+ATT 8;
+SAR;
+ATT 8;
+
+SGO 65;
+ATT 8;
+SAR;
+ATT 8;
+
+SGO 65;
+ATT 4;
+SAR;
+ATT 4;
+
+SGO 67;
+ATT 4;
+SAR;
+ATT 4;
+
+SGO 64;
+ATT 8;
+SAR;
+ATT 8;
+
+SGO 64;
+ATT 8;
+SAR;
+ATT 8;
+
+SGO 62;
+ATT 4;
+SAR;
+ATT 4;
+
+SGO 60;
+ATT 4;
+SAR;
+ATT 4;
+
+SGO 62;
+ATT 10;
+SAR;
+ATT 10;
+
+ATT 8;
+
+//autre pause 
+
+SGO 55;
+ATT 4;
+SAR;
+ATT 4;
+
+SGO 60;
+ATT 4;
+SAR;
+ATT 4;
+
+SGO 62;
+ATT 8;
+SAR;
+ATT 8;
+
+SGO 62;
+ATT 8;
+SAR;
+ATT 8;
+
+SGO 62;
+ATT 4;
+SAR;
+ATT 4;
+
+SGO 65;
+ATT 4;
+SAR;
+ATT 4;
+
+SGO 67;
+ATT 8;
+SAR;
+ATT 8;
+
+SGO 67;
+ATT 8;
+SAR;
+ATT 8;
+
+SGO 67;
+ATT 4;
+SAR;
+ATT 4;
+
+SGO 69;
+ATT 4;
+SAR;
+ATT 4;
+
+SGO 71;
+ATT 8;
+SAR;
+ATT 8;
+
+SGO 71;
+ATT 8;
+SAR;
+ATT 8;
+
+SGO 69;
+ATT 4;
+SAR;
+ATT 4;
+
+SGO 67;
+ATT 4;
+SAR;
+ATT 4;
+
+SGO 69;
+ATT 4;
+SAR;
+ATT 4;
+
+SGO 62;
+ATT 8;
+SAR;
+ATT 8;
+
+ATT 8;
+
+SGO 62;
+ATT 4;
+SAR;
+ATT 4;
+
+SGO 64;
+ATT 4;
+SAR;
+ATT 4;
+
+SGO 65;
+ATT 8;
+SAR;
+ATT 8;
+
+SGO 65;
+ATT 8;
+SAR;
+ATT 8;
+
+SGO 67;
+ATT 8;
+SAR;
+ATT 8;
+
+SGO 69;
+ATT 4;
+SAR;
+ATT 4;
+
+SGO 62;
+ATT 8;
+SAR;
+ATT 8;
+
+ATT 8;
+
+SGO 62;
+ATT 4;
+SAR;
+ATT 4;
+
+SGO 65;
+ATT 4;
+SAR;
+ATT 4;
+
+SGO 64;
+ATT 8;
+SAR;
+ATT 8;
+
+SGO 64;
+ATT 8;
+SAR;
+ATT 8;
+
+SGO 65;
+ATT 4;
+SAR;
+ATT 4;
+
+SGO 62;
+ATT 4;
+SAR;
+ATT 4;
+
+SGO 62;
+ATT 10;
+SAR;
+ATT 10;
 
 FIN;
