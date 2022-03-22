@@ -1,9 +1,9 @@
 /**
- * Implementation of the MotorsController methods
+ * Implementation of the BuzzerController methods
  *
- * \file MotorsController.cpp
+ * \file BuzzerController.cpp
  * \author Stefan Cotargasanu
- * \date March 13 2022
+ * \date March 22 2022
  *
  * Pins:
  *  Input:

@@ -1,9 +1,9 @@
 /**
  * Definition of the BuzzerController class
  * 
- * \file MotorsController.h
+ * \file BuzzerController.h
  * \author Stefan Cotargasanu
- * \date March 13 2022
+ * \date March 22 2022
  * * Pins:
  *  Input:
  *      -

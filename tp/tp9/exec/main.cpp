@@ -3,7 +3,7 @@
 #include <BuzzerController.h>
 #include <RobotProgramDownloader.h>
 #include <avr/io.h>
-#include <interpreter.h>
+#include <Interpreter.h>
 #include <util/delay.h>
 
 #include "Partition.h"

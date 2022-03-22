@@ -1,7 +1,7 @@
 /**
  * Definition of the Interpreter class
  * 
- * \file MotorsController.h
+ * \file Interpreter.h
  * \author Stefan Cotargasanu Rakotoarivony Faneva Lina Belloui Justine Sauquet 
  * \date March 22 2022
  */

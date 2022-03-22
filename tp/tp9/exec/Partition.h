@@ -1,8 +1,8 @@
 /**
  * Definition of the Partition class
  * 
- * \file MotorsController.h
- * \author Stefan Cotargasanu
+ * \file Partition.h
+ * \author Justine Sauquet
  * \date March 22 2022
  *  
  */
