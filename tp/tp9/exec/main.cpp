@@ -3,12 +3,12 @@
 #include <avr/io.h>
 #include <util/delay.h>
 #include <BuzzerController.h>
+#include "Partition.h"
 
 int main() {
     BuzzerController::initBuzzer();
-    BuzzerController::playNote(45);
-    while (true) {
-    }
-    
+    Partition partition;
+    // partition.partitionAuClair();
+    partition.partitionPirates();
     return 0;
 };

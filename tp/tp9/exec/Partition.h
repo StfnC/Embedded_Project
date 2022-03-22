@@ -3,51 +3,9 @@
 #include <util/delay.h>
 #include <BuzzerController.h>
 
-// au clare de la lune
-// class Partition {
-
-//     void partition() {
-//         _delay_ms(600);
-//         BuzzerController::playNote(60); 
-
-//         _delay(600);
-//         BuzzerController::playNote(60); 
-
-//         _delay(600);
-//         BuzzerController::playNote(60); 
-
-//         _delay(600);
-//         BuzzerController::playNote(62);
-
-//         _delay(1200);
-//         BuzzerController::playNote(64);
-
-//         _delay(1200);
-//         BuzzerController::playNote(62);
-
-//         _delay(600);
-//         BuzzerController::playNote(60);
-
-//         _delay(600);
-//         BuzzerController::playNote(64);
-
-//         _delay(600);
-//         BuzzerController::playNote(62);
-
-//         _delay(600);
-//         BuzzerController::playNote(62);
-
-//         _delay(2400);
-//         BuzzerController::playNote(60);
-//     };
-// };
-
-// He's a pirate
-
 class Partition {
-
-    void partition() {
-
+public:
+    void partitionPirates() {
         _delay_ms(166);
         BuzzerController::playNote(55); // sol croche
 
@@ -57,10 +15,10 @@ class Partition {
         _delay_ms(331);
         BuzzerController::playNote(62); // ré noir
 
-       _delay_ms(331);
+        _delay_ms(331);
         BuzzerController::playNote(62);
 
-       _delay_ms(166);
+        _delay_ms(166);
         BuzzerController::playNote(62);
 
         _delay_ms(166);
@@ -80,7 +38,7 @@ class Partition {
 
         _delay_ms(331);
         BuzzerController::playNote(64);
-        
+
         _delay_ms(331);
         BuzzerController::playNote(64);
 
@@ -108,10 +66,10 @@ class Partition {
         _delay_ms(331);
         BuzzerController::playNote(62); // ré noir
 
-       _delay_ms(331);
+        _delay_ms(331);
         BuzzerController::playNote(62);
 
-       _delay_ms(166);
+        _delay_ms(166);
         BuzzerController::playNote(62);
 
         _delay_ms(166);
@@ -131,7 +89,7 @@ class Partition {
 
         _delay_ms(331);
         BuzzerController::playNote(64);
-        
+
         _delay_ms(331);
         BuzzerController::playNote(64);
 
@@ -145,7 +103,7 @@ class Partition {
         BuzzerController::playNote(62);
 
         _delay_ms(166);
-        
+
 
         _delay_ms(166);
         BuzzerController::playNote(55); // sol croche
@@ -156,10 +114,10 @@ class Partition {
         _delay_ms(331);
         BuzzerController::playNote(62); // ré noir
 
-       _delay_ms(331);
+        _delay_ms(331);
         BuzzerController::playNote(62);
 
-       _delay_ms(166);
+        _delay_ms(166);
         BuzzerController::playNote(62);
 
         _delay_ms(166);
@@ -171,10 +129,10 @@ class Partition {
         _delay_ms(331);
         BuzzerController::playNote(67);
 
-        _delay_ms(166));
+        _delay_ms(166);
         BuzzerController::playNote(67);
 
-        _delay_ms(166));
+        _delay_ms(166);
         BuzzerController::playNote(69); // la croche
 
         _delay_ms(331);
@@ -183,20 +141,19 @@ class Partition {
         _delay_ms(331);
         BuzzerController::playNote(71); // si noir
 
-        _delay_ms(166));
+        _delay_ms(166);
         BuzzerController::playNote(69);
 
         _delay_ms(166);
         BuzzerController::playNote(67); // sol3 croche
 
-        _delay_ms(166));
+        _delay_ms(166);
         BuzzerController::playNote(69);
 
         _delay_ms(331);
         BuzzerController::playNote(62);
 
         _delay_ms(166);
-        BuzzerController::playNote();
 
         _delay_ms(166);
         BuzzerController::playNote(62);
@@ -220,11 +177,10 @@ class Partition {
         BuzzerController::playNote(62);
 
         _delay_ms(166);
-        BuzzerController::playNote();
 
         _delay_ms(166);
         BuzzerController::playNote(62);
-    
+
         _delay_ms(166);
         BuzzerController::playNote(65);
 
@@ -245,10 +201,6 @@ class Partition {
 
         _delay_ms(166);
 
-
-
-
-        
         _delay_ms(166);
         BuzzerController::playNote(69); // la croche
 
@@ -258,10 +210,10 @@ class Partition {
         _delay_ms(331);
         BuzzerController::playNote(74); // ré noir
 
-       _delay_ms(331);
+        _delay_ms(331);
         BuzzerController::playNote(74);
 
-       _delay_ms(166);
+        _delay_ms(166);
         BuzzerController::playNote(74);
 
         _delay_ms(166);
@@ -281,7 +233,7 @@ class Partition {
 
         _delay_ms(331);
         BuzzerController::playNote(64);
-        
+
         _delay_ms(331);
         BuzzerController::playNote(64);
 
@@ -298,6 +250,40 @@ class Partition {
         BuzzerController::playNote(62);
 
         _delay_ms(166);
+    };
 
+    void partitionAuClair() {
+        _delay_ms(600);
+        BuzzerController::playNote(60);
+
+        _delay_ms(600);
+        BuzzerController::playNote(60);
+
+        _delay_ms(600);
+        BuzzerController::playNote(60);
+
+        _delay_ms(600);
+        BuzzerController::playNote(62);
+
+        _delay_ms(1200);
+        BuzzerController::playNote(64);
+
+        _delay_ms(1200);
+        BuzzerController::playNote(62);
+
+        _delay_ms(600);
+        BuzzerController::playNote(60);
+
+        _delay_ms(600);
+        BuzzerController::playNote(64);
+
+        _delay_ms(600);
+        BuzzerController::playNote(62);
+
+        _delay_ms(600);
+        BuzzerController::playNote(62);
+
+        _delay_ms(2400);
+        BuzzerController::playNote(60);
     };
 };
