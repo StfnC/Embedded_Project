@@ -1,3 +1,20 @@
+/**
+ * Implementation of the MotorsController methods
+ *
+ * \file MotorsController.cpp
+ * \author Stefan Cotargasanu
+ * \date March 13 2022
+ *
+ * Pins:
+ *  Input:
+ *      -
+ *
+ *  Output:
+ *      -D4
+ *      -D5
+ *
+ */
+
 #include "BuzzerController.h"
 
 #include <math.h>

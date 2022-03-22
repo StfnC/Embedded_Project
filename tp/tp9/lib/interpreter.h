@@ -1,10 +1,17 @@
+/**
+ * Definition of the Interpreter class
+ * 
+ * \file MotorsController.h
+ * \author Stefan Cotargasanu Rakotoarivony Faneva Lina Belloui Justine Sauquet 
+ * \date March 22 2022
+ */
+
 #pragma once
 #define F_CPU 8000000
 
 #include <avr/io.h>
 #include <counter.h>
 #include <led.h>
-// #include <Notes.h>
 #include <MotorsController.h>
 #include <util/delay.h>
 #include <usart.h>
@@ -45,7 +52,6 @@ private:
     usart transmitter_;
     MotorsController motorsController_;
     Memoire24CXXX memoire_;
-    // Notes song_;
     
     static const uint16_t ROTATION_TIME = 490;
     uint16_t numberInstructions_ = 0;

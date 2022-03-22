@@ -1,3 +1,11 @@
+/**
+ * Implementation of the Interpreter methods
+ *
+ * \file MotorsController.cpp
+ * \author Stefan Cotargasanu Faneva Rakotoarivony Lina Belloui Justine Sauquet 
+ * \date March 22 2022
+ *
+ */
 #include "interpreter.h"
 
 Interpreter::Interpreter() : transmitter_(),

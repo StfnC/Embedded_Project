@@ -4,8 +4,14 @@
  * \file MotorsController.h
  * \author Stefan Cotargasanu
  * \date March 13 2022
- * 
+ * Output:
+ *      -B3
+ *      -B4
+ *      -B5
+ *      -B6
  */
+
+
 #pragma once
 #include <avr/interrupt.h>
 #include <avr/io.h>

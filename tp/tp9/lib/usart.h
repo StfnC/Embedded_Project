@@ -4,6 +4,12 @@
  * \file usart.h
  * \author Stefan Cotargasanu
  * \date March 13 2022
+  * Pins:
+ *  Input:
+ *      -D0
+ * 
+ *  Output:
+ *      -D1
  * 
  */
 #pragma once

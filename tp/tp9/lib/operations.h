@@ -1,3 +1,11 @@
+/**
+ * Definition of the Operations namespace
+ * 
+ * \file MotorsController.h
+ * \author Faneva Rakotoarivony
+ * \date March 23 2022
+ */
+
 namespace Operations {
     const uint8_t dbt = 0x01;
     const uint8_t att = 0x02;
