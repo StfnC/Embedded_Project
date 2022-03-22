@@ -26,7 +26,7 @@ void CounterInterrupt::setGenerationMode(GenerationMode generationMode) {
     switch (generationMode) {
         case GenerationMode::Normal:
             TCCR1A &= ~(_BV(WGM10) | _BV(WGM11));
-            TCCR1B &= ~(_BV(WGM11) | _BV(WGM12));
+            TCCR1B &= ~(_BV(WGM12) | _BV(WGM13));
             TCCR1C = 0;
             break;
 
