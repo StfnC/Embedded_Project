@@ -6,7 +6,9 @@
 
 int main() {
     BuzzerController::initBuzzer();
-    BuzzerController::playNote(0x60);
-    BuzzerController::stopNote();
+    BuzzerController::playNote(45);
+    while (true) {
+    }
+    
     return 0;
 };
