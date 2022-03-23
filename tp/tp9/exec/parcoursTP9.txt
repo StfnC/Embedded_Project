@@ -11,6 +11,8 @@ FBC;
 
 MAV 255;
 ATT 40;
+MAR;
+ATT 40;
 TRD;
 ATT 40;
 TRD;
@@ -19,6 +21,8 @@ MAR;
 ATT 40;
 
 MRE 255;
+ATT 40;
+MAR;
 ATT 40;
 TRD;
 ATT 40;
@@ -27,6 +31,8 @@ MAR;
 
 MAV 255;
 ATT 40;
+MAR;
+ATT 40;
 TRG;
 ATT 40;
 TRG;
@@ -35,6 +41,8 @@ MAR;
 ATT 40;
 
 MRE 255;
+ATT 40;
+MAR;
 ATT 40;
 TRG;
 ATT 40;
