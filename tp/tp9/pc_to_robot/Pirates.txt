@@ -1,7 +1,4 @@
-att 4;
         dbt;
-        sar;
-        att 4;
 
         sgo 60;
         att 4;
@@ -209,12 +206,12 @@ att 4;
         sar;
         att 4;
 
-        sgo 71;
+        sgo 72;
         att 8;
         sar;
         att 8;
 
-        sgo 71;
+        sgo 72;
         att 8;
         sar;
         att 8;
@@ -312,4 +309,5 @@ att 4;
         att 10;
         sar;
         att 10;
+
         fin;
