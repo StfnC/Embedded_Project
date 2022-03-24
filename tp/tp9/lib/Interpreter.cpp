@@ -16,7 +16,7 @@ Interpreter::Interpreter() : transmitter_(),
 uint8_t Interpreter::read8Bits() {
     uint8_t* numberPtr;
     memoire_.lecture(currentAdress_, numberPtr);
-    currentAdress_ += sizeof(uint8_t);
+    currentAdress_++;
     return *numberPtr;
 }
 

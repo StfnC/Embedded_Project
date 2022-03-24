@@ -32,7 +32,7 @@ void RobotProgramDownloader::writeTotalBytes() {
 
     memory_.ecriture(0x0000, static_cast<const uint8_t>(totalBytes_ >> 0x08));
     _delay_ms(5);
-    memory_.ecriture(0x0000 + sizeof(uint8_t), static_cast<const uint8_t>(totalBytes_));
+    memory_.ecriture(0x0000 + 1, static_cast<const uint8_t>(totalBytes_));
     _delay_ms(5);
 }
 
@@ -41,7 +41,7 @@ void RobotProgramDownloader::writeProgramToMemory() {
 
     for (uint16_t i = 2; i < totalBytes_; i++) {
         dataBuffer = receptor_.receive();
-        memory_.ecriture(0x0000 + i * sizeof(uint8_t), dataBuffer);
+        memory_.ecriture(0x0000 + i, dataBuffer);
         _delay_ms(5);
     }
 }
