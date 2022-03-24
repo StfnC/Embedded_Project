@@ -1,8 +1,8 @@
 /**
  * Definition of the Interpreter class
- * 
+ *
  * \file Interpreter.h
- * \author Stefan Cotargasanu Rakotoarivony Faneva Lina Belloui Justine Sauquet 
+ * \author Stefan Cotargasanu Rakotoarivony Faneva Lina Belloui Justine Sauquet
  * \date March 22 2022
  */
 
@@ -21,7 +21,8 @@
 #include "operations.h"
 #include <BuzzerController.h>
 
-class Interpreter {
+class Interpreter
+{
 public:
     Interpreter();
     void interpretCode();
@@ -52,7 +53,8 @@ private:
     usart transmitter_;
     MotorsController motorsController_;
     Memoire24CXXX memoire_;
-    
+
+    uint8_t loopInstructionNumber_ = 0;
     static const uint16_t ROTATION_TIME = 515;
     uint16_t numberInstructions_ = 0;
     uint16_t currentAdress_ = 0;

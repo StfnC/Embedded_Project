@@ -23,7 +23,7 @@ uint8_t Interpreter::read8Bits() {
 void Interpreter::interpretCode() {
     readNumberInstructions();
 
-    for (uint16_t i = 0; i < numberInstructions_; i++) {
+    for ( ; numberInstructions_ > 0; numberInstructions_--) {
         interpretLine();
     }
 }
@@ -208,6 +208,7 @@ void Interpreter::dbc(uint8_t operand) {  // début de boucle
     transmitter_.transmit(0xC0);
 
     loopAddress_ = currentAdress_;
+    loopInstructionNumber_ = numberInstructions_;
     counter_ = operand + 1;
 }
 
@@ -216,6 +217,7 @@ void Interpreter::fbc() {  // fin de boucle
 
     if (counter_ != 0) {
         currentAdress_ = loopAddress_;
+        numberInstructions_ = loopInstructionNumber_;
         counter_--;
     }
 }
