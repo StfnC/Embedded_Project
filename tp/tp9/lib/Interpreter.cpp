@@ -2,14 +2,14 @@
  * Implementation of the Interpreter methods
  *
  * \file Interpreter.cpp
- * \author Stefan Cotargasanu Faneva Rakotoarivony Lina Belloui Justine Sauquet 
+ * \author Stefan Cotargasanu Faneva Rakotoarivony Lina Belloui Justine Sauquet
  * \date March 22 2022
  *
  */
 #include "Interpreter.h"
 
 Interpreter::Interpreter() : transmitter_(),
-    memoire_() {
+                             memoire_() {
     motorsController_ = MotorsController();
 }
 
@@ -42,69 +42,65 @@ void Interpreter::readNumberInstructions() {
     numberInstructions_ -= 1;
 }
 
-
-
 void Interpreter::interpreter(uint8_t instruction, uint8_t operand) {
-    if (execute_ || instruction == Operations::dbt)
-    {
-        switch (instruction)
-        {
-        case Operations::dbt:
-            dbt();
-            break;
+    if (execute_ || instruction == Operations::dbt) {
+        switch (instruction) {
+            case Operations::dbt:
+                dbt();
+                break;
 
-        case Operations::att:
-            att(operand);
-            break;
+            case Operations::att:
+                att(operand);
+                break;
 
-        case Operations::dal:
-            dal(operand);
-            break;
+            case Operations::dal:
+                dal(operand);
+                break;
 
-        case Operations::det:
-            det(operand);
-            break;
+            case Operations::det:
+                det(operand);
+                break;
 
-        case Operations::sgo:
-            sgo(operand);
-            break;
+            case Operations::sgo:
+                sgo(operand);
+                break;
 
-        case Operations::sar:
-            sar();
-            break;
+            case Operations::sar:
+                sar();
+                break;
 
-        case Operations::mar1:
-        case Operations::mar2:
-            mar();
-            break;
+            case Operations::mar1:
+            case Operations::mar2:
+                mar();
+                break;
 
-        case Operations::mav:
-            mav(operand);
-            break;
+            case Operations::mav:
+                mav(operand);
+                break;
 
-        case Operations::mre:
-            mre(operand);
-            break;
+            case Operations::mre:
+                mre(operand);
+                break;
 
-        case Operations::trd:
-            trd();
-            break;
+            case Operations::trd:
+                trd();
+                break;
 
-        case Operations::trg:
-            trg();
-            break;
+            case Operations::trg:
+                trg();
+                break;
 
-        case Operations::dbc:
-            dbc(operand);
-            break;
+            case Operations::dbc:
+                dbc(operand);
+                break;
 
-        case Operations::fbc:
-            fbc();
-            break;
+            case Operations::fbc:
+                fbc();
+                break;
 
-        case Operations::fin:
-            fin();
-            break;
+            case Operations::fin:
+                fin();
+                break;
         }
     }
 }
@@ -117,44 +113,41 @@ void Interpreter::dbt() {
 void Interpreter::att(uint8_t operand) {
     transmitter_.transmit(0x02);
 
-    for (uint8_t i = 0; i < operand; i++)
-    {
+    for (uint8_t i = 0; i < operand; i++) {
         _delay_ms(25);
     }
 }
 
-void Interpreter::dal(uint8_t operand) { // allumer la del
+void Interpreter::dal(uint8_t operand) {  // allumer la del
     transmitter_.transmit(0x44);
     led led0(&PORTA, DDA0, DDA1);
     led0.setGreen();
 };
 
-void Interpreter::det(uint8_t operand) { // eteindre del
+void Interpreter::det(uint8_t operand) {  // eteindre del
     transmitter_.transmit(0x45);
     led led0(&PORTA, DDA0, DDA1);
     led0.setOff();
 }
 
-void Interpreter::sgo(uint8_t operand) { // jouer une sonorité
+void Interpreter::sgo(uint8_t operand) {  // jouer une sonorité
     transmitter_.transmit(0x48);
     BuzzerController::playNote(operand);
 }
 
-void Interpreter::sar() { // arrêter de jouer la sonorité
+void Interpreter::sar() {  // arrêter de jouer la sonorité
     transmitter_.transmit(0x09);
     BuzzerController::stopNote();
 }
 
-void Interpreter::mar() {                // arrête les deux moteurs
+void Interpreter::mar() {  // arrête les deux moteurs
     transmitter_.transmit(0x60);
     motorsController_.setRightPercentage(0);
     transmitter_.transmit(0x61);
     motorsController_.setLeftPercentage(0);
 }
 
-
-
-void Interpreter::mav(uint8_t operand) {   // avancer
+void Interpreter::mav(uint8_t operand) {  // avancer
     transmitter_.transmit(0x62);
     transmitter_.transmit(operand);
     uint8_t percentage = (operand / 255) * 100;
@@ -163,10 +156,9 @@ void Interpreter::mav(uint8_t operand) {   // avancer
     motorsController_.setLeftPercentage(percentage);
     motorsController_.setRightPercentage(percentage);
     _delay_ms(20);
-
 }
 
-void Interpreter::mre(uint8_t operand) {   // reculer
+void Interpreter::mre(uint8_t operand) {  // reculer
     transmitter_.transmit(0x63);
 
     uint8_t percentage = operand / 255 * 100;
@@ -176,7 +168,7 @@ void Interpreter::mre(uint8_t operand) {   // reculer
     motorsController_.setRightPercentage(percentage);
 }
 
-void Interpreter::trd() {         // tourner à droite
+void Interpreter::trd() {  // tourner à droite
     transmitter_.transmit(0x64);
 
     uint8_t rightPercent = motorsController_.getRightPercentage();
@@ -187,14 +179,14 @@ void Interpreter::trd() {         // tourner à droite
 
     motorsController_.setLeftPercentage(100);
 
-    _delay_ms(ROTATION_TIME);       // duree de rotation
+    _delay_ms(ROTATION_TIME);  // duree de rotation
 
     motorsController_.invertRightDirection();
     motorsController_.setRightPercentage(rightPercent);
     motorsController_.setLeftPercentage(leftPercent);
 }
 
-void Interpreter::trg() {         // tourner à gauche
+void Interpreter::trg() {  // tourner à gauche
     transmitter_.transmit(0x65);
 
     uint8_t rightPercent = motorsController_.getRightPercentage();
@@ -205,25 +197,24 @@ void Interpreter::trg() {         // tourner à gauche
     motorsController_.setLeftPercentage(100);
     motorsController_.invertLeftDirection();
 
-    _delay_ms(ROTATION_TIME);       // duree de rotation
+    _delay_ms(ROTATION_TIME);  // duree de rotation
 
     motorsController_.setRightPercentage(rightPercent);
     motorsController_.invertLeftDirection();
     motorsController_.setLeftPercentage(leftPercent);
 }
 
-void Interpreter::dbc(uint8_t operand) {    // début de boucle
+void Interpreter::dbc(uint8_t operand) {  // début de boucle
     transmitter_.transmit(0xC0);
 
     loopAddress_ = currentAdress_;
     counter_ = operand + 1;
 }
 
-void Interpreter::fbc() {                   // fin de boucle
+void Interpreter::fbc() {  // fin de boucle
     transmitter_.transmit(0xC1);
 
-    if (counter_ != 0)
-    {
+    if (counter_ != 0) {
         currentAdress_ = loopAddress_;
         counter_--;
     }
