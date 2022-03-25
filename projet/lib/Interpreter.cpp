@@ -9,7 +9,7 @@
 #include "Interpreter.h"
 
 Interpreter::Interpreter() : transmitter_(),
-                             memoire_() {
+memoire_() {
     motorsController_ = MotorsController();
 }
 
@@ -22,8 +22,12 @@ uint8_t Interpreter::read8Bits() {
 
 void Interpreter::interpretCode() {
     readNumberInstructions();
+    char message[50];
 
-    for ( ; numberInstructions_ > 0; numberInstructions_--) {
+    int n = sprintf(message, "\n\t\n\t Nombre d'instruction : %d. \n\t\n\t", numberInstructions_);
+    transmitter_.transmitTextMessage(message, n);
+
+    for (; numberInstructions_ > 0; numberInstructions_--) {
         interpretLine();
     }
 }
@@ -45,73 +49,73 @@ void Interpreter::readNumberInstructions() {
 void Interpreter::interpreter(uint8_t instruction, uint8_t operand) {
     if (execute_ || instruction == Operations::dbt) {
         switch (instruction) {
-            case Operations::dbt:
-                dbt();
-                break;
+        case Operations::dbt:
+            dbt();
+            break;
 
-            case Operations::att:
-                att(operand);
-                break;
+        case Operations::att:
+            att(operand);
+            break;
 
-            case Operations::dal:
-                dal(operand);
-                break;
+        case Operations::dal:
+            dal(operand);
+            break;
 
-            case Operations::det:
-                det(operand);
-                break;
+        case Operations::det:
+            det(operand);
+            break;
 
-            case Operations::sgo:
-                sgo(operand);
-                break;
+        case Operations::sgo:
+            sgo(operand);
+            break;
 
-            case Operations::sar:
-                sar();
-                break;
+        case Operations::sar:
+            sar();
+            break;
 
-            case Operations::mar1:
-            case Operations::mar2:
-                mar();
-                break;
+        case Operations::mar1:
+        case Operations::mar2:
+            mar();
+            break;
 
-            case Operations::mav:
-                mav(operand);
-                break;
+        case Operations::mav:
+            mav(operand);
+            break;
 
-            case Operations::mre:
-                mre(operand);
-                break;
+        case Operations::mre:
+            mre(operand);
+            break;
 
-            case Operations::trd:
-                trd();
-                break;
+        case Operations::trd:
+            trd();
+            break;
 
-            case Operations::trg:
-                trg();
-                break;
+        case Operations::trg:
+            trg();
+            break;
 
-            case Operations::dbc:
-                dbc(operand);
-                break;
+        case Operations::dbc:
+            dbc(operand);
+            break;
 
-            case Operations::fbc:
-                fbc();
-                break;
+        case Operations::fbc:
+            fbc();
+            break;
 
-            case Operations::fin:
-                fin();
-                break;
+        case Operations::fin:
+            fin();
+            break;
         }
     }
 }
 
 void Interpreter::dbt() {
-    transmitter_.transmit(0x01);
+    // transmitter_.transmit(0x01);
     execute_ = true;
 }
 
 void Interpreter::att(uint8_t operand) {
-    transmitter_.transmit(0x02);
+    // transmitter_.transmit(0x02);
 
     for (uint8_t i = 0; i < operand; i++) {
         _delay_ms(25);
@@ -119,36 +123,38 @@ void Interpreter::att(uint8_t operand) {
 }
 
 void Interpreter::dal(uint8_t operand) {  // allumer la del
-    transmitter_.transmit(0x44);
+    // transmitter_.transmit(0x44);
     led led0(&PORTA, DDA0, DDA1);
     led0.setGreen();
 };
 
 void Interpreter::det(uint8_t operand) {  // eteindre del
-    transmitter_.transmit(0x45);
+    // transmitter_.transmit(0x45);
     led led0(&PORTA, DDA0, DDA1);
     led0.setOff();
 }
 
 void Interpreter::sgo(uint8_t operand) {  // jouer une sonorité
-    transmitter_.transmit(0x48);
+    // transmitter_.transmit(0x48);
+ 
     BuzzerController::playNote(operand);
+
 }
 
 void Interpreter::sar() {  // arrêter de jouer la sonorité
-    transmitter_.transmit(0x09);
+    // transmitter_.transmit(0x09);
     BuzzerController::stopNote();
 }
 
 void Interpreter::mar() {  // arrête les deux moteurs
-    transmitter_.transmit(0x60);
+    // transmitter_.transmit(0x60);
     motorsController_.setRightPercentage(0);
     transmitter_.transmit(0x61);
     motorsController_.setLeftPercentage(0);
 }
 
 void Interpreter::mav(uint8_t operand) {  // avancer
-    transmitter_.transmit(0x62);
+    // transmitter_.transmit(0x62);
     transmitter_.transmit(operand);
     uint8_t percentage = (operand / 255) * 100;
     motorsController_.changeLeftDirection(Direction::Forward);
@@ -159,7 +165,7 @@ void Interpreter::mav(uint8_t operand) {  // avancer
 }
 
 void Interpreter::mre(uint8_t operand) {  // reculer
-    transmitter_.transmit(0x63);
+    // transmitter_.transmit(0x63);
 
     uint8_t percentage = operand / 255 * 100;
     motorsController_.changeLeftDirection(Direction::Reverse);
@@ -169,7 +175,7 @@ void Interpreter::mre(uint8_t operand) {  // reculer
 }
 
 void Interpreter::trd() {  // tourner à droite
-    transmitter_.transmit(0x64);
+    // transmitter_.transmit(0x64);
 
     uint8_t rightPercent = motorsController_.getRightPercentage();
     uint8_t leftPercent = motorsController_.getLeftPercentage();
@@ -187,7 +193,7 @@ void Interpreter::trd() {  // tourner à droite
 }
 
 void Interpreter::trg() {  // tourner à gauche
-    transmitter_.transmit(0x65);
+    // transmitter_.transmit(0x65);
 
     uint8_t rightPercent = motorsController_.getRightPercentage();
     uint8_t leftPercent = motorsController_.getLeftPercentage();
@@ -205,7 +211,7 @@ void Interpreter::trg() {  // tourner à gauche
 }
 
 void Interpreter::dbc(uint8_t operand) {  // début de boucle
-    transmitter_.transmit(0xC0);
+    transmitter_.transmit(Operations::dbc);
 
     loopAddress_ = currentAdress_;
     loopInstructionNumber_ = numberInstructions_;
@@ -213,16 +219,18 @@ void Interpreter::dbc(uint8_t operand) {  // début de boucle
 }
 
 void Interpreter::fbc() {  // fin de boucle
-    transmitter_.transmit(0xC1);
+    transmitter_.transmit(Operations::fbc);
+
 
     if (counter_ != 0) {
         currentAdress_ = loopAddress_;
-        numberInstructions_ = loopInstructionNumber_;
         counter_--;
     }
+    numberInstructions_ = loopInstructionNumber_;
+
 }
 
 void Interpreter::fin() {
-    transmitter_.transmit(0xFF);
+    // transmitter_.transmit(0xFF);
     execute_ = false;
 }
