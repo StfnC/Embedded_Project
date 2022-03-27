@@ -26,8 +26,10 @@ class usart {
 
         void transmitTextMessage(uint8_t message[], uint8_t messageLength);
         void transmitTextMessage(const char message[], uint8_t messageLength);
+        void transmitTextMessage(const char message[]);
         void transmitTextMessage(char* message, uint8_t messageLength);
         
     private:
+        static const uint8_t DEFAULT_MESSAGE_BUFFER_SIZE = 500;
         void initialization(void);
 };
