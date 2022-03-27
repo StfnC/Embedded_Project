@@ -1,10 +1,11 @@
-#include <usart.h>
+#include <debug.h>
 
 int main() {
-    usart usart;
+    DEBUG_INIT;
 
     while (true) {
-        usart.transmitTextMessage("Hello %d world\n", 255);
+        DEBUG_PRINT_MESSAGE_WITH_VALUE("Hello Debug %d\n", 55);
+        DEBUG_PRINT_MESSAGE("Hello Debug Message\n");
     }
     
     return 0;
