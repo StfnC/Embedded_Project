@@ -62,12 +62,6 @@ void usart::transmitTextMessage(uint8_t message[], uint8_t messageLength){
     }
 }
 
-void usart::transmitTextMessage(const char message[], uint8_t messageLength){
-    for (uint8_t i = 0; i < messageLength - 1; i++) {
-        usart::transmit(message[i]);
-    }
-}
-
 void usart::transmitTextMessage(const char message[]){
     char buffer [DEFAULT_MESSAGE_BUFFER_SIZE];
 
@@ -76,7 +70,19 @@ void usart::transmitTextMessage(const char message[]){
     messageLength = sprintf(buffer, message);
 
     for (uint8_t i = 0; i < messageLength - 1; i++) {
-        usart::transmit(message[i]);
+        usart::transmit(buffer[i]);
+    }
+}
+
+void usart::transmitTextMessage(const char message[], uint8_t value) {
+    char buffer [DEFAULT_MESSAGE_BUFFER_SIZE];
+
+    int messageLength;
+
+    messageLength = sprintf(buffer, message, value);
+
+    for (uint8_t i = 0; i < messageLength - 1; i++) {
+        usart::transmit(buffer[i]);
     }
 }
 

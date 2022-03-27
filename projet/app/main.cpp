@@ -4,7 +4,7 @@ int main() {
     usart usart;
 
     while (true) {
-        usart.transmitTextMessage("Hello world\n\t");
+        usart.transmitTextMessage("Hello %d world\n\t", 255);
     }
     
     return 0;

@@ -25,8 +25,8 @@ class usart {
         uint8_t receive(void);
 
         void transmitTextMessage(uint8_t message[], uint8_t messageLength);
-        void transmitTextMessage(const char message[], uint8_t messageLength);
         void transmitTextMessage(const char message[]);
+        void transmitTextMessage(const char message[], uint8_t value);
         void transmitTextMessage(char* message, uint8_t messageLength);
         
     private:
