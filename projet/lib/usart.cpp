@@ -1,6 +1,6 @@
 /**
  * Implementation of the usart methods
- * 
+ *
  * \file usart.cpp
  * \author Stefan Cotargasanu
  * \date March 13 2022
@@ -8,10 +8,10 @@
  * Pins:
  *  Input:
  *      -D0
- * 
+ *
  *  Output:
  *      -D1
- * 
+ *
  */
 
 #include "usart.h"
@@ -56,14 +56,14 @@ uint8_t usart::receive(void) {
     return UDR0;
 }
 
-void usart::transmitTextMessage(uint8_t message[], uint8_t messageLength){
+void usart::transmitTextMessage(uint8_t message[], uint8_t messageLength) {
     for (uint8_t i = 0; i < messageLength - 1; i++) {
         usart::transmit(message[i]);
     }
 }
 
-void usart::transmitTextMessage(const char message[]){
-    char buffer [DEFAULT_MESSAGE_BUFFER_SIZE];
+void usart::transmitTextMessage(const char message[]) {
+    char buffer[DEFAULT_MESSAGE_BUFFER_SIZE];
 
     int messageLength;
 
@@ -75,7 +75,7 @@ void usart::transmitTextMessage(const char message[]){
 }
 
 void usart::transmitTextMessage(const char message[], uint8_t value) {
-    char buffer [DEFAULT_MESSAGE_BUFFER_SIZE];
+    char buffer[DEFAULT_MESSAGE_BUFFER_SIZE];
 
     int messageLength;
 
@@ -86,7 +86,7 @@ void usart::transmitTextMessage(const char message[], uint8_t value) {
     }
 }
 
-void usart::transmitTextMessage(char* message, uint8_t messageLength){
+void usart::transmitTextMessage(char* message, uint8_t messageLength) {
     for (uint8_t i = 0; i < messageLength - 1; i++) {
         usart::transmit(message[i]);
     }
