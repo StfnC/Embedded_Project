@@ -32,4 +32,5 @@ class usart {
     private:
         static const uint8_t DEFAULT_MESSAGE_BUFFER_SIZE = 500;
         void initialization(void);
+        
 };
