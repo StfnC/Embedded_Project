@@ -56,12 +56,6 @@ uint8_t usart::receive(void) {
     return UDR0;
 }
 
-void usart::transmitTextMessage(uint8_t message[], uint8_t messageLength) {
-    for (uint8_t i = 0; i < messageLength; i++) {
-        usart::transmit(message[i]);
-    }
-}
-
 void usart::transmitTextMessage(const char message[]) {
     char buffer[DEFAULT_MESSAGE_BUFFER_SIZE];
 
@@ -84,11 +78,5 @@ void usart::transmitTextMessage(const char message[], uint8_t value) {
 
     for (uint8_t i = 0; i < messageLength; i++) {
         usart::transmit(buffer[i]);
-    }
-}
-
-void usart::transmitTextMessage(char* message, uint8_t messageLength) {
-    for (uint8_t i = 0; i < messageLength; i++) {
-        usart::transmit(message[i]);
     }
 }

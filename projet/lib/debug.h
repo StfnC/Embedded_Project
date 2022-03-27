@@ -26,10 +26,9 @@ class Debug
 {
     public:
         void static initDebug();
-        void static printPortValue(uint8_t port);
-        void static compareSignal(uint8_t port, uint8_t pin, uint8_t value);
         void static printVariable(uint8_t variable);
-        void static printMessage(uint8_t message[], uint8_t length);
+        void static printMessage(const char message[], uint8_t value);
+        void static printMessage(const char message[]);
 
     private:
         static usart transmitter_;

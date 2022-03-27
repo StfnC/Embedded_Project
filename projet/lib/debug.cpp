@@ -16,22 +16,17 @@ void Debug::initDebug()
     transmitter_ = usart();
 }
 
-void Debug::printPortValue(uint8_t port)
-{
-    transmitter_.transmit(port);
-}
-
-void Debug::compareSignal(uint8_t port, uint8_t pin, uint8_t value)
-{
-    transmitter_.transmit((port & pin) & value);
-}
-
 void Debug::printVariable(uint8_t variable)
 {
     transmitter_.transmit(variable);
 }
 
-void Debug::printMessage(uint8_t message[], uint8_t length)
+void Debug::printMessage(const char message[], uint8_t value)
 {
-    transmitter_.transmitTextMessage(message, length);
+    transmitter_.transmitTextMessage(message, value);
+}
+
+void Debug::printMessage(const char message[])
+{
+    transmitter_.transmitTextMessage(message);
 }
