@@ -19,9 +19,8 @@
 
 #include "MotorsController.h"
 
-MotorsController::MotorsController() : leftSpeed_(0), rightSpeed_(0) {
-    MotorsController::initialization();
-}
+uint8_t MotorsController::leftSpeed_ = 0;
+uint8_t MotorsController::rightSpeed_ = 0;
 
 void MotorsController::initialization() {
     cli();
