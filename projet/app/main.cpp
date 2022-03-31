@@ -1,17 +1,14 @@
 #include <debug.h>
-#include <MotorsController.h>
+#include <usart.h>
 
 int main() {
     DEBUG_INIT;
-    MotorsController::initialization();
-    MotorsController::changeLeftDirection(Direction::Forward);
-    MotorsController::changeRightDirection(Direction::Forward);
+    usart::initialization();
 
     while (true) {
         DEBUG_PRINT_MESSAGE_WITH_VALUE("Hello Debug %d\n", 55);
         DEBUG_PRINT_MESSAGE("Hello Debug Message\n");
-        MotorsController::setLeftPercentage(100);
-        MotorsController::setRightPercentage(100);
+        usart::transmitTextMessage("Hello usart\n");
     }
     
     return 0;
