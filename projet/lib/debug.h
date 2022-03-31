@@ -29,7 +29,4 @@ class Debug
         void static printVariable(uint8_t variable);
         void static printMessage(const char message[], uint8_t value);
         void static printMessage(const char message[]);
-
-    private:
-        static usart transmitter_;
 };
