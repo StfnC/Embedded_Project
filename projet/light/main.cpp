@@ -5,9 +5,8 @@
 #include <util/delay.h>
 #include <MotorsController.h>
 uint8_t ambientLightCalculation(can& conv, usart& tr);
-void waitForCenter();
+void waitForCenter(uint8_t average);
 can conv = can();
-uint8_t average;
 int main() {
     MotorsController::initialization();
     DEBUG_INIT;
@@ -28,7 +27,7 @@ int main() {
         uint8_t midValue = leftValue - rightValue + 128;
         DEBUG_PRINT_MESSAGE_WITH_VALUE("\tMidValue : %d\n", midValue);
         if (leftValue >= average + 20 || rightValue >= average + 20) {
-            waitForCenter();
+            waitForCenter(average);
         }
         MotorsController::setLeftPercentage(0);
         MotorsController::setRightPercentage(0);
@@ -49,12 +48,16 @@ uint8_t ambientLightCalculation(can& conv, usart& tr) {
     }
     return static_cast<uint8_t>(average);
 }
-void waitForCenter() {
+void waitForCenter(uint8_t average) {
     bool centered = false;
     DEBUG_PRINT_MESSAGE("lolilololol\n");
-    while (!centered) {
-        uint8_t leftValue = static_cast<uint8_t>(conv.lecture(3) >> 2);
-        uint8_t rightValue = static_cast<uint8_t>(conv.lecture(1) >> 2);
+    uint8_t leftValue = static_cast<uint8_t>(conv.lecture(3) >> 2);
+    uint8_t rightValue = static_cast<uint8_t>(conv.lecture(1) >> 2);
+    // while (!(centered) || leftValue >= average + 20 || rightValue >= average + 20) {
+    while ((leftValue >= (average + 20)) || (rightValue >= (average + 20))) {
+        DEBUG_PRINT_MESSAGE_WITH_VALUE("%d", average);
+        leftValue = static_cast<uint8_t>(conv.lecture(3) >> 2);
+        rightValue = static_cast<uint8_t>(conv.lecture(1) >> 2);
         uint8_t midValue = leftValue - rightValue + 128;
         DEBUG_PRINT_MESSAGE_WITH_VALUE("Gauche : %d", leftValue);
         DEBUG_PRINT_MESSAGE_WITH_VALUE("\tDroite : %d", rightValue);
@@ -65,7 +68,7 @@ void waitForCenter() {
             MotorsController::changeLeftDirection(Direction::Reverse);
             MotorsController::changeRightDirection(Direction::Forward);
         }
-        if (midValue <= 122) {
+        else if (midValue <= 122) {
             MotorsController::setLeftPercentage(90);
             MotorsController::setRightPercentage(90);
             MotorsController::changeLeftDirection(Direction::Forward);
@@ -77,9 +80,10 @@ void waitForCenter() {
             MotorsController::changeLeftDirection(Direction::Forward);
             MotorsController::changeRightDirection(Direction::Forward);
         }
-        if ((leftValue >= average + 20 || rightValue >= average + 20) || (midValue <= 129 && midValue >= 127)) {
-            DEBUG_PRINT_MESSAGE("CACA\n");
-            centered = true;
-        }
+        // if (midValue <= 129 && midValue >= 127) {
+        //     DEBUG_PRINT_MESSAGE("CACA\n");
+        //     centered = true;
+        // }
     }
+    DEBUG_PRINT_MESSAGE("\t\t\t\t zezette \n\n\n\n");
 }
