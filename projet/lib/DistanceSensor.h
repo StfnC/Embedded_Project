@@ -3,6 +3,7 @@
 
 class DistanceSensor {
     public:
+        static void initialization();
         static uint8_t getDistance();
 
     private:

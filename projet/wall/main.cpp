@@ -14,10 +14,6 @@ const uint8_t FOLLOWING_DISTANCE_THRESHOLD = 71;
 const uint8_t FOLLOWING_DISTANCE_ERROR = 5;
 const uint8_t MOTOR_MULTIPLIER = 3;
 
-void initialization() {
-    DDRA &= ~(1 << ADC_POSITION);
-}
-
 bool isTooFarFromWall(uint8_t distance) {
     return (distance < FOLLOWING_DISTANCE_THRESHOLD - FOLLOWING_DISTANCE_ERROR);
 }
@@ -44,6 +40,7 @@ void goStraight() {
 }
 
 int main() {
+    DistanceSensor::initialization();
     MotorsController::initialization();
     usart::initialization();
     uint8_t analogReading;
