@@ -13,6 +13,5 @@ void DistanceSensor::calibrate() {
 }
 
 uint8_t DistanceSensor::getVoltage() {
-    // FIXME: Don't hard-code the >> 2, maybe create a method in can to get the reading on 8 bits
-    return static_cast<uint8_t>(can_.lecture(PIN_) >> 2);
+    return can_.lecture8Bits(PIN_);
 }
