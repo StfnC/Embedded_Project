@@ -1,6 +1,7 @@
 #include <can.h>
 #include <MotorsController.h>
 #include <usart.h>
+#include <DistanceSensor.h>
 
 // FIXME: -Transform this into a class
 //        -Create state machine to handle the different cases
@@ -25,42 +26,41 @@ bool isTooCloseFromWall(uint8_t distance) {
     return (distance > FOLLOWING_DISTANCE_THRESHOLD + FOLLOWING_DISTANCE_ERROR);
 }
 
-void creepCloser(MotorsController& motors) {
-    motors.setLeftPercentage(0);
-    motors.setRightPercentage(0);
+void creepCloser() {
+    MotorsController::setLeftPercentage(0);
+    MotorsController::setRightPercentage(0);
 }
 
-void backAway(MotorsController& motors) {
-    motors.setLeftPercentage(0);
-    motors.setRightPercentage(0);
+void backAway() {
+    MotorsController::setLeftPercentage(0);
+    MotorsController::setRightPercentage(0);
 }
 
-void goStraight(MotorsController& motors) {
-    motors.changeLeftDirection(Direction::Forward);
-    motors.changeRightDirection(Direction::Forward);
-    motors.setLeftPercentage(100);
-    motors.setRightPercentage(100);
+void goStraight() {
+    MotorsController::changeLeftDirection(Direction::Forward);
+    MotorsController::changeRightDirection(Direction::Forward);
+    MotorsController::setLeftPercentage(100);
+    MotorsController::setRightPercentage(100);
 }
 
 int main() {
-    can can;
-    usart usart;
+    MotorsController::initialization();
+    usart::initialization();
     uint8_t analogReading;
-    MotorsController motors;
 
     while (true) {
-        analogReading = static_cast<uint8_t>(can.lecture(ADC_POSITION) >> PRECISION_LOSS);
-        usart.transmitTextMessage("Analog Reading : %d\n", analogReading);
+        analogReading = DistanceSensor::getDistance();
+        usart::transmitTextMessage("Analog Reading : %d\n", analogReading);
 
         if (isTooFarFromWall(analogReading)) {
-            usart.transmitTextMessage("Too far\n");
-            creepCloser(motors);
+            usart::transmitTextMessage("Too far\n");
+            creepCloser();
         } else if (isTooCloseFromWall(analogReading)) {
-            usart.transmitTextMessage("Too close\n");
-            backAway(motors);
+            usart::transmitTextMessage("Too close\n");
+            backAway();
         } else {
-            usart.transmitTextMessage("Right distance\n");
-            goStraight(motors);
+            usart::transmitTextMessage("Right distance\n");
+            goStraight();
         }
     }
 
