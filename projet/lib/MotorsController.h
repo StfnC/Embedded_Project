@@ -23,15 +23,13 @@ enum class Direction {
 
 class MotorsController {
     public:
-        MotorsController();
-        ~MotorsController() = default;
-
-        void setLeftPercentage(uint8_t percentage);
-        void changeLeftDirection(Direction direction);
-        void setRightPercentage(uint8_t percentage);
-        void changeRightDirection(Direction direction);
-        void invertRightDirection();
-        void invertLeftDirection();
+        static void initialization();
+        static void setLeftPercentage(uint8_t percentage);
+        static void changeLeftDirection(Direction direction);
+        static void setRightPercentage(uint8_t percentage);
+        static void changeRightDirection(Direction direction);
+        static void invertRightDirection();
+        static void invertLeftDirection();
 
         uint8_t getLeftPercentage();
         uint8_t getRightPercentage();
@@ -39,12 +37,11 @@ class MotorsController {
     private:
         static const uint8_t MAX_TIMER_VALUE = 255;
 
-        uint8_t leftSpeed_;
-        uint8_t rightSpeed_;
+        static uint8_t leftSpeed_;
+        static uint8_t rightSpeed_;
 
-        void initialization();
-        uint8_t convertPercentageToTimerValue(uint8_t percentage);
-        uint8_t convertTimerValueToPercentage(uint8_t timerValue);
-        void adjustLeftMotorSpeed();
-        void adjustRightMotorSpeed();
+        static uint8_t convertPercentageToTimerValue(uint8_t percentage);
+        static uint8_t convertTimerValueToPercentage(uint8_t timerValue);
+        static void adjustLeftMotorSpeed();
+        static void adjustRightMotorSpeed();
 };
