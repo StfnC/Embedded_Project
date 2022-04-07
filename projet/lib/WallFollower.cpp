@@ -31,13 +31,13 @@ void WallFollower::goStraight() {
 void WallFollower::getCloser() {
     MotorsController::changeLeftDirection(Direction::Forward);
     MotorsController::changeRightDirection(Direction::Forward);
-    MotorsController::setLeftPercentage(100);
-    MotorsController::setRightPercentage(75);
+    MotorsController::setLeftPercentage(75);
+    MotorsController::setRightPercentage(25);
 }
 
 void WallFollower::getAway() {
     MotorsController::changeLeftDirection(Direction::Forward);
     MotorsController::changeRightDirection(Direction::Forward);
-    MotorsController::setLeftPercentage(75);
-    MotorsController::setRightPercentage(100);
+    MotorsController::setLeftPercentage(25);
+    MotorsController::setRightPercentage(75);
 }
