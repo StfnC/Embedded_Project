@@ -44,25 +44,32 @@ void MotorsController::setLeftPercentage(uint8_t percentage) {
     }
 }
 
+void MotorsController::setLeftPower(uint8_t value) {
+    if (value >= 0 && value <= 255) {
+        leftSpeed_ = value;
+        adjustLeftMotorSpeed();
+    }
+}
+
 void MotorsController::changeLeftDirection(Direction direction) {
     switch (direction) {
-        case Direction::Forward:
-            PORTB &= ~(1 << DDB6);
-            break;
-        case Direction::Reverse:
-            PORTB |= (1 << DDB6);
-            break;
+    case Direction::Forward:
+        PORTB &= ~(1 << DDB6);
+        break;
+    case Direction::Reverse:
+        PORTB |= (1 << DDB6);
+        break;
     }
 }
 
 void MotorsController::changeRightDirection(Direction direction) {
     switch (direction) {
-        case Direction::Forward:
-            PORTB &= ~(1 << DDB5);
-            break;
-        case Direction::Reverse:
-            PORTB |= (1 << DDB5);
-            break;
+    case Direction::Forward:
+        PORTB &= ~(1 << DDB5);
+        break;
+    case Direction::Reverse:
+        PORTB |= (1 << DDB5);
+        break;
     }
 }
 
@@ -77,6 +84,13 @@ void MotorsController::invertLeftDirection() {
 void MotorsController::setRightPercentage(uint8_t percentage) {
     if (percentage >= 0 && percentage <= 100) {
         rightSpeed_ = convertPercentageToTimerValue(percentage);
+        adjustRightMotorSpeed();
+    }
+}
+
+void MotorsController::setRightPower(uint8_t value) {
+    if (value >= 0 && value <= 255) {
+        rightSpeed_ = value;
         adjustRightMotorSpeed();
     }
 }

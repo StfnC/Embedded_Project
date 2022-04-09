@@ -25,8 +25,10 @@ class MotorsController {
     public:
         static void initialization();
         static void setLeftPercentage(uint8_t percentage);
+        static void setLeftPower(uint8_t value);
         static void changeLeftDirection(Direction direction);
         static void setRightPercentage(uint8_t percentage);
+        static void setRightPower(uint8_t value);
         static void changeRightDirection(Direction direction);
         static void invertRightDirection();
         static void invertLeftDirection();
