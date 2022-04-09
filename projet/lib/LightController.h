@@ -8,6 +8,7 @@
 
 #pragma once
 #include <avr/io.h>
+#include <stdlib.h>
 #include "can.h"
 #include <MotorsController.h>
 #include <debug.h>
@@ -23,10 +24,12 @@ class LightController {
     private:
         static void frontLight();
         static void middleLight();
+        static void middleLeft();
+        static void middleRight();
         static void farLeftLight();
         static void farRightLight();
         static uint8_t readValue(uint8_t port);
-        static const uint8_t HIGH_VALUE_LIGHT = 20;
+        static const uint8_t HIGH_VALUE_LIGHT = 15;
         static const uint8_t MIDDLE_VALUE = 128;
         static uint8_t leftValue_;
         static uint8_t rightValue_;
