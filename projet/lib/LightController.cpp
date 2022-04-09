@@ -83,8 +83,8 @@ void LightController::followLight() {
 void LightController::middleRight() {
     uint8_t difference = abs(leftValue_ - rightValue_);
     usart::transmitTextMessage("\tDifference : %d", difference);
-    usart::transmitTextMessage("  ocrleft : %d", leftValue_ + 4 * difference);
-    usart::transmitTextMessage("  ocrright : %d", rightValue_ - 4 * difference);
+    usart::transmitTextMessage("  ocrleft : %d", leftValue_ + 3 * difference);
+    usart::transmitTextMessage("  ocrright : %d", rightValue_ - 3 * difference);
     MotorsController::setRightPower(leftValue_ + 2 * difference);
     MotorsController::setLeftPower(rightValue_ - 2 * difference);
     MotorsController::changeLeftDirection(Direction::Forward);
@@ -94,8 +94,8 @@ void LightController::middleRight() {
 void LightController::middleLeft() {
     uint8_t difference = abs(leftValue_ - rightValue_);
     usart::transmitTextMessage("\tDifference : %d", difference);
-    usart::transmitTextMessage("  ocrleft : %d", leftValue_ - 4 * difference);
-    usart::transmitTextMessage("  ocrright : %d", rightValue_ + 4 * difference);
+    usart::transmitTextMessage("  ocrleft : %d", leftValue_ - 3 * difference);
+    usart::transmitTextMessage("  ocrright : %d", rightValue_ + 3 * difference);
     MotorsController::setRightPower(leftValue_ - 2 * difference);
     MotorsController::setLeftPower(rightValue_ + 2 * difference);
     MotorsController::changeLeftDirection(Direction::Forward);
