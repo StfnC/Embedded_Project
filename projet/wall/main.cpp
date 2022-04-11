@@ -6,9 +6,9 @@
 
 
 int main() {
+    usart::initialization();
     DistanceSensor::initialization();
     MotorsController::initialization();
-    usart::initialization();
 
     while (true) {
         WallFollower::followWall();

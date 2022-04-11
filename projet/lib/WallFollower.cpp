@@ -9,7 +9,7 @@ const uint8_t WallFollower::NO_WALL_THRESHOLD = 30;
 
 
 void WallFollower::followWall() {
-    uint8_t distance = DistanceSensor::getDistance();
+    uint8_t distance = DistanceSensor::getDistanceCm();
 
     usart::transmitTextMessage("Distance : %d\n", distance);
 
@@ -28,7 +28,7 @@ void WallFollower::followWall() {
 void WallFollower::goStraight() {
     MotorsController::changeLeftDirection(Direction::Forward);
     MotorsController::changeRightDirection(Direction::Forward);
-    MotorsController::setLeftPercentage(75);
+    MotorsController::setLeftPercentage(85);
     MotorsController::setRightPercentage(75);
 }
 
@@ -36,14 +36,14 @@ void WallFollower::getCloser() {
     MotorsController::changeLeftDirection(Direction::Forward);
     MotorsController::changeRightDirection(Direction::Forward);
     MotorsController::setLeftPercentage(75);
-    MotorsController::setRightPercentage(25);
+    MotorsController::setRightPercentage(50);
 }
 
 void WallFollower::getAway() {
     MotorsController::changeLeftDirection(Direction::Forward);
     MotorsController::changeRightDirection(Direction::Forward);
-    MotorsController::setLeftPercentage(25);
-    MotorsController::setRightPercentage(75);
+    MotorsController::setLeftPercentage(50);
+    MotorsController::setRightPercentage(70);
 }
 
 void WallFollower::fullStop() {
