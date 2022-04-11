@@ -1,11 +1,9 @@
 #include "WallFollower.h"
 #include "usart.h"
 
-// FIXME: Get rid of hardcoded values
-
-const uint8_t WallFollower::FOLLOWING_DISTANCE_THRESHOLD = 71;
-const uint8_t WallFollower::FOLLOWING_DISTANCE_ERROR = 5;
-const uint8_t WallFollower::NO_WALL_THRESHOLD = 30;
+const uint8_t WallFollower::FOLLOWING_DISTANCE_THRESHOLD = 20;
+const uint8_t WallFollower::FOLLOWING_DISTANCE_ERROR = 3;
+const uint8_t WallFollower::NO_WALL_THRESHOLD = 50;
 
 
 void WallFollower::followWall() {
@@ -14,11 +12,11 @@ void WallFollower::followWall() {
     usart::transmitTextMessage("Distance : %d\n", distance);
 
     // FIXME: Create an enum for the different distances
-    if (distance < NO_WALL_THRESHOLD) {
+    if (distance > NO_WALL_THRESHOLD) {
         fullStop();
-    } else if (distance > WallFollower::FOLLOWING_DISTANCE_THRESHOLD + WallFollower::FOLLOWING_DISTANCE_ERROR) {
-        getAway();
     } else if (distance < WallFollower::FOLLOWING_DISTANCE_THRESHOLD - WallFollower::FOLLOWING_DISTANCE_ERROR) {
+        getAway();
+    } else if (distance > WallFollower::FOLLOWING_DISTANCE_THRESHOLD + WallFollower::FOLLOWING_DISTANCE_ERROR) {
         getCloser();
     } else {
         goStraight();
