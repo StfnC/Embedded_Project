@@ -66,6 +66,10 @@ void MotorsController::changeLeftDirection(Direction direction) {
     }
 }
 
+bool MotorsController::getLeftDirection() {
+    return static_cast<bool>(directionLeft_);
+}
+
 void MotorsController::changeRightDirection(Direction direction) {
     switch (direction) {
     case Direction::Forward:
@@ -77,6 +81,10 @@ void MotorsController::changeRightDirection(Direction direction) {
         PORTB |= (1 << DDB5);
         break;
     }
+}
+
+bool MotorsController::getRightDirection() {
+    return static_cast<bool>(directionRight_);
 }
 
 void MotorsController::invertRightDirection() {
@@ -124,3 +132,4 @@ void MotorsController::adjustLeftMotorSpeed() {
 void MotorsController::adjustRightMotorSpeed() {
     OCR0A = rightSpeed_;
 }
+
