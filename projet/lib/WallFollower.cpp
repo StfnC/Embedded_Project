@@ -2,21 +2,24 @@
 #include "usart.h"
 
 const uint8_t WallFollower::FOLLOWING_DISTANCE_THRESHOLD = 20;
-const uint8_t WallFollower::FOLLOWING_DISTANCE_ERROR = 3;
+const uint8_t WallFollower::FOLLOWING_DISTANCE_ERROR = 1;
 const uint8_t WallFollower::NO_WALL_THRESHOLD = 50;
+const uint8_t WallFollower::BASE_SPEED = 50;
+
+uint8_t WallFollower::distance_;
 
 
 void WallFollower::followWall() {
-    uint8_t distance = DistanceSensor::getDistanceCm();
+    distance_ = DistanceSensor::getDistanceCm();
 
-    usart::transmitTextMessage("Distance : %d\n", distance);
+    usart::transmitTextMessage("Distance : %d\n", distance_);
 
     // FIXME: Create an enum for the different distances
-    if (distance > NO_WALL_THRESHOLD) {
+    if (distance_ > NO_WALL_THRESHOLD) {
         fullStop();
-    } else if (distance < WallFollower::FOLLOWING_DISTANCE_THRESHOLD - WallFollower::FOLLOWING_DISTANCE_ERROR) {
+    } else if (distance_ < WallFollower::FOLLOWING_DISTANCE_THRESHOLD - WallFollower::FOLLOWING_DISTANCE_ERROR) {
         getAway();
-    } else if (distance > WallFollower::FOLLOWING_DISTANCE_THRESHOLD + WallFollower::FOLLOWING_DISTANCE_ERROR) {
+    } else if (distance_ > WallFollower::FOLLOWING_DISTANCE_THRESHOLD + WallFollower::FOLLOWING_DISTANCE_ERROR) {
         getCloser();
     } else {
         goStraight();
@@ -26,22 +29,22 @@ void WallFollower::followWall() {
 void WallFollower::goStraight() {
     MotorsController::changeLeftDirection(Direction::Forward);
     MotorsController::changeRightDirection(Direction::Forward);
-    MotorsController::setLeftPercentage(85);
-    MotorsController::setRightPercentage(75);
+    MotorsController::setLeftPercentage(BASE_SPEED);
+    MotorsController::setRightPercentage(BASE_SPEED);
 }
 
 void WallFollower::getCloser() {
     MotorsController::changeLeftDirection(Direction::Forward);
     MotorsController::changeRightDirection(Direction::Forward);
     MotorsController::setLeftPercentage(75);
-    MotorsController::setRightPercentage(50);
+    MotorsController::setRightPercentage(BASE_SPEED);
 }
 
 void WallFollower::getAway() {
     MotorsController::changeLeftDirection(Direction::Forward);
     MotorsController::changeRightDirection(Direction::Forward);
-    MotorsController::setLeftPercentage(50);
-    MotorsController::setRightPercentage(70);
+    MotorsController::setLeftPercentage(25);
+    MotorsController::setRightPercentage(BASE_SPEED);
 }
 
 void WallFollower::fullStop() {

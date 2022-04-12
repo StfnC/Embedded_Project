@@ -13,6 +13,9 @@ class WallFollower {
         static const uint8_t FOLLOWING_DISTANCE_THRESHOLD;
         static const uint8_t FOLLOWING_DISTANCE_ERROR;
         static const uint8_t NO_WALL_THRESHOLD;
+        static const uint8_t BASE_SPEED;
+
+        static uint8_t distance_;
 
         static void goStraight();
         static void getCloser();
