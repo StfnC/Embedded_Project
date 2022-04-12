@@ -24,19 +24,20 @@ class LightController {
     private:
         static void frontLight();
         static void middleLight();
-        static void farLeftLight();
-        static void farRightLight();
+        static void noLightLeft();
+        static void noLightRight();
         static uint8_t readValue(uint8_t port);
         
-        
+        static const uint8_t OCR_PRECISION = 5;
+        static const uint8_t DEFAULT_SPEED = 50;
+        static const uint8_t PRECISION_CAN = 2;
         static const uint8_t MIDDLE_VALUE = 128;
         static uint8_t leftValue_;
         static uint8_t rightValue_;
-        static uint16_t average_;
+        static uint8_t ocrLeft_;
+        static uint8_t ocrRight_;
         static uint8_t highestAmbientValue_;
-        static uint8_t lowestAmbientValue_;
         static uint8_t middleValue_;
         static can converter_;
-        static led led0; 
         static MotorsController motors_;
 };
