@@ -17,8 +17,8 @@
 #include <avr/io.h>
 
 enum class Direction {
-    Forward,
-    Reverse
+    Forward = 1,
+    Reverse = 0
 };
 
 class MotorsController {
@@ -33,12 +33,14 @@ class MotorsController {
         static void invertRightDirection();
         static void invertLeftDirection();
 
-        uint8_t getLeftPercentage();
-        uint8_t getRightPercentage();
+        static uint8_t getLeftPercentage();
+        static uint8_t getRightPercentage();
 
     private:
         static const uint8_t MAX_TIMER_VALUE = 255;
 
+        static Direction directionLeft_; 
+        static Direction directionRight_; 
         static uint8_t leftSpeed_;
         static uint8_t rightSpeed_;
 
