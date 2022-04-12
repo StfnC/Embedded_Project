@@ -20,24 +20,40 @@ uint8_t LightController::leftValue_ = 0;
 uint8_t LightController::rightValue_ = 0;
 uint16_t LightController::average_ = 0;
 uint8_t LightController::middleValue_ = 0;
+led LightController::led0(&PORTA, DDA2, DDA3);
 can LightController::converter_ = can();
+uint8_t LightController::highestAmbientValue_;
+uint8_t LightController::lowestAmbientValue_;
 
+inline uint8_t max(uint8_t lhs, uint8_t rhs) { return (lhs > rhs) ? lhs : rhs; }
+inline uint8_t min(uint8_t lhs, uint8_t rhs) { return (lhs < rhs) ? lhs : rhs; }
 
 void LightController::initialization() {
     DDRA |= ~(_BV(DDA1) | _BV(DDA0));
+    DDRA |= _BV(DDA2) | _BV(DDA3);
     usart::initialization();
     middleValue_ = 0;
     averageLightCalculation();
     usart::transmitTextMessage("Luminosite ambiante : %d", average_);
+    usart::transmitTextMessage("\tLuminosite ambiante minimale : %d", lowestAmbientValue_);
+    usart::transmitTextMessage("\tLuminosite ambiante maximale : %d\n", highestAmbientValue_);
     MotorsController::initialization();
 }
 
 void LightController::averageLightCalculation() {
     average_ = 0;
-    for (uint16_t i = 0; i < 10000; i++) {
+    highestAmbientValue_ = 0;
+    lowestAmbientValue_ = UINT8_MAX;
+    for (uint16_t i = 0; i < INT16_MAX; i++) {
         leftValue_ = readValue(DDA0);
         rightValue_ = readValue(DDA1);
         average_ += (leftValue_ + rightValue_) / 2;
+        if (leftValue_ > highestAmbientValue_ || rightValue_ > highestAmbientValue_) {
+            highestAmbientValue_ = (leftValue_ > rightValue_) ? leftValue_ : rightValue_;
+        }
+        if (leftValue_ < lowestAmbientValue_ || rightValue_ < lowestAmbientValue_) {
+            lowestAmbientValue_ = (leftValue_ < rightValue_) ? leftValue_ : rightValue_;
+        }
         if (i > 1) {
             average_ = average_ / 2;
         }
@@ -51,55 +67,14 @@ void LightController::followLight() {
     usart::transmitTextMessage("\tDroite : %d", rightValue_);
     middleValue_ = leftValue_ - rightValue_ + MIDDLE_VALUE;
     usart::transmitTextMessage("\tMiddle : %d", middleValue_);
-    if (leftValue_ >= average_ + HIGH_VALUE_LIGHT || rightValue_ >= average_ + HIGH_VALUE_LIGHT) {
-        if (middleValue_ <= 70) {
-            usart::transmitTextMessage("\t FAR LEFT");
-            farLeftLight();
-        }
-        else if (middleValue_ >= 200) {
-            usart::transmitTextMessage("\tFAR RIGHT");
-            farRightLight();
-        }
-        else {
-            usart::transmitTextMessage("\tMIDDLE");
-            if (leftValue_ > rightValue_ + 2) {
-                middleLeft();
-            }
-            else if (leftValue_ < rightValue_ - 2) {
-                middleRight();
-            }
-            else {
-                middleLight();
-            }
-        }
+    if (leftValue_ > highestAmbientValue_ || rightValue_ > highestAmbientValue_) {
+        middleLight();
     }
     else {
         MotorsController::setLeftPercentage(0);
         MotorsController::setRightPercentage(0);
     }
     usart::transmitTextMessage("\n");
-}
-
-void LightController::middleRight() {
-    uint8_t difference = abs(leftValue_ - rightValue_);
-    usart::transmitTextMessage("\tDifference : %d", difference);
-    usart::transmitTextMessage("  ocrleft : %d", leftValue_ + 3 * difference);
-    usart::transmitTextMessage("  ocrright : %d", rightValue_ - 3 * difference);
-    MotorsController::setRightPower(leftValue_ + 2 * difference);
-    MotorsController::setLeftPower(rightValue_ - 2 * difference);
-    MotorsController::changeLeftDirection(Direction::Forward);
-    MotorsController::changeRightDirection(Direction::Forward);
-}
-
-void LightController::middleLeft() {
-    uint8_t difference = abs(leftValue_ - rightValue_);
-    usart::transmitTextMessage("\tDifference : %d", difference);
-    usart::transmitTextMessage("  ocrleft : %d", leftValue_ - 3 * difference);
-    usart::transmitTextMessage("  ocrright : %d", rightValue_ + 3 * difference);
-    MotorsController::setRightPower(leftValue_ - 2 * difference);
-    MotorsController::setLeftPower(rightValue_ + 2 * difference);
-    MotorsController::changeLeftDirection(Direction::Forward);
-    MotorsController::changeRightDirection(Direction::Forward);
 }
 
 void LightController::farLeftLight() {
@@ -110,16 +85,32 @@ void LightController::farLeftLight() {
 }
 
 void LightController::middleLight() {
-    uint8_t difference = abs(leftValue_ - rightValue_);
-    usart::transmitTextMessage("\tDifference : %d", difference);
-    usart::transmitTextMessage("  ocrleft : %d", leftValue_ + 2 * difference);
-    usart::transmitTextMessage("  ocrright : %d", rightValue_ + 2 * difference);
-    MotorsController::setLeftPower(leftValue_ + 2 * difference);
-    MotorsController::setRightPower(rightValue_ + 2 * difference);
-    MotorsController::changeLeftDirection(Direction::Forward);
-    MotorsController::changeRightDirection(Direction::Forward);
-}
+    const double scaling = static_cast<double>(UINT8_MAX)/ (UINT8_MAX - highestAmbientValue_);
+    uint8_t ocrLeft = (max(leftValue_, highestAmbientValue_) - highestAmbientValue_) * scaling ;
+    uint8_t ocrRight =(max(rightValue_, highestAmbientValue_) - highestAmbientValue_) * scaling;
 
+
+    usart::transmitTextMessage("\t ocrL: %d  ", ocrLeft);
+    usart::transmitTextMessage("ocrR: %d", ocrRight);
+    if (ocrLeft <= 5) {
+        MotorsController::changeRightDirection(Direction::Reverse);
+        MotorsController::changeLeftDirection(Direction::Forward);
+        MotorsController::setRightPercentage(50);
+        MotorsController::setLeftPercentage(50);
+    }
+    else if (ocrRight <= 5) {
+        MotorsController::changeRightDirection(Direction::Forward); 
+        MotorsController::changeLeftDirection(Direction::Reverse);
+        MotorsController::setLeftPercentage(50);
+        MotorsController::setRightPower(50);
+    }
+    else {
+        MotorsController::changeLeftDirection(Direction::Forward);
+        MotorsController::changeRightDirection(Direction::Forward);
+        MotorsController::setLeftPower(min(ocrRight, 255 - 50) + 50);
+        MotorsController::setRightPower(min(ocrLeft, 255 - 50) + 50);
+    }
+}
 
 void LightController::farRightLight() {
     MotorsController::setLeftPercentage(60);
