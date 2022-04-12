@@ -21,6 +21,8 @@
 
 uint8_t MotorsController::leftSpeed_ = 0;
 uint8_t MotorsController::rightSpeed_ = 0;
+Direction MotorsController::directionLeft_ = Direction::Forward;
+Direction MotorsController::directionRight_ = Direction::Forward;
 
 void MotorsController::initialization() {
     cli();
@@ -54,23 +56,35 @@ void MotorsController::setLeftPower(uint8_t value) {
 void MotorsController::changeLeftDirection(Direction direction) {
     switch (direction) {
     case Direction::Forward:
+        directionLeft_ = Direction::Forward;
         PORTB &= ~(1 << DDB6);
         break;
     case Direction::Reverse:
+        directionLeft_ = Direction::Reverse;
         PORTB |= (1 << DDB6);
         break;
     }
 }
 
+bool MotorsController::getLeftDirection() {
+    return static_cast<bool>(directionLeft_);
+}
+
 void MotorsController::changeRightDirection(Direction direction) {
     switch (direction) {
     case Direction::Forward:
+        directionRight_ = Direction::Forward;
         PORTB &= ~(1 << DDB5);
         break;
     case Direction::Reverse:
+        directionRight_ = Direction::Reverse;
         PORTB |= (1 << DDB5);
         break;
     }
+}
+
+bool MotorsController::getRightDirection() {
+    return static_cast<bool>(directionRight_);
 }
 
 void MotorsController::invertRightDirection() {
@@ -118,3 +132,4 @@ void MotorsController::adjustLeftMotorSpeed() {
 void MotorsController::adjustRightMotorSpeed() {
     OCR0A = rightSpeed_;
 }
+
