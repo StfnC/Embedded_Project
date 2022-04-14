@@ -1,13 +1,13 @@
 #include "WallFollower.h"
+
 #include "usart.h"
 
 const uint8_t WallFollower::FOLLOWING_DISTANCE_THRESHOLD = 20;
 const uint8_t WallFollower::FOLLOWING_DISTANCE_ERROR = 1;
 const uint8_t WallFollower::NO_WALL_THRESHOLD = 50;
-const uint8_t WallFollower::BASE_SPEED = 50;
+const uint8_t WallFollower::BASE_SPEED = 40;
 
 uint8_t WallFollower::distance_;
-
 
 void WallFollower::followWall() {
     distance_ = DistanceSensor::getDistanceCm();
@@ -36,15 +36,15 @@ void WallFollower::goStraight() {
 void WallFollower::getCloser() {
     MotorsController::changeLeftDirection(Direction::Forward);
     MotorsController::changeRightDirection(Direction::Forward);
-    MotorsController::setLeftPercentage(75);
-    MotorsController::setRightPercentage(BASE_SPEED);
+    MotorsController::setLeftPercentage(BASE_SPEED + 15);
+    MotorsController::setRightPercentage(BASE_SPEED - 15);
 }
 
 void WallFollower::getAway() {
     MotorsController::changeLeftDirection(Direction::Forward);
     MotorsController::changeRightDirection(Direction::Forward);
-    MotorsController::setLeftPercentage(25);
-    MotorsController::setRightPercentage(BASE_SPEED);
+    MotorsController::setLeftPercentage(BASE_SPEED - 15);
+    MotorsController::setRightPercentage(BASE_SPEED + 15);
 }
 
 void WallFollower::fullStop() {
