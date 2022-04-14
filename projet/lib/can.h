@@ -38,6 +38,7 @@ public:
    // inclusivement.  Seulement les 10 bits de poids faible
    // sont significatifs.
    uint16_t lecture(uint8_t pos);
+   uint8_t lecture8Bits(uint8_t pos);
 
 private:
    // Donnees membres - aucun

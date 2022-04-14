@@ -70,3 +70,6 @@ can::lecture( uint8_t pos)
    return adcVal;
 }
 
+uint8_t can::lecture8Bits(uint8_t pos) {
+   return static_cast<uint8_t>(lecture(pos) >> 2);
+}
