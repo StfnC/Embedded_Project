@@ -11,10 +11,10 @@ void MemoryManager::initializationRead() {
 
 void MemoryManager::initialization() {
     cli();
-    TCNT0 = 0;
-    TCCR0A = _BV(COM0A1) | _BV(COM0A0) | _BV(COM0B1) | _BV(COM0B0);
-    TCCR0B |= (1 << CS12) | (1 << CS10);
-    TIMSK0 |= (1 << OCIE0A); // | (1<<OCIE0B);
+    TCNT2 = 0;
+    TCCR2A = _BV(COM2A1) | _BV(COM2A0) | _BV(COM2B1) | _BV(COM2B0);
+    TCCR2B |= (1 << CS22) | (1 << CS20);
+    TIMSK2 |= (1 << OCIE2A); // | (1<<OCIE0B);
     sei();
 }
 
