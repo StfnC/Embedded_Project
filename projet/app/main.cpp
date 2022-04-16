@@ -1,15 +1,16 @@
 #include <debug.h>
 #include <usart.h>
 
+#include "Robot.h"
+
 int main() {
     DEBUG_INIT;
     usart::initialization();
+    Robot::init();
 
     while (true) {
-        DEBUG_PRINT_MESSAGE_WITH_VALUE("Hello Debug %d\n", 55);
-        DEBUG_PRINT_MESSAGE("Hello Debug Message\n");
-        usart::transmitTextMessage("Hello usart\n");
+        Robot::run();
     }
-    
+
     return 0;
 }
