@@ -5,10 +5,16 @@
 #include <debug.h>
 #include <util/delay.h>
 
+#include <MotorsController.h>
+#include <DistanceSensor.h>
+#include <WallFollower.h>
+
 State Robot::currentState_ = State::INIT;
 led Robot::led_(DDA0, DDA1);
 
 void Robot::init() {
+    MotorsController::initialization();
+    DistanceSensor::initialization();
 }
 
 void Robot::run() {
@@ -102,10 +108,13 @@ void Robot::manageStateStartAutonomous() {
 
 void Robot::manageStateStartMemorizing() {
     DEBUG_PRINT_MESSAGE("Current State : START_MEMORIZING\n");
+    currentState_ = State::FOLLOW_WALL;
 }
 
 void Robot::manageStateFollowWall() {
     DEBUG_PRINT_MESSAGE("Current State : FOLLOW_WALL\n");
+    // FIXME: WallFollower needs a way to tell us that it doesn't detect a wall
+    WallFollower::followWall();
 }
 
 void Robot::manageStateFollowLight() {
