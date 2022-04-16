@@ -16,12 +16,16 @@ void WallFollower::followWall() {
 
     // FIXME: Create an enum for the different distances
     if (distance_ > NO_WALL_THRESHOLD) {
+        wallDetected_ = false;
         fullStop();
     } else if (distance_ < WallFollower::FOLLOWING_DISTANCE_THRESHOLD - WallFollower::FOLLOWING_DISTANCE_ERROR) {
+        wallDetected_ = true;
         getAway();
     } else if (distance_ > WallFollower::FOLLOWING_DISTANCE_THRESHOLD + WallFollower::FOLLOWING_DISTANCE_ERROR) {
+        wallDetected_ = true;
         getCloser();
     } else {
+        wallDetected_ = true;
         goStraight();
     }
 }
@@ -50,4 +54,8 @@ void WallFollower::getAway() {
 void WallFollower::fullStop() {
     MotorsController::setRightPercentage(0);
     MotorsController::setLeftPercentage(0);
+}
+
+bool WallFollower::isWallDetected() {
+    return wallDetected_;
 }

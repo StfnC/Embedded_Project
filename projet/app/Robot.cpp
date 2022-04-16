@@ -113,8 +113,12 @@ void Robot::manageStateStartMemorizing() {
 
 void Robot::manageStateFollowWall() {
     DEBUG_PRINT_MESSAGE("Current State : FOLLOW_WALL\n");
-    // FIXME: WallFollower needs a way to tell us that it doesn't detect a wall
+
     WallFollower::followWall();
+
+    if (!WallFollower::isWallDetected()) {
+        currentState_ = State::FOLLOW_LIGHT;
+    }
 }
 
 void Robot::manageStateFollowLight() {
