@@ -6,12 +6,9 @@
 #include <util/delay.h>
 
 State Robot::currentState_ = State::INIT;
-led Robot::led_(&PORTA, DDA0, DDA1);
+led Robot::led_(DDA0, DDA1);
 
 void Robot::init() {
-    // FIXME: - Change led class so that leds are only on PORTA
-    //        - This will allow us to hide the led setup from Robot
-    DDRA |= (1 << DDA0) | (1 << DDA1);
 }
 
 void Robot::run() {

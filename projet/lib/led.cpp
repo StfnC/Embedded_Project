@@ -11,21 +11,22 @@
 
 #include <util/delay.h>
 
-led::led(volatile uint8_t* port, uint8_t pin1, uint8_t pin2) : port_(port), pin1_(pin1), pin2_(pin2) {
+led::led(uint8_t pin1, uint8_t pin2) : pin1_(pin1), pin2_(pin2) {
+    DDRA |= (1 << pin1_) | (1 << pin2_);
 }
 
 void led::setGreen() {
-    *port_ |= (1 << pin1_);
-    *port_ &= ~(1 << pin2_);
+    PORTA |= (1 << pin1_);
+    PORTA &= ~(1 << pin2_);
 }
 
 void led::setRed() {
-    *port_ &= ~(1 << pin1_);
-    *port_ |= (1 << pin2_);
+    PORTA &= ~(1 << pin1_);
+    PORTA |= (1 << pin2_);
 }
 
 void led::setOff() {
-    *port_ &= ~((1 << pin2_) | (1 << pin1_));
+    PORTA &= ~((1 << pin2_) | (1 << pin1_));
 }
 
 void led::setAmber() {
