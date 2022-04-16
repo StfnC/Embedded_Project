@@ -1,29 +1,38 @@
+#define F_CPU 8000000
+#include <LightController.h>
+#include <avr/interrupt.h>
 #include <avr/io.h>
+#include <util/delay.h>
 #include <counter.h>
-#include <debug.h>
-#include <memoire_24.h>
-#include <debug.h>
+#include <usart.h>
+#include <MemoryManager.h>
 #include <MotorsController.h>
+volatile bool gMinuterieExpiree = false;
+volatile int valeurAvantInterruption;
+volatile int valeurApresInterruption;
+volatile int counter = 0;
 
-Memoire24CXXX memoire();
 ISR(TIMER1_COMPA_vect) {
-
+    MemoryManager::writeMemory();
 }
 
-void writeSpeed() {
-    uint8_t leftSpeed = MotorsController::getLeftPercentage();
-    
-}
+
+
 
 int main() {
-    DEBUG_INIT;
-    CounterInterrupt counter = CounterInterrupt();
+    DDRA |= 0x00;
+
+
+    usart::initialization();
+    usart::transmitTextMessage("CALIBRATION LUMIERE AMBIANTE\n");
     MotorsController::initialization();
-    counter.setGenerationMode(GenerationMode::ClearTimerCompare);
-    counter.setCompareMode(CompareMode::Toggle);
-    counter.setDuration(0.02);
+    LightController::initialization();
+    usart::transmitTextMessage("\nFIN CALIBRATION LUMIERE AMBIANTE\n");
 
-
+    MemoryManager::initialization();
+    MemoryManager::setIntervalle(500);
+    while (true)
+    {
+        LightController::followLight();
+    }
 }
-
-
