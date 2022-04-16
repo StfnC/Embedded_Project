@@ -13,7 +13,8 @@ volatile int valeurApresInterruption;
 volatile int counter = 0;
 
 ISR(TIMER1_COMPA_vect) {
-    MemoryManager::writeMemory();
+    MemoryManager::readMemory();
+    // gMinuterieExpiree = true;
 }
 
 
@@ -26,13 +27,11 @@ int main() {
     usart::initialization();
     usart::transmitTextMessage("CALIBRATION LUMIERE AMBIANTE\n");
     MotorsController::initialization();
-    LightController::initialization();
     usart::transmitTextMessage("\nFIN CALIBRATION LUMIERE AMBIANTE\n");
 
     MemoryManager::initialization();
     MemoryManager::setIntervalle(255);
     while (true)
     {
-        LightController::followLight();
     }
 }
