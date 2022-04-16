@@ -39,15 +39,15 @@ void MemoryManager::readMemory() {
     memory.lecture(address_++, &lecture);
     MotorsController::changeLeftDirection(static_cast<Direction>(lecture >> 7));
     MotorsController::setLeftPercentage(lecture & 0x7F);
-    usart::transmitTextMessage("\tAddr : %d", address_ >> 8);
-    usart::transmitTextMessage("%d", static_cast<uint8_t>(address_));
-    usart::transmitTextMessage(" Value : %d", lecture);
+    // usart::transmitTextMessage("\tAddr : %d", address_ >> 8);
+    // usart::transmitTextMessage("%d", static_cast<uint8_t>(address_));
+    // usart::transmitTextMessage(" Value : %d", lecture);
 
     memory.lecture(address_++, &lecture);
     MotorsController::changeRightDirection(static_cast<Direction>(lecture >> 7));
     MotorsController::setRightPercentage(lecture & 0x7F);
-    usart::transmitTextMessage("\tAddr : %d", address_ >> 8);
-    usart::transmitTextMessage("%d", static_cast<uint8_t>(address_));
-    usart::transmitTextMessage(" Value : %d \n", lecture);
+    // usart::transmitTextMessage("\tAddr : %d", address_ >> 8);
+    // usart::transmitTextMessage("%d", static_cast<uint8_t>(address_));
+    // usart::transmitTextMessage(" Value : %d \n", lecture);
 
 }
