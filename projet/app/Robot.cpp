@@ -123,6 +123,11 @@ void Robot::manageStateFollowWall() {
 
 void Robot::manageStateFollowLight() {
     DEBUG_PRINT_MESSAGE("Current State : FOLLOW_LIGHT\n");
+    // FIXME: -Add and test LighController
+    //        -Create constant for when robot is close to wall (10 cm?)
+    if (DistanceSensor::getDistanceCm() < 10) {
+        currentState_ = State::FOLLOW_WALL;
+    }   
 }
 
 void Robot::manageStateStopMemorizing() {

@@ -8,6 +8,7 @@ const uint8_t WallFollower::NO_WALL_THRESHOLD = 50;
 const uint8_t WallFollower::BASE_SPEED = 40;
 
 uint8_t WallFollower::distance_;
+bool WallFollower::wallDetected_;
 
 void WallFollower::followWall() {
     distance_ = DistanceSensor::getDistanceCm();
