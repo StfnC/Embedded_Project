@@ -8,6 +8,7 @@
 #include <MotorsController.h>
 #include <DistanceSensor.h>
 #include <WallFollower.h>
+#include <LightController.h>
 
 State Robot::currentState_ = State::INIT;
 led Robot::led_(DDA0, DDA1);
@@ -15,6 +16,7 @@ led Robot::led_(DDA0, DDA1);
 void Robot::init() {
     MotorsController::initialization();
     DistanceSensor::initialization();
+    LightController::initialization();
 }
 
 void Robot::run() {
@@ -123,9 +125,13 @@ void Robot::manageStateFollowWall() {
 
 void Robot::manageStateFollowLight() {
     DEBUG_PRINT_MESSAGE("Current State : FOLLOW_LIGHT\n");
-    // FIXME: -Add and test LighController
-    //        -Create constant for when robot is close to wall (10 cm?)
-    if (DistanceSensor::getDistanceCm() < 10) {
+    LightController::followLight();
+    // FIXME:-Create constant for when robot is close to wall (10 cm?)
+    uint8_t distance = DistanceSensor::getDistanceCm();
+
+    DEBUG_PRINT_MESSAGE_WITH_VALUE("Distance : %d\n", distance);
+
+    if (distance < 10) {
         currentState_ = State::FOLLOW_WALL;
     }   
 }

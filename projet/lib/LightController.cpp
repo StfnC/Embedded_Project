@@ -28,18 +28,16 @@ inline uint8_t max(uint8_t lhs, uint8_t rhs) { return (lhs > rhs) ? lhs : rhs; }
 inline uint8_t min(uint8_t lhs, uint8_t rhs) { return (lhs < rhs) ? lhs : rhs; }
 
 void LightController::initialization() {
-    DDRA |= ~(_BV(DDA1) | _BV(DDA0));
-    DDRA |= _BV(DDA2) | _BV(DDA3);
+    DDRA &= ~(_BV(DDA5) | _BV(DDA4));
     middleValue_ = 0;
     averageLightCalculation();
-    MotorsController::initialization();
 }
 
 void LightController::averageLightCalculation() {
     highestAmbientValue_ = 0;
     for (uint16_t i = 0; i < INT16_MAX; i++) {
-        leftValue_ = readValue(DDA0);
-        rightValue_ = readValue(DDA1);
+        leftValue_ = readValue(DDA4);
+        rightValue_ = readValue(DDA5);
         if (leftValue_ > highestAmbientValue_ || rightValue_ > highestAmbientValue_) {
             highestAmbientValue_ = (leftValue_ > rightValue_) ? leftValue_ : rightValue_;
         }
@@ -47,8 +45,8 @@ void LightController::averageLightCalculation() {
 }
 
 void LightController::followLight() {
-    leftValue_ = readValue(DDA0);
-    rightValue_ = readValue(DDA1);
+    leftValue_ = readValue(DDA4);
+    rightValue_ = readValue(DDA5);
     middleValue_ = leftValue_ - rightValue_ + MIDDLE_VALUE;
 
     if (leftValue_ > highestAmbientValue_ || rightValue_ > highestAmbientValue_) {
