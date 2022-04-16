@@ -12,15 +12,15 @@ void MemoryManager::initializationRead() {
 void MemoryManager::initialization() {
     usart::initialization();
     cli();
-    TCNT1 = 0;
-    TCCR1A = _BV(COM1A1) | _BV(COM1A0) | _BV(COM1B1) | _BV(COM1B0);
-    TCCR1B |= (1 << CS12) | (1 << CS10) | (1 << WGM12);
-    TIMSK1 |= (1 << OCIE1A); // | (1<<OCIE0B);
+    TCNT2 = 0;
+    TCCR2A = _BV(COM2A1) | _BV(COM2A0) | _BV(3);
+    TCCR2B |= (1 << CS22) | (1 << CS21) | (1 << CS20);
+    TIMSK2 |= (1 << OCIE2A);
     sei();
 }
 
 void MemoryManager::setIntervalle(uint16_t duration) {
-    OCR1A = duration;
+    OCR2A = duration;
 }
 
 void MemoryManager::writeMemory() {

@@ -12,7 +12,7 @@ volatile int valeurAvantInterruption;
 volatile int valeurApresInterruption;
 volatile int counter = 0;
 
-ISR(TIMER1_COMPA_vect) {
+ISR(TIMER2_COMPA_vect) {
     MemoryManager::writeMemory();
 }
 
