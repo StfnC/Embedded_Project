@@ -63,7 +63,7 @@ void Robot::manageStateInit() {
     DEBUG_PRINT_MESSAGE("Current State : INIT\n");
     // FIXME: ONLY FOR TESTING
     _delay_ms(4000);
-    currentState_ = State::START_RERUN;
+    currentState_ = State::START_AUTONOMOUS;
 }
 
 void Robot::manageStateStartRerun() {
@@ -91,6 +91,16 @@ void Robot::manageStateEndRerun() {
 
 void Robot::manageStateStartAutonomous() {
     DEBUG_PRINT_MESSAGE("Current State : START_AUTONOMOUS\n");
+    // FIXME: This can be extracted to a function (same code as Start_Rerun)
+    for (uint8_t i = 0; i < 15; i++) {
+        led_.setGreen();
+        _delay_ms(100);
+        led_.setOff();
+        _delay_ms(100);
+    }
+
+    led_.setOff();
+    currentState_ = State::START_MEMORIZING;
 }
 
 void Robot::manageStateStartMemorizing() {
