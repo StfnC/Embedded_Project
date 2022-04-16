@@ -1,4 +1,7 @@
+#pragma once
+
 #include <avr/io.h>
+#include <led.h>
 
 #include "State.h"
 
@@ -10,6 +13,7 @@ class Robot {
 
     private:
         static State currentState_;
+        static led led_;
 
         static void manageStateMachine();
         static void manageStateInit();
@@ -24,5 +28,4 @@ class Robot {
         static void manageStateStartUTurn();
         static void manageStateUTurn();
         static void manageStateEndAutonomous();
-
 };

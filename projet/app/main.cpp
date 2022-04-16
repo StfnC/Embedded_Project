@@ -1,3 +1,5 @@
+#define F_CPU 8000000L
+
 #include <debug.h>
 #include <usart.h>
 

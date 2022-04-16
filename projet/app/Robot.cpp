@@ -1,10 +1,17 @@
+#define F_CPU 8000000L
+
 #include "Robot.h"
 
 #include <debug.h>
+#include <util/delay.h>
 
 State Robot::currentState_ = State::INIT;
+led Robot::led_(&PORTA, DDA0, DDA1);
 
 void Robot::init() {
+    // FIXME: - Change led class so that leds are only on PORTA
+    //        - This will allow us to hide the led setup from Robot
+    DDRA |= (1 << DDA0) | (1 << DDA1);
 }
 
 void Robot::run() {
@@ -54,10 +61,24 @@ void Robot::manageStateMachine() {
 
 void Robot::manageStateInit() {
     DEBUG_PRINT_MESSAGE("Current State : INIT\n");
+    // FIXME: ONLY FOR TESTING
+    _delay_ms(4000);
+    currentState_ = State::START_RERUN;
 }
 
 void Robot::manageStateStartRerun() {
     DEBUG_PRINT_MESSAGE("Current State : START_RERUN\n");
+    // FIXME: -Maybe use a timer instead
+    //        -Use constants
+    for (uint8_t i = 0; i < 15; i++) {
+        led_.setRed();
+        _delay_ms(100);
+        led_.setOff();
+        _delay_ms(100);
+    }
+
+    led_.setOff();
+    currentState_ = State::RERUN;
 }
 
 void Robot::manageStateRerun() {
@@ -66,7 +87,6 @@ void Robot::manageStateRerun() {
 
 void Robot::manageStateEndRerun() {
     DEBUG_PRINT_MESSAGE("Current State : END_RERUN\n");
-
 }
 
 void Robot::manageStateStartAutonomous() {
