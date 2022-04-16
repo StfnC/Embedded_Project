@@ -3,12 +3,13 @@
 #include <avr/interrupt.h>
 #include <memoire_24.h>
 #include <MotorsController.h>
+#include "usart.h"
 
 class MemoryManager {
 public:
     static void initializationRead();
     static void initialization();
-    static void setIntervalle(uint8_t duration);
+    static void setIntervalle(uint16_t duration);
     static void writeMemory();
     static void readMemory();
 private:

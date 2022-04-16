@@ -12,9 +12,10 @@ volatile int valeurAvantInterruption;
 volatile int valeurApresInterruption;
 volatile int counter = 0;
 
-ISR(TIMER1_COMPA_vect) {
+ISR(TIMER2_COMPA_vect) {
     MemoryManager::readMemory();
     // gMinuterieExpiree = true;
+    counter++;
 }
 
 
@@ -31,7 +32,12 @@ int main() {
 
     MemoryManager::initialization();
     MemoryManager::setIntervalle(255);
-    while (true)
-    {
+    while (counter < INT8_MAX);
+    {   
+        if (gMinuterieExpiree) {
+            MemoryManager::readMemory();
+            gMinuterieExpiree = false;
+        }
+        usart::transmitTextMessage("%d\n", counter);
     }
 }
