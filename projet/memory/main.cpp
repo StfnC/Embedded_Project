@@ -24,15 +24,21 @@ int main() {
 
 
     usart::initialization();
-    usart::transmitTextMessage("CALIBRATION LUMIERE AMBIANTE\n");
+    // usart::transmitTextMessage("CALIBRATION LUMIERE AMBIANTE\n");
     MotorsController::initialization();
-    LightController::initialization();
-    usart::transmitTextMessage("\nFIN CALIBRATION LUMIERE AMBIANTE\n");
+    // LightController::initialization();
+    // usart::transmitTextMessage("\nFIN CALIBRATION LUMIERE AMBIANTE\n");
 
     MemoryManager::initialization();
     MemoryManager::setIntervalle(255);
-    while (true)
-    {
-        LightController::followLight();
-    }
+    
+    MotorsController::changeLeftDirection(Direction::Forward);
+    MotorsController::changeRightDirection(Direction::Forward);
+    MotorsController::setLeftPercentage(70);
+    MotorsController::setRightPercentage(70);
+    _delay_ms(1000);
+    MotorsController::setLeftPercentage(0);
+    _delay_ms(500);
+    MotorsController::setRightPercentage(0);
+
 }

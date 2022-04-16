@@ -17,8 +17,8 @@
 #include <avr/io.h>
 
 enum class Direction {
-    Forward = 1,
-    Reverse = 0
+    Forward = 0,
+    Reverse = 1
 };
 
 class MotorsController {

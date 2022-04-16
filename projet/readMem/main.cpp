@@ -31,7 +31,11 @@ int main() {
 
     MemoryManager::initialization();
     MemoryManager::setIntervalle(255);
-    while (true)
-    {
+    while (counter < INT8_MAX);
+    {   
+        if (gMinuterieExpiree) {
+            MemoryManager::readMemory();
+            gMinuterieExpiree = false;
+        }
     }
 }
