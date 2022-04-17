@@ -9,6 +9,7 @@
 #include <DistanceSensor.h>
 #include <WallFollower.h>
 #include <LightController.h>
+#include <ButtonPressDetector.h>
 
 State Robot::currentState_ = State::INIT;
 led Robot::led_(DDA0, DDA1);
@@ -17,6 +18,7 @@ void Robot::init() {
     MotorsController::initialization();
     DistanceSensor::initialization();
     LightController::initialization();
+    ButtonPressDetector::init();
 }
 
 void Robot::run() {
@@ -50,7 +52,7 @@ void Robot::manageStateMachine() {
             manageStateFollowLight();
             break;
         case State::STOP_MEMORIZING:
-            manageStateStartMemorizing();
+            manageStateStopMemorizing();
             break;
         case State::START_U_TURN:
             manageStateStartUTurn();
@@ -66,9 +68,14 @@ void Robot::manageStateMachine() {
 
 void Robot::manageStateInit() {
     DEBUG_PRINT_MESSAGE("Current State : INIT\n");
-    // FIXME: ONLY FOR TESTING
-    _delay_ms(4000);
-    currentState_ = State::START_AUTONOMOUS;
+    
+    if (ButtonPressDetector::wasSmallButtonPressed()) {
+        currentState_ = State::START_AUTONOMOUS;
+        ButtonPressDetector::reset();
+    } else if (ButtonPressDetector::wasBreadButtonPressed()) {
+        currentState_ = State::START_RERUN;
+        ButtonPressDetector::reset();
+    }
 }
 
 void Robot::manageStateStartRerun() {
@@ -125,12 +132,25 @@ void Robot::manageStateFollowWall() {
 
 void Robot::manageStateFollowLight() {
     DEBUG_PRINT_MESSAGE("Current State : FOLLOW_LIGHT\n");
+    if (ButtonPressDetector::wasSmallButtonPressed()) {
+        currentState_ = State::END_AUTONOMOUS;
+        ButtonPressDetector::reset();
+        return;
+    }
+    
+    if (ButtonPressDetector::wasBreadButtonPressed()) {
+        currentState_ = State::STOP_MEMORIZING;
+        ButtonPressDetector::reset();
+        return;
+    }    
+
     LightController::followLight();
-    // FIXME:-Create constant for when robot is close to wall (10 cm?)
+
     uint8_t distance = DistanceSensor::getDistanceCm();
 
     DEBUG_PRINT_MESSAGE_WITH_VALUE("Distance : %d\n", distance);
 
+    // FIXME:-Create constant for when robot is close to wall (10 cm?)
     if (distance < 10) {
         currentState_ = State::FOLLOW_WALL;
     }   
@@ -138,16 +158,21 @@ void Robot::manageStateFollowLight() {
 
 void Robot::manageStateStopMemorizing() {
     DEBUG_PRINT_MESSAGE("Current State : STOP_MEMORIZING\n");
+    currentState_ = State::START_U_TURN;
 }
 
 void Robot::manageStateStartUTurn() {
     DEBUG_PRINT_MESSAGE("Current State : START_U_TURN\n");
+    currentState_ = State::U_TURN;
 }
 
 void Robot::manageStateUTurn() {
     DEBUG_PRINT_MESSAGE("Current State : U_TURN\n");
+    // FIXME: Maybe should be Follow_Light?
+    currentState_ = State::FOLLOW_WALL;
 }
 
 void Robot::manageStateEndAutonomous() {
     DEBUG_PRINT_MESSAGE("Current State : END_AUTONOMOUS\n");
+    // FIXME: Make sure that the robot isn't memorizing anymore
 }
