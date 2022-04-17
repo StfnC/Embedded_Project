@@ -15,11 +15,11 @@ int main() {
         } else if (ButtonPressDetector::wasBreadButtonPressed()) {
             led.setGreen();
             _delay_ms(1000);
-            ButtonPressDetector::setBreadButtonPressed(false);
+            ButtonPressDetector::reset();
         } else {
             led.setRed();
             _delay_ms(1000);
-            ButtonPressDetector::setSmallButtonPressed(false);
+            ButtonPressDetector::reset();
         }
     }
 }

@@ -5,6 +5,10 @@
 class ButtonPressDetector {
     public:
         static void init();
+        static inline constexpr void reset() {
+            breadButtonWasPressed_ = false;
+            smallButtonWasPressed_ = false;
+        }
         static bool wasBreadButtonPressed();
         static bool wasSmallButtonPressed();
         static void setBreadButtonPressed(bool pressed);
