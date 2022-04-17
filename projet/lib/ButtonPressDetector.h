@@ -2,14 +2,16 @@
 
 #include <avr/io.h>
 
-class ButtonController {
+class ButtonPressDetector {
     public:
         static void init();
         static bool wasBreadButtonPressed();
         static bool wasSmallButtonPressed();
         static void setBreadButtonPressed(bool pressed);
         static void setSmallButtonPressed(bool pressed);
-        static uint8_t getDebounceTime();
+        static inline uint8_t getDebounceTime() {
+            return DEBOUNCE_TIME;
+        }
 
     private:
         static const uint8_t DEBOUNCE_TIME = 10;
