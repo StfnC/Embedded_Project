@@ -26,12 +26,8 @@ void MemoryManager::setIntervalle(uint16_t duration) {
 void MemoryManager::writeMemory() {
     uint8_t storingLeft = (MotorsController::getLeftDirection() << 7) | MotorsController::getLeftPercentage();
     memory.ecriture(address_++, storingLeft);
-    // usart::transmitTextMessage("Addr : %d", address_);
-    // usart::transmitTextMessage("\tValue : %d", storingLeft);
     uint8_t storingRight = (MotorsController::getRightDirection() << 7) | MotorsController::getRightPercentage();
     memory.ecriture(address_++, storingRight);
-    // usart::transmitTextMessage("\tAddr : %d", address_);
-    // usart::transmitTextMessage("\tValue : %d\n", storingRight);
 }
 
 void MemoryManager::readMemory() {
@@ -39,13 +35,9 @@ void MemoryManager::readMemory() {
     memory.lecture(address_++, &lecture);
     MotorsController::changeLeftDirection(static_cast<Direction>(lecture >> 7));
     MotorsController::setLeftPercentage(lecture & 0x7F);
-    // usart::transmitTextMessage("Addr : %d", address_);
-    // usart::transmitTextMessage(" Value : %d", lecture);
 
     memory.lecture(address_++, &lecture);
     MotorsController::changeRightDirection(static_cast<Direction>(lecture >> 7));
     MotorsController::setRightPercentage(lecture & 0x7F);
-    // usart::transmitTextMessage("\tAddr : %d", address_);
-    // usart::transmitTextMessage(" Value : %d \n", lecture);
 
 }
