@@ -39,5 +39,4 @@ class LightController {
         static uint8_t highestAmbientValue_;
         static uint8_t middleValue_;
         static can converter_;
-        static MotorsController motors_;
 };

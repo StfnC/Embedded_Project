@@ -11,7 +11,7 @@
 
 class led {
 	public:
-    	led(volatile uint8_t* port, uint8_t pin1, uint8_t pin2);
+    	led(uint8_t pin1, uint8_t pin2);
     	~led() = default;
 
     	void setGreen();

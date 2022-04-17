@@ -124,13 +124,13 @@ void Interpreter::att(uint8_t operand) {
 
 void Interpreter::dal(uint8_t operand) {  // allumer la del
     // transmitter_.transmit(0x44);
-    led led0(&PORTA, DDA0, DDA1);
+    led led0(DDA0, DDA1);
     led0.setGreen();
 };
 
 void Interpreter::det(uint8_t operand) {  // eteindre del
     // transmitter_.transmit(0x45);
-    led led0(&PORTA, DDA0, DDA1);
+    led led0(DDA0, DDA1);
     led0.setOff();
 }
 

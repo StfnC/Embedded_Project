@@ -1,0 +1,14 @@
+enum class State {
+    INIT,
+    START_RERUN,
+    RERUN,
+    END_RERUN,
+    START_AUTONOMOUS,
+    START_MEMORIZING,
+    FOLLOW_WALL,
+    FOLLOW_LIGHT,
+    STOP_MEMORIZING,
+    START_U_TURN,
+    U_TURN,
+    END_AUTONOMOUS
+};

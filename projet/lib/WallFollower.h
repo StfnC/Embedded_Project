@@ -4,10 +4,9 @@
 #include "MotorsController.h"
 
 class WallFollower {
-    // FIXME: Maybe create an enum for the state of the wall following
-
     public:
         static void followWall();
+        static bool isWallDetected();
 
     private:
         static const uint8_t FOLLOWING_DISTANCE_THRESHOLD;
@@ -16,6 +15,7 @@ class WallFollower {
         static const uint8_t BASE_SPEED;
 
         static uint8_t distance_;
+        static bool wallDetected_;
 
         static void goStraight();
         static void getCloser();
