@@ -26,10 +26,12 @@ void RerunManager::initializationRead() {
 
 void RerunManager::initialization() {
     cli();
+
     TCNT2 = 0;
-    TCCR2A = _BV(COM2A1) | _BV(COM2A0);
+    TCCR2A |= (1 << COM2A1) | (1 << COM2A0);
     TCCR2B |= (1 << CS22) | (1 << CS21) | (1 << CS20);
     TIMSK2 |= (1 << OCIE2A);
+
     sei();
 }
 
