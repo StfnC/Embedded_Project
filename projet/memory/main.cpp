@@ -12,16 +12,23 @@ volatile int valeurAvantInterruption;
 volatile int valeurApresInterruption;
 volatile int counter = 0;
 
-ISR(TIMER2_COMPA_vect) {
-    MemoryManager::writeMemory();
+volatile bool rerun = true;
+
+ISR(TIMER2_COMPA_vect)
+{
+    if (!rerun)
+    {
+        MemoryManager::writeMemory();
+    }
+    else
+    {
+        MemoryManager::readMemory();
+    }
 }
 
-
-
-
-int main() {
+int main()
+{
     DDRA |= 0x00;
-
 
     usart::initialization();
     // usart::transmitTextMessage("CALIBRATION LUMIERE AMBIANTE\n");
@@ -31,14 +38,16 @@ int main() {
 
     MemoryManager::initialization();
     MemoryManager::setIntervalle(255);
-    
-    MotorsController::changeLeftDirection(Direction::Forward);
-    MotorsController::changeRightDirection(Direction::Forward);
-    MotorsController::setLeftPercentage(70);
-    MotorsController::setRightPercentage(70);
-    _delay_ms(1000);
-    MotorsController::setLeftPercentage(0);
-    _delay_ms(500);
-    MotorsController::setRightPercentage(0);
 
+    // MotorsController::changeLeftDirection(Direction::Forward);
+    // MotorsController::changeRightDirection(Direction::Forward);
+    // MotorsController::setLeftPercentage(70);
+    // MotorsController::setRightPercentage(70);
+    // _delay_ms(1000);
+    // MotorsController::setLeftPercentage(0);
+    // _delay_ms(500);
+    // MotorsController::setRightPercentage(0);
+
+    while (true)
+        ;
 }
