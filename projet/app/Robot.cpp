@@ -163,11 +163,23 @@ void Robot::manageStateStopMemorizing() {
 
 void Robot::manageStateStartUTurn() {
     DEBUG_PRINT_MESSAGE("Current State : START_U_TURN\n");
+    // FIXME: Create constant
+    _delay_ms(1000);
     currentState_ = State::U_TURN;
 }
 
 void Robot::manageStateUTurn() {
     DEBUG_PRINT_MESSAGE("Current State : U_TURN\n");
+    led_.setAmber();
+    MotorsController::changeLeftDirection(Direction::Forward);
+    MotorsController::changeRightDirection(Direction::Forward);
+    MotorsController::setLeftPercentage(80);
+    MotorsController::setRightPercentage(80);
+    _delay_ms(400);
+    MotorsController::setRightPercentage(60);
+    _delay_ms(1600);
+    led_.setOff();
+
     // FIXME: Maybe should be Follow_Light?
     currentState_ = State::FOLLOW_WALL;
 }
