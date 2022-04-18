@@ -1,4 +1,5 @@
 #define F_CPU 8000000
+#include <memoire_24.h>
 #include <LightController.h>
 #include <avr/interrupt.h>
 #include <avr/io.h>
@@ -16,12 +17,19 @@ ISR(TIMER2_COMPA_vect) {
     MemoryManager::writeMemory();
 }
 
+void wipeMemory() {
+    Memoire24CXXX memory;
 
+    for (uint16_t i = 0; i < UINT16_MAX; i++) {
+        memory.ecriture(i, 0);
+    }
+}
 
 
 int main() {
     DDRA |= 0x00;
 
+    wipeMemory();
 
     usart::initialization();
     // usart::transmitTextMessage("CALIBRATION LUMIERE AMBIANTE\n");
