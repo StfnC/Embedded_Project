@@ -2,7 +2,22 @@
 
 uint16_t RerunManager::address_ = 0;
 Memoire24CXXX RerunManager::memory_ = Memoire24CXXX();
+RerunManagerState RerunManager::state_ = RerunManagerState::INERT;
 
+void RerunManager::manageRerun() {
+    switch (state_) {
+        case RerunManagerState::INERT:
+            break;
+        case RerunManagerState::MEMORIZING:
+            break;
+        case RerunManagerState::RERUN:
+            break;
+    }
+}
+
+void RerunManager::setRerunManagerState(RerunManagerState state) {
+    state_ = state;
+}
 
 void RerunManager::initializationRead() {
     RerunManager::initialization();
