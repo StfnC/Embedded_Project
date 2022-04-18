@@ -177,7 +177,7 @@ void Robot::manageStateUTurn() {
     MotorsController::setRightPercentage(80);
     _delay_ms(400);
     MotorsController::setRightPercentage(60);
-    _delay_ms(1600);
+    _delay_ms(6000);
     led_.setOff();
 
     // FIXME: Maybe should be Follow_Light?
