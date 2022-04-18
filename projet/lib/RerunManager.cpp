@@ -27,7 +27,7 @@ void RerunManager::setRerunManagerState(RerunManagerState state) {
 }
 
 void RerunManager::initializationRead() {
-    RerunManager::initialization();
+    state_ = RerunManagerState::RERUN;
     address_ = 0;
 }
 
@@ -49,7 +49,7 @@ void RerunManager::stopRerunManagement() {
 
     TCCR2A &= ~((1 << COM2A0) | (1 << COM2A1));
     OCR2A = 0x0000;
-
+    TIMSK2 &= ~(_BV(OCIE2A));
     sei();
 }
 

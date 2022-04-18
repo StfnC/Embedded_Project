@@ -8,7 +8,8 @@
 #include <usart.h>
 #include <RerunManager.h>
 #include <MotorsController.h>
-volatile bool gMinuterieExpiree = false;
+#include <memoire_24.h>
+volatile bool gMinuterieExpiree = true;
 volatile int valeurAvantInterruption;
 volatile int valeurApresInterruption;
 volatile int counter = 0;
@@ -25,7 +26,6 @@ void wipeMemory() {
         _delay_ms(3);
     }
 }
-
 
 int main() {
     // wipeMemory();
@@ -45,8 +45,8 @@ int main() {
     _delay_ms(500);
     MotorsController::setRightPercentage(0);
     
-    // _delay_ms(5000);
-    RerunManager::setRerunManagerState(RerunManagerState::RERUN);
+    _delay_ms(1500);
+    RerunManager::initializationRead();
     // Robot should rerun
     // _delay_ms(5000);
 
