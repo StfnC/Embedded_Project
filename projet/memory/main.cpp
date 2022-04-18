@@ -12,19 +12,10 @@ volatile int valeurAvantInterruption;
 volatile int valeurApresInterruption;
 volatile int counter = 0;
 
-volatile bool rerun = true;
 
 ISR(TIMER2_COMPA_vect)
 {
-    if (MemoryManager::state_ == State::MEMORIZING)
-    {
-        MemoryManager::writeMemory();
-    }
-    else if (MemoryManager::state_ == State::RERUN)
-    {
-        MemoryManager::readMemory();
-    }
-    else {}
+    MemoryManager::manageRun();
 }
 
 int main()

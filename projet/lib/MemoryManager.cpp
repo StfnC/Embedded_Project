@@ -10,6 +10,17 @@ void MemoryManager::initializationRead() {
 }
 
 void MemoryManager::manageRun() {
+    switch (state_)
+    {
+    case State::INERT:
+        break;
+    case State::MEMORIZING:
+        writeMemory();
+        break;
+    case State::RERUN:
+        readMemory();
+        break;
+    }
 }
 
 void MemoryManager::initialization() {
