@@ -17,6 +17,8 @@ class RerunManager {
         static void stopRerunManagement();
         static void initializationRead();
         static void initialization();
+        static void stopRegister();
+        static void stopRerun();
 
     private:
         static const uint8_t TIMER_DURATION = 0xFF;

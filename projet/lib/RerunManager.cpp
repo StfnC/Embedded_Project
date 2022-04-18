@@ -26,6 +26,13 @@ void RerunManager::setRerunManagerState(RerunManagerState state) {
     state_ = state;
 }
 
+
+void RerunManager::stopRegister(){
+    state_ = RerunManagerState::INERT;
+    memory_.ecriture(address_++, 0xFF);
+    memory_.ecriture(address_++, 0xFF);
+}
+
 void RerunManager::initializationRead() {
     state_ = RerunManagerState::RERUN;
     address_ = 0;
@@ -53,6 +60,14 @@ void RerunManager::stopRerunManagement() {
     sei();
 }
 
+void RerunManager::stopRerun() {
+    state_ = RerunManagerState::INERT;
+    MotorsController::setLeftPercentage(0);
+    MotorsController::setRightPercentage(0);
+    stopRerunManagement();
+}
+
+
 void RerunManager::writeMemory() {
     uint8_t storingLeft = (MotorsController::getLeftDirection() << 7) | MotorsController::getLeftPercentage();
     memory_.ecriture(address_++, storingLeft);
@@ -70,4 +85,8 @@ void RerunManager::readMemory() {
     memory_.lecture(address_++, &lecture);
     MotorsController::changeRightDirection(static_cast<Direction>(lecture >> 7));
     MotorsController::setRightPercentage(lecture & 0x7F);
+
+    if (lecture == 0xFF) {        
+        stopRerun();
+    }
 }
