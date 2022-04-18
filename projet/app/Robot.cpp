@@ -100,11 +100,15 @@ void Robot::manageStateStartRerun() {
 
 void Robot::manageStateRerun() {
     DEBUG_PRINT_MESSAGE("Current State : RERUN\n");
-    while (RerunManager::getState() != RerunManagerState::INERT);
+    // FIXME: BLOCKING
+    if (RerunManager::getState() == RerunManagerState::INERT) {
+        currentState_ = State::END_RERUN;
+    }
 }
 
 void Robot::manageStateEndRerun() {
     DEBUG_PRINT_MESSAGE("Current State : END_RERUN\n");
+    led_.setGreen();
     RerunManager::stopRerun();
 }
 
