@@ -5,7 +5,7 @@
 #include <util/delay.h>
 #include <counter.h>
 #include <usart.h>
-#include <MemoryManager.h>
+#include <RerunManager.h>
 #include <MotorsController.h>
 volatile bool gMinuterieExpiree = false;
 volatile int valeurAvantInterruption;
@@ -13,7 +13,7 @@ volatile int valeurApresInterruption;
 volatile int counter = 0;
 
 ISR(TIMER2_COMPA_vect) {
-    MemoryManager::readMemory();
+    RerunManager::readMemory();
     // gMinuterieExpiree = true;
 }
 
@@ -29,12 +29,12 @@ int main() {
     MotorsController::initialization();
     usart::transmitTextMessage("\nFIN CALIBRATION LUMIERE AMBIANTE\n");
 
-    MemoryManager::initialization();
-    MemoryManager::setIntervalle(255);
+    RerunManager::initialization();
+    RerunManager::setIntervalle(255);
     while (counter < INT8_MAX);
     {   
         if (gMinuterieExpiree) {
-            MemoryManager::readMemory();
+            RerunManager::readMemory();
             gMinuterieExpiree = false;
         }
     }

@@ -6,7 +6,7 @@
 #include <util/delay.h>
 #include <counter.h>
 #include <usart.h>
-#include <MemoryManager.h>
+#include <RerunManager.h>
 #include <MotorsController.h>
 volatile bool gMinuterieExpiree = false;
 volatile int valeurAvantInterruption;
@@ -14,7 +14,7 @@ volatile int valeurApresInterruption;
 volatile int counter = 0;
 
 ISR(TIMER2_COMPA_vect) {
-    MemoryManager::writeMemory();
+    RerunManager::writeMemory();
 }
 
 void wipeMemory() {
@@ -37,8 +37,8 @@ int main() {
     // LightController::initialization();
     // usart::transmitTextMessage("\nFIN CALIBRATION LUMIERE AMBIANTE\n");
 
-    MemoryManager::initialization();
-    MemoryManager::setIntervalle(255);
+    RerunManager::initialization();
+    RerunManager::setIntervalle(255);
     
     MotorsController::changeLeftDirection(Direction::Forward);
     MotorsController::changeRightDirection(Direction::Forward);
