@@ -2,11 +2,14 @@
 
 uint16_t MemoryManager::address_ = 0;
 Memoire24CXXX MemoryManager::memory = Memoire24CXXX();
-
+State MemoryManager::state_ = State::INERT;
 
 void MemoryManager::initializationRead() {
     MemoryManager::initialization();
     address_ = 0;
+}
+
+void MemoryManager::manageRun() {
 }
 
 void MemoryManager::initialization() {
