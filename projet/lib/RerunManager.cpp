@@ -1,4 +1,7 @@
+#define F_CPU 8000000L
+
 #include "RerunManager.h"
+#include <util/delay.h>
 
 uint16_t RerunManager::address_ = 0;
 Memoire24CXXX RerunManager::memory_ = Memoire24CXXX();
@@ -9,8 +12,12 @@ void RerunManager::manageRerun() {
         case RerunManagerState::INERT:
             break;
         case RerunManagerState::MEMORIZING:
+            writeMemory();
+            PORTA = (1 << DDA0);
             break;
         case RerunManagerState::RERUN:
+            readMemory();
+            PORTA = (1 << DDA1);
             break;
     }
 }
@@ -49,6 +56,7 @@ void RerunManager::stopRerunManagement() {
 void RerunManager::writeMemory() {
     uint8_t storingLeft = (MotorsController::getLeftDirection() << 7) | MotorsController::getLeftPercentage();
     memory_.ecriture(address_++, storingLeft);
+    _delay_ms(1);
     uint8_t storingRight = (MotorsController::getRightDirection() << 7) | MotorsController::getRightPercentage();
     memory_.ecriture(address_++, storingRight);
 }
@@ -58,9 +66,8 @@ void RerunManager::readMemory() {
     memory_.lecture(address_++, &lecture);
     MotorsController::changeLeftDirection(static_cast<Direction>(lecture >> 7));
     MotorsController::setLeftPercentage(lecture & 0x7F);
-
+    _delay_ms(1);
     memory_.lecture(address_++, &lecture);
     MotorsController::changeRightDirection(static_cast<Direction>(lecture >> 7));
     MotorsController::setRightPercentage(lecture & 0x7F);
-
 }

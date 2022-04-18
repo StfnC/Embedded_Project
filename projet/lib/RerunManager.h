@@ -17,12 +17,13 @@ class RerunManager {
         static void stopRerunManagement();
         static void initializationRead();
         static void initialization();
-        static void writeMemory();
-        static void readMemory();
 
     private:
         static const uint8_t TIMER_DURATION = 0xFF;
         static uint16_t address_;
         static Memoire24CXXX memory_;
         static RerunManagerState state_;
+
+        static void readMemory();
+        static void writeMemory();
 };

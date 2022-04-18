@@ -14,7 +14,7 @@ volatile int valeurApresInterruption;
 volatile int counter = 0;
 
 ISR(TIMER2_COMPA_vect) {
-    RerunManager::writeMemory();
+    RerunManager::manageRerun();
 }
 
 void wipeMemory() {
@@ -22,22 +22,19 @@ void wipeMemory() {
 
     for (uint16_t i = 0; i < UINT16_MAX; i++) {
         memory.ecriture(i, 0);
+        _delay_ms(3);
     }
 }
 
 
 int main() {
-    DDRA |= 0x00;
-
     // wipeMemory();
-
-    usart::initialization();
-    // usart::transmitTextMessage("CALIBRATION LUMIERE AMBIANTE\n");
+    DDRA = 0xFF;
     MotorsController::initialization();
-    // LightController::initialization();
-    // usart::transmitTextMessage("\nFIN CALIBRATION LUMIERE AMBIANTE\n");
+    usart::initialization();
 
     RerunManager::initialization();
+    RerunManager::setRerunManagerState(RerunManagerState::MEMORIZING);
     
     MotorsController::changeLeftDirection(Direction::Forward);
     MotorsController::changeRightDirection(Direction::Forward);
@@ -47,5 +44,12 @@ int main() {
     MotorsController::setLeftPercentage(0);
     _delay_ms(500);
     MotorsController::setRightPercentage(0);
+    
+    // _delay_ms(5000);
+    RerunManager::setRerunManagerState(RerunManagerState::RERUN);
+    // Robot should rerun
+    // _delay_ms(5000);
 
+    while (true) {
+    }
 }
