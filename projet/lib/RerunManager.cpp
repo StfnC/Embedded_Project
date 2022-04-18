@@ -13,11 +13,9 @@ void RerunManager::manageRerun() {
             break;
         case RerunManagerState::MEMORIZING:
             writeMemory();
-            PORTA = (1 << DDA0);
             break;
         case RerunManagerState::RERUN:
             readMemory();
-            PORTA = (1 << DDA1);
             break;
     }
 }
@@ -80,6 +78,11 @@ void RerunManager::writeMemory() {
 void RerunManager::readMemory() {
     uint8_t lecture;
     memory_.lecture(address_++, &lecture);
+
+    if (lecture == 0xFF) {
+        stopRerun();
+    }
+    
     MotorsController::changeLeftDirection(static_cast<Direction>(lecture >> 7));
     MotorsController::setLeftPercentage(lecture & 0x7F);
     _delay_ms(1);
@@ -87,7 +90,4 @@ void RerunManager::readMemory() {
     MotorsController::changeRightDirection(static_cast<Direction>(lecture >> 7));
     MotorsController::setRightPercentage(lecture & 0x7F);
 
-    if (lecture == 0xFF) {        
-        stopRerun();
-    }
 }
