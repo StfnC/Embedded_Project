@@ -4,12 +4,14 @@ uint16_t MemoryManager::address_ = 0;
 Memoire24CXXX MemoryManager::memory = Memoire24CXXX();
 State MemoryManager::state_ = State::INERT;
 
-void MemoryManager::initializationRead() {
+void MemoryManager::initializationRead()
+{
     MemoryManager::initialization();
     address_ = 0;
 }
 
-void MemoryManager::manageRun() {
+void MemoryManager::manageRun()
+{
     switch (state_)
     {
     case State::INERT:
@@ -23,7 +25,8 @@ void MemoryManager::manageRun() {
     }
 }
 
-void MemoryManager::initialization() {
+void MemoryManager::initialization()
+{
     usart::initialization();
     cli();
     TCNT2 = 0;
@@ -33,11 +36,24 @@ void MemoryManager::initialization() {
     sei();
 }
 
-void MemoryManager::setIntervalle(uint16_t duration) {
+void MemoryManager::stopManagement() {
+    TCCR2A &= ~(_BV(COM2A1) | _BV(COM2A0));
+    TIMSK2 &= ~(_BV(OCIE2A));
+}
+
+void MemoryManager::setReading() {
+    state_ = State::RERUN;
+    address_ = 0;
+}
+
+
+void MemoryManager::setIntervalle(uint8_t duration)
+{
     OCR2A = duration;
 }
 
-void MemoryManager::writeMemory() {
+void MemoryManager::writeMemory()
+{
     uint8_t storingLeft = (MotorsController::getLeftDirection() << 7) | MotorsController::getLeftPercentage();
     memory.ecriture(address_++, storingLeft);
     // usart::transmitTextMessage("Addr : %d", address_);
@@ -48,7 +64,8 @@ void MemoryManager::writeMemory() {
     // usart::transmitTextMessage("\tValue : %d\n", storingRight);
 }
 
-void MemoryManager::readMemory() {
+void MemoryManager::readMemory()
+{
     uint8_t lecture;
     memory.lecture(address_++, &lecture);
     MotorsController::changeLeftDirection(static_cast<Direction>(lecture >> 7));
@@ -63,5 +80,4 @@ void MemoryManager::readMemory() {
     // usart::transmitTextMessage("\tAddr : %d", address_ >> 8);
     // usart::transmitTextMessage("%d", static_cast<uint8_t>(address_));
     // usart::transmitTextMessage(" Value : %d \n", lecture);
-
 }

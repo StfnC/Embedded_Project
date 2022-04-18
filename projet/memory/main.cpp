@@ -7,6 +7,7 @@
 #include <usart.h>
 #include <MemoryManager.h>
 #include <MotorsController.h>
+#include <memoire_24.h>
 volatile bool gMinuterieExpiree = true;
 volatile int valeurAvantInterruption;
 volatile int valeurApresInterruption;
@@ -21,7 +22,7 @@ ISR(TIMER2_COMPA_vect)
 int main()
 {
     DDRA |= 0x00;
-
+    Memoire24CXXX memory = Memoire24CXXX();
     usart::initialization();
     // usart::transmitTextMessage("CALIBRATION LUMIERE AMBIANTE\n");
     MotorsController::initialization();
@@ -31,15 +32,17 @@ int main()
     MemoryManager::initialization();
     MemoryManager::setIntervalle(255);
 
-    // MotorsController::changeLeftDirection(Direction::Forward);
-    // MotorsController::changeRightDirection(Direction::Forward);
-    // MotorsController::setLeftPercentage(70);
-    // MotorsController::setRightPercentage(70);
-    // _delay_ms(1000);
-    // MotorsController::setLeftPercentage(0);
-    // _delay_ms(500);
-    // MotorsController::setRightPercentage(0);
-
+    MotorsController::changeLeftDirection(Direction::Forward);
+    MotorsController::changeRightDirection(Direction::Forward);
+    MotorsController::setLeftPercentage(70);
+    MotorsController::setRightPercentage(70);
+    _delay_ms(1000);
+    MotorsController::setLeftPercentage(0);
+    _delay_ms(500);
+    MotorsController::setRightPercentage(0);
+    _delay_ms(1000);
+    MemoryManager::setReading();
+    usart::transmitTextMessage("LMAO\n");
     while (true)
         ;
 }

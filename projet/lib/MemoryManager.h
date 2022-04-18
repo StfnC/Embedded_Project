@@ -16,7 +16,9 @@ public:
     static void manageRun();
     static void initializationRead();
     static void initialization();
-    static void setIntervalle(uint16_t duration);
+    static void setIntervalle(uint8_t duration);
+    static void setReading();
+    static void stopManagement();
     static State state_;
     static void readMemory();
     static void writeMemory();
