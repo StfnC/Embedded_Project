@@ -33,6 +33,15 @@ void RerunManager::initialization() {
     sei();
 }
 
+void RerunManager::stopRerunManagement() {
+    cli();
+
+    TCCR2A &= ~((1 << COM2A0) | (1 << COM2A1));
+    OCR2A = 0x0000;
+
+    sei();
+}
+
 void RerunManager::setIntervalle(uint16_t duration) {
     OCR2A = duration;
 }

@@ -14,6 +14,7 @@ class RerunManager {
     public:
         static void manageRerun();
         static void setRerunManagerState(RerunManagerState state);
+        static void stopRerunManagement();
         static void initializationRead();
         static void initialization();
         static void setIntervalle(uint16_t duration);
