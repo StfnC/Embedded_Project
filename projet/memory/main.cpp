@@ -14,10 +14,6 @@ volatile int valeurAvantInterruption;
 volatile int valeurApresInterruption;
 volatile int counter = 0;
 
-ISR(TIMER2_COMPA_vect) {
-    RerunManager::manageRerun();
-}
-
 void wipeMemory() {
     Memoire24CXXX memory;
 
@@ -44,7 +40,7 @@ int main() {
     MotorsController::setLeftPercentage(0);
     _delay_ms(500);
     MotorsController::setRightPercentage(0);
-    
+    RerunManager::stopRegister();
     _delay_ms(1500);
     RerunManager::initializationRead();
     // Robot should rerun

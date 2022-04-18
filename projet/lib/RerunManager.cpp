@@ -34,8 +34,9 @@ void RerunManager::stopRegister(){
 }
 
 void RerunManager::initializationRead() {
-    state_ = RerunManagerState::RERUN;
+    initialization();
     address_ = 0;
+    state_ = RerunManagerState::RERUN;
 }
 
 void RerunManager::initialization() {

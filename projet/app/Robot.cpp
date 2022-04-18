@@ -10,9 +10,14 @@
 #include <WallFollower.h>
 #include <LightController.h>
 #include <ButtonPressDetector.h>
+#include <RerunManager.h>
 
 State Robot::currentState_ = State::INIT;
 led Robot::led_(DDA0, DDA1);
+
+ISR(TIMER2_COMPA_vect) {
+    RerunManager::manageRerun();
+}
 
 void Robot::init() {
     MotorsController::initialization();
@@ -88,17 +93,19 @@ void Robot::manageStateStartRerun() {
         led_.setOff();
         _delay_ms(100);
     }
-
+    RerunManager::initializationRead();
     led_.setOff();
     currentState_ = State::RERUN;
 }
 
 void Robot::manageStateRerun() {
     DEBUG_PRINT_MESSAGE("Current State : RERUN\n");
+    while (RerunManager::getState() != RerunManagerState::INERT);
 }
 
 void Robot::manageStateEndRerun() {
     DEBUG_PRINT_MESSAGE("Current State : END_RERUN\n");
+    RerunManager::stopRerun();
 }
 
 void Robot::manageStateStartAutonomous() {
@@ -117,6 +124,7 @@ void Robot::manageStateStartAutonomous() {
 
 void Robot::manageStateStartMemorizing() {
     DEBUG_PRINT_MESSAGE("Current State : START_MEMORIZING\n");
+    RerunManager::initialization();
     currentState_ = State::FOLLOW_WALL;
 }
 
@@ -158,6 +166,7 @@ void Robot::manageStateFollowLight() {
 
 void Robot::manageStateStopMemorizing() {
     DEBUG_PRINT_MESSAGE("Current State : STOP_MEMORIZING\n");
+    RerunManager::stopRegister();
     currentState_ = State::START_U_TURN;
 }
 
