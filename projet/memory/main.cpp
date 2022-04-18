@@ -44,7 +44,14 @@ int main() {
     MotorsController::setLeftPercentage(0);
     _delay_ms(500);
     MotorsController::setRightPercentage(0);
-    
+    RerunManager::stopRegister();
+
+    MotorsController::setLeftPercentage(100);
+    MotorsController::setRightPercentage(100);
+    _delay_ms(1500);
+    MotorsController::setLeftPercentage(0);
+    MotorsController::setRightPercentage(0);
+    usart::transmitTextMessage("ZUODBFIUB\n");
     _delay_ms(1500);
     RerunManager::initializationRead();
     // Robot should rerun

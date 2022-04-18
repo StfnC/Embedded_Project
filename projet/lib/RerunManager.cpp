@@ -20,12 +20,14 @@ void RerunManager::manageRerun() {
     }
 }
 
+
 void RerunManager::setRerunManagerState(RerunManagerState state) {
     state_ = state;
 }
 
 
 void RerunManager::stopRegister(){
+    stopRerunManagement();
     state_ = RerunManagerState::INERT;
     memory_.ecriture(address_++, 0xFF);
     memory_.ecriture(address_++, 0xFF);
@@ -60,10 +62,10 @@ void RerunManager::stopRerunManagement() {
 }
 
 void RerunManager::stopRerun() {
+    stopRerunManagement();
     state_ = RerunManagerState::INERT;
     MotorsController::setLeftPercentage(0);
     MotorsController::setRightPercentage(0);
-    stopRerunManagement();
 }
 
 

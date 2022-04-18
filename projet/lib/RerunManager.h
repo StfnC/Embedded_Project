@@ -3,6 +3,7 @@
 #include <avr/interrupt.h>
 #include <avr/io.h>
 #include <memoire_24.h>
+#include <usart.h>
 
 enum class RerunManagerState {
     INERT,
@@ -21,6 +22,7 @@ class RerunManager {
         static RerunManagerState getState() { return state_;}
 
     private:
+        static void stopWheels();
         static void stopRerunManagement();
         static void readMemory();
         static void writeMemory();

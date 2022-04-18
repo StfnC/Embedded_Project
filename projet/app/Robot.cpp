@@ -109,7 +109,7 @@ void Robot::manageStateRerun() {
 void Robot::manageStateEndRerun() {
     DEBUG_PRINT_MESSAGE("Current State : END_RERUN\n");
     led_.setGreen();
-    RerunManager::stopRerun();
+    // RerunManager::stopRerun();
 }
 
 void Robot::manageStateStartAutonomous() {
@@ -129,6 +129,7 @@ void Robot::manageStateStartAutonomous() {
 void Robot::manageStateStartMemorizing() {
     DEBUG_PRINT_MESSAGE("Current State : START_MEMORIZING\n");
     RerunManager::initialization();
+    RerunManager::setRerunManagerState(RerunManagerState::MEMORIZING);
     currentState_ = State::FOLLOW_WALL;
 }
 
