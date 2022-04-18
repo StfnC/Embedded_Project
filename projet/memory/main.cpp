@@ -29,7 +29,7 @@ void wipeMemory() {
 int main() {
     DDRA |= 0x00;
 
-    wipeMemory();
+    // wipeMemory();
 
     usart::initialization();
     // usart::transmitTextMessage("CALIBRATION LUMIERE AMBIANTE\n");
@@ -38,7 +38,6 @@ int main() {
     // usart::transmitTextMessage("\nFIN CALIBRATION LUMIERE AMBIANTE\n");
 
     RerunManager::initialization();
-    RerunManager::setIntervalle(255);
     
     MotorsController::changeLeftDirection(Direction::Forward);
     MotorsController::changeRightDirection(Direction::Forward);

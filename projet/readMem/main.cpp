@@ -30,7 +30,7 @@ int main() {
     usart::transmitTextMessage("\nFIN CALIBRATION LUMIERE AMBIANTE\n");
 
     RerunManager::initialization();
-    RerunManager::setIntervalle(255);
+    
     while (counter < INT8_MAX);
     {   
         if (gMinuterieExpiree) {

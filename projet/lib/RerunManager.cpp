@@ -32,6 +32,8 @@ void RerunManager::initialization() {
     TCCR2B |= (1 << CS22) | (1 << CS21) | (1 << CS20);
     TIMSK2 |= (1 << OCIE2A);
 
+    OCR2A = TIMER_DURATION;
+
     sei();
 }
 
@@ -42,10 +44,6 @@ void RerunManager::stopRerunManagement() {
     OCR2A = 0x0000;
 
     sei();
-}
-
-void RerunManager::setIntervalle(uint16_t duration) {
-    OCR2A = duration;
 }
 
 void RerunManager::writeMemory() {
