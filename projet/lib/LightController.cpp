@@ -81,8 +81,8 @@ void LightController::noLightLeft() {
 void LightController::middleLight() {
     MotorsController::changeLeftDirection(Direction::Forward);
     MotorsController::changeRightDirection(Direction::Forward);
-    MotorsController::setLeftPower(min(ocrRight_, UINT16_MAX - DEFAULT_SPEED) + DEFAULT_SPEED);
-    MotorsController::setRightPower(min(ocrLeft_, UINT16_MAX - DEFAULT_SPEED) + DEFAULT_SPEED);
+    MotorsController::setLeftPower(min(ocrRight_, UINT8_MAX - DEFAULT_SPEED) + DEFAULT_SPEED);
+    MotorsController::setRightPower(min(ocrLeft_, UINT8_MAX - DEFAULT_SPEED) + DEFAULT_SPEED);
 }
 
 
