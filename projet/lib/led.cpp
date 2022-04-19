@@ -7,6 +7,10 @@
  *
  */
 
+#ifndef F_CPU
+# define F_CPU 8000000UL
+#endif
+
 #include "led.h"
 
 #include <util/delay.h>
