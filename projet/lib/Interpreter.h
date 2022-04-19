@@ -50,8 +50,6 @@ private:
 
     bool execute_ = false;
 
-    usart transmitter_;
-    MotorsController motorsController_;
     Memoire24CXXX memoire_;
 
     uint8_t loopInstructionNumber_ = 0;
