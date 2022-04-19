@@ -8,7 +8,8 @@
 enum class RerunManagerState {
     INERT,
     MEMORIZING,
-    RERUN
+    RERUN,
+    END_MEMORY
 };
 
 class RerunManager {

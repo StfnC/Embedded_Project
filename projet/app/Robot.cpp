@@ -101,7 +101,7 @@ void Robot::manageStateStartRerun() {
 void Robot::manageStateRerun() {
     DEBUG_PRINT_MESSAGE("Current State : RERUN\n");
     // FIXME: BLOCKING
-    if (RerunManager::getState() == RerunManagerState::INERT) {
+    if (RerunManager::getState() == RerunManagerState::END_MEMORY) {
         currentState_ = State::END_RERUN;
     }
 }
@@ -204,5 +204,10 @@ void Robot::manageStateUTurn() {
 
 void Robot::manageStateEndAutonomous() {
     DEBUG_PRINT_MESSAGE("Current State : END_AUTONOMOUS\n");
-    // FIXME: Make sure that the robot isn't memorizing anymore
+    if (RerunManager::getState() != RerunManagerState::END_MEMORY) {
+        led_.setRed();
+        RerunManager::stopRegister();
+    }
+
+    led_.setGreen();
 }

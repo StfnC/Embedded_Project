@@ -10,6 +10,7 @@ RerunManagerState RerunManager::state_ = RerunManagerState::INERT;
 void RerunManager::manageRerun() {
     switch (state_) {
         case RerunManagerState::INERT:
+        case RerunManagerState::END_MEMORY:
             break;
         case RerunManagerState::MEMORIZING:
             writeMemory();
@@ -26,10 +27,11 @@ void RerunManager::setRerunManagerState(RerunManagerState state) {
 }
 
 
-void RerunManager::stopRegister(){
+void RerunManager::stopRegister() {
+    state_ = RerunManagerState::END_MEMORY;
+
     memory_.ecriture(address_++, 0xFF);
     stopRerunManagement();
-    state_ = RerunManagerState::INERT;
     memory_.ecriture(address_++, 0xFF);
 }
 
@@ -63,7 +65,7 @@ void RerunManager::stopRerunManagement() {
 
 void RerunManager::stopRerun() {
     stopRerunManagement();
-    state_ = RerunManagerState::INERT;
+    state_ = RerunManagerState::END_MEMORY;
     MotorsController::setLeftPercentage(0);
     MotorsController::setRightPercentage(0);
 }
