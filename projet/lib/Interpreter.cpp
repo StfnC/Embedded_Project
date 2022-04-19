@@ -209,21 +209,17 @@ void Interpreter::trg() {  // tourner à gauche
 }
 
 void Interpreter::dbc(uint8_t operand) {  // début de boucle
-    usart::transmit(Operations::dbc);
-
     loopAddress_ = currentAdress_;
     loopInstructionNumber_ = numberInstructions_;
     counter_ = operand + 1;
 }
 
 void Interpreter::fbc() {  // fin de boucle
-    usart::transmit(Operations::fbc);
-
     if (counter_ != 0) {
         currentAdress_ = loopAddress_;
         counter_--;
+        numberInstructions_ = loopInstructionNumber_;
     }
-    numberInstructions_ = loopInstructionNumber_;
 }
 
 void Interpreter::fin() {

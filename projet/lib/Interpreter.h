@@ -52,7 +52,7 @@ private:
 
     Memoire24CXXX memoire_;
 
-    uint8_t loopInstructionNumber_ = 0;
+    uint16_t loopInstructionNumber_ = 0;
     static const uint16_t ROTATION_TIME = 515;
     uint16_t numberInstructions_ = 0;
     uint16_t currentAdress_ = 0;
