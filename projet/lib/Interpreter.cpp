@@ -41,7 +41,8 @@ void Interpreter::readNumberInstructions() {
     numberInstructions_ = static_cast<uint16_t>(firstNumberHalf) << 8;
     uint8_t secondNumberHalf = read8Bits();
     numberInstructions_ |= static_cast<uint16_t>(secondNumberHalf);
-    numberInstructions_ -= 1;
+    numberInstructions_ -= 2;
+    numberInstructions_ /= 2;
 }
 
 void Interpreter::interpreter(uint8_t instruction, uint8_t operand) {
