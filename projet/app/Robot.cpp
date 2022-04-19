@@ -109,6 +109,8 @@ void Robot::manageStateRerun() {
 void Robot::manageStateEndRerun() {
     DEBUG_PRINT_MESSAGE("Current State : END_RERUN\n");
     led_.setGreen();
+    MotorsController::setLeftPercentage(0);
+    MotorsController::setRightPercentage(0);
     // RerunManager::stopRerun();
 }
 

@@ -27,7 +27,7 @@ class RerunManager {
         static void readMemory();
         static void writeMemory();
 
-        static const uint8_t TIMER_DURATION = 0xFF;
+        static const uint8_t TIMER_DURATION = 50;
         static uint16_t address_;
         static Memoire24CXXX memory_;
         static RerunManagerState state_;

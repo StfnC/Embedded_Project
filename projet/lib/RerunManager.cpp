@@ -27,9 +27,9 @@ void RerunManager::setRerunManagerState(RerunManagerState state) {
 
 
 void RerunManager::stopRegister(){
+    memory_.ecriture(address_++, 0xFF);
     stopRerunManagement();
     state_ = RerunManagerState::INERT;
-    memory_.ecriture(address_++, 0xFF);
     memory_.ecriture(address_++, 0xFF);
 }
 
@@ -91,5 +91,7 @@ void RerunManager::readMemory() {
     memory_.lecture(address_++, &lecture);
     MotorsController::changeRightDirection(static_cast<Direction>(lecture >> 7));
     MotorsController::setRightPercentage(lecture & 0x7F);
-
+   if (lecture == 0xFF) {
+        stopRerun();
+    }
 }
