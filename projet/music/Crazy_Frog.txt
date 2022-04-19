@@ -1,0 +1,383 @@
+        dbt;
+        
+        dbc 2;
+
+        sgo 50;
+        att 8;
+        sar;
+        att 8;
+
+        sgo 53;
+        att 6;
+        sar;
+        att 6;
+
+        sgo 50;
+        att 4;
+        sar;
+        att 4;
+
+        sgo 50;
+        att 2;
+        sar;
+        att 2;
+        
+        sgo 55;
+        
+        att 4;
+        sar;
+        att 4;
+
+        sgo 50;
+        att 4;
+        sar;
+        att 4;
+
+        sgo 48;
+        att 4;
+        sar;
+        att 4;
+        
+        // première mesure 
+        
+        sgo 50;
+        att 8;
+        sar;
+        att 8;
+
+        sgo 57;
+        att 6;
+        sar;
+        att 6;
+
+        sgo 50;
+        att 4;
+        sar;
+        att 4;
+
+        sgo 50;
+        att 2;
+        sar;
+        att 2;
+        
+        sgo 59;
+        att 4;
+        sar;
+        att 4;
+
+        sgo 57;
+        att 4;
+        sar;
+        att 4;
+
+        sgo 53;
+        att 4;
+        sar;
+        att 4;
+        
+        // deuxième mesure 
+        
+        sgo 50;
+        att 4;
+        sar;
+        att 4;
+
+        sgo 57;
+        att 4;
+        sar;
+        att 4;
+
+        sgo 62;
+        att 4;
+        sar;
+        att 4;
+
+        sgo 50;
+        att 2;
+        sar;
+        att 2;
+        
+        sgo 48;
+        att 4;
+        sar;
+        att 4;
+
+        sgo 45;
+        att 2;
+        sar;
+        att 2;
+
+        sgo 52;
+        att 4;
+        sar;
+        att 4;
+        
+        sgo 50;
+        att 4;
+        sar;
+        att 4;
+        
+        sgo 50;
+        att 20;
+        sar;
+        att 20;
+        
+        fbc;
+        
+        // fin première ligne
+        
+        dbc 1;
+        
+        sgo 55;
+        att 4;
+        sar;
+        att 4;
+
+        sgo 54;
+        att 4;
+        sar;
+        att 4;
+        
+        sgo 53;
+        att 4;
+        sar;
+        att 4;
+
+        sgo 53;
+        att 4;
+        sar;
+        att 4;
+        
+        sgo 52;
+        att 8;
+        sar;
+        att 8;
+        
+        sgo 52;
+        att 8;
+        sar;
+        att 8;
+        
+        //
+        
+        sgo 55;
+        att 4;
+        sar;
+        att 4;
+
+        sgo 54;
+        att 4;
+        sar;
+        att 4;
+        
+        sgo 53;
+        att 4;
+        sar;
+        att 4;
+
+        sgo 53;
+        att 4;
+        sar;
+        att 4;
+        
+        sgo 52;
+        att 4;
+        sar;
+        att 4;
+        
+        sgo 52;
+        att 4;
+        sar;
+        att 4;
+        
+        sgo 52;
+        att 8;
+        sar;
+        att 8;
+        
+        //
+        
+        sgo 55;
+        att 4;
+        sar;
+        att 4;
+
+        sgo 54;
+        att 4;
+        sar;
+        att 4;
+        
+        sgo 53;
+        att 4;
+        sar;
+        att 4;
+
+        sgo 53;
+        att 4;
+        sar;
+        att 4;
+        
+        sgo 52;
+        att 8;
+        sar;
+        att 8;
+        
+        sgo 52;
+        att 8;
+        sar;
+        att 8;
+        
+        //
+        
+        sgo 55;
+        att 4;
+        sar;
+        att 4;
+
+        sgo 54;
+        att 4;
+        sar;
+        att 4;
+        
+        sgo 53;
+        att 4;
+        sar;
+        att 4;
+
+        sgo 53;
+        att 4;
+        sar;
+        att 4;
+        
+        sgo 50;
+        att 8;
+        sar;
+        att 8;
+        
+        sgo 50;
+        att 8;
+        sar;
+        att 8;
+        
+        fbc;
+        
+        sgo 50;
+        att 8;
+        sar;
+        att 8;
+
+        sgo 53;
+        att 6;
+        sar;
+        att 6;
+
+        sgo 50;
+        att 4;
+        sar;
+        att 4;
+
+        sgo 50;
+        att 2;
+        sar;
+        att 2;
+        
+        sgo 55;
+        att 4;
+        sar;
+        att 4;
+
+        sgo 50;
+        att 4;
+        sar;
+        att 4;
+
+        sgo 48;
+        att 4;
+        sar;
+        att 4;
+        
+        // première mesure 
+        
+        sgo 50;
+        att 8;
+        sar;
+        att 8;
+
+        sgo 57;
+        att 6;
+        sar;
+        att 6;
+
+        sgo 50;
+        att 4;
+        sar;
+        att 4;
+
+        sgo 50;
+        att 2;
+        sar;
+        att 2;
+        
+        sgo 59;
+        att 4;
+        sar;
+        att 4;
+
+        sgo 57;
+        att 4;
+        sar;
+        att 4;
+
+        sgo 53;
+        att 4;
+        sar;
+        att 4;
+        
+        // deuxième mesure 
+        
+        sgo 50;
+        att 4;
+        sar;
+        att 4;
+
+        sgo 57;
+        att 4;
+        sar;
+        att 4;
+
+        sgo 62;
+        att 4;
+        sar;
+        att 4;
+
+        sgo 50;
+        att 2;
+        sar;
+        att 2;
+        
+        sgo 48;
+        att 4;
+        sar;
+        att 4;
+
+        sgo 45;
+        att 2;
+        sar;
+        att 2;
+
+        sgo 52;
+        att 4;
+        sar;
+        att 4;
+        
+        sgo 50;
+        att 4;
+        sar;
+        att 4;
+        
+        sgo 50;
+        att 12;
+        sar;
+        att 12;
+        
+        fin;

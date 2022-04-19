@@ -1,0 +1,369 @@
+        dbt;
+
+        sgo 57;
+        att 4;
+        sar;
+        att 4;
+
+        sgo 62;
+        att 20;
+        sar;
+        att 20;
+
+        sgo 52;
+        att 6;
+        sar;
+        att 6;
+
+        sgo 53;
+        att 2;
+        sar;
+        att 2;
+
+        sgo 53;
+        att 24;
+        sar;
+        att 24;
+
+        sgo 57;
+        att 6;
+        sar;
+        att 6;
+
+        sgo 59;
+        att 2;
+        sar;
+        att 2;
+        
+        sgo 60;
+        att 4;
+        sar;
+        att 4;
+
+        sgo 67;
+        att 20;
+        sar;
+        att 20;
+
+        sgo 59;
+        att 6;
+        sar;
+        att 6;
+
+        sgo 60;
+        att 2;
+        sar;
+        att 2;
+        
+        sgo 62;
+        att 8;
+        sar;
+        att 8;
+        
+        sgo 64;
+        att 8;
+        sar;
+        att 8;
+
+        sgo 65;
+        att 8;
+        sar;
+        att 8;
+
+        sgo 53;
+        att 6;
+        sar;
+        att 6;
+
+        sgo 55;
+        att 2;
+        sar;
+        att 2;
+        
+        sgo 57;
+        att 4;
+        sar;
+        att 4;
+
+        sgo 62;
+        att 20;
+        sar;
+        att 20;
+
+        sgo 64;
+        att 6;
+        sar;
+        att 6;
+
+        sgo 65;
+        att 2;
+        sar;
+        att 2;
+
+        sgo 67;
+        att 24;
+        sar;
+        att 24;
+
+        sgo 57;
+        att 6;
+        sar;
+        att 6;
+
+        sgo 57;
+        att 2;
+        sar;
+        att 2;
+        
+        sgo 65;
+        att 8;
+        sar;
+        att 8;
+
+        sgo 64;
+        att 6;
+        sar;
+        att 6;
+
+        sgo 57;
+        att 2;
+        sar;
+        att 2;
+
+        sgo 65;
+        att 8;
+        sar;
+        att 8;
+
+        sgo 64;
+        att 6;
+        sar;
+        att 6;
+
+        sgo 57;
+        att 2;
+        sar;
+        att 2;
+        
+        // phrase qui se repete
+        
+        sgo 65;
+        att 8;
+        sar;
+        att 8;
+
+        sgo 64;
+        att 6;
+        sar;
+        att 6;
+
+        sgo 57;
+        att 2;
+        sar;
+        att 2;
+
+        sgo 65;
+        att 4;
+        sar;
+        att 4;
+        
+        sgo 64;
+        att 4;
+        sar;
+        att 4;
+
+        sgo 53;
+        att 6;
+        sar;
+        att 6;
+
+        sgo 55;
+        att 2;
+        sar;
+        att 2;
+        
+        // on recommence
+        
+        sgo 57;
+        att 4;
+        sar;
+        att 4;
+
+        sgo 62;
+        att 20;
+        sar;
+        att 20;
+
+        sgo 52;
+        att 6;
+        sar;
+        att 6;
+
+        sgo 53;
+        att 2;
+        sar;
+        att 2;
+
+        sgo 53;
+        att 24;
+        sar;
+        att 24;
+
+        sgo 57;
+        att 6;
+        sar;
+        att 6;
+
+        sgo 59;
+        att 2;
+        sar;
+        att 2;
+        
+        sgo 60;
+        att 4;
+        sar;
+        att 4;
+
+        sgo 67;
+        att 20;
+        sar;
+        att 20;
+
+        sgo 59;
+        att 6;
+        sar;
+        att 6;
+
+        sgo 60;
+        att 2;
+        sar;
+        att 2;
+        
+        sgo 62;
+        att 8;
+        sar;
+        att 8;
+        
+        sgo 64;
+        att 8;
+        sar;
+        att 8;
+
+        sgo 65;
+        att 8;
+        sar;
+        att 8;
+
+        sgo 53;
+        att 6;
+        sar;
+        att 6;
+
+        sgo 55;
+        att 2;
+        sar;
+        att 2;
+        
+        sgo 57;
+        att 4;
+        sar;
+        att 4;
+
+        sgo 62;
+        att 20;
+        sar;
+        att 20;
+
+        sgo 64;
+        att 6;
+        sar;
+        att 6;
+
+        sgo 65;
+        att 2;
+        sar;
+        att 2;
+
+        sgo 67;
+        att 24;
+        sar;
+        att 24;
+
+        sgo 57;
+        att 6;
+        sar;
+        att 6;
+
+        sgo 57;
+        att 2;
+        sar;
+        att 2;
+        
+        sgo 65;
+        att 8;
+        sar;
+        att 8;
+
+        sgo 64;
+        att 6;
+        sar;
+        att 6;
+
+        sgo 57;
+        att 2;
+        sar;
+        att 2;
+
+        sgo 65;
+        att 8;
+        sar;
+        att 8;
+
+        sgo 64;
+        att 6;
+        sar;
+        att 6;
+
+        sgo 57;
+        att 2;
+        sar;
+        att 2;
+        
+        // deuxieme changement
+        
+        sgo 65;
+        att 8;
+        sar;
+        att 8;
+
+        sgo 64;
+        att 6;
+        sar;
+        att 6;
+
+        sgo 57;
+        att 2;
+        sar;
+        att 2;
+
+        sgo 65;
+        att 4;
+        sar;
+        att 4;
+        
+        sgo 64;
+        att 4;
+        sar;
+        att 4;
+
+        sgo 53;
+        att 6;
+        sar;
+        att 6;
+
+        sgo 58;
+        att 2;
+        sar;
+        att 2;
+        
+        fin;
