@@ -4,7 +4,7 @@
 
 const uint8_t WallFollower::FOLLOWING_DISTANCE_THRESHOLD = 20;
 const uint8_t WallFollower::FOLLOWING_DISTANCE_ERROR = 1;
-const uint8_t WallFollower::NO_WALL_THRESHOLD = 50;
+const uint8_t WallFollower::NO_WALL_THRESHOLD = 40;
 const uint8_t WallFollower::BASE_SPEED = 40;
 
 uint8_t WallFollower::distance_;

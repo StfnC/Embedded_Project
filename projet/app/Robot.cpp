@@ -166,7 +166,7 @@ void Robot::manageStateFollowLight() {
     DEBUG_PRINT_MESSAGE_WITH_VALUE("Distance : %d\n", distance);
 
     // FIXME:-Create constant for when robot is close to wall (10 cm?)
-    if (distance < 10) {
+    if (distance < 15) {
         currentState_ = State::FOLLOW_WALL;
     }   
 }
@@ -192,9 +192,13 @@ void Robot::manageStateUTurn() {
     MotorsController::setLeftPercentage(80);
     MotorsController::setRightPercentage(80);
     _delay_ms(400);
-    MotorsController::setRightPercentage(60);
-    _delay_ms(6000);
-    led_.setOff();
+    MotorsController::setRightPercentage(55);
+    _delay_ms(3000);
+    // FIXME: Constant
+    while (DistanceSensor::getDistanceCm() > 30);
+    
+
+    led_.setOff();;
 
     // FIXME: Maybe should be Follow_Light?
     currentState_ = State::FOLLOW_WALL;
