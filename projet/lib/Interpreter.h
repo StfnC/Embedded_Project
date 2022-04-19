@@ -48,12 +48,13 @@ private:
     void fbc();
     void fin();
 
+    static const uint16_t ROTATION_TIME = 515;
+    
     bool execute_ = false;
 
     Memoire24CXXX memoire_;
 
     uint16_t loopInstructionNumber_ = 0;
-    static const uint16_t ROTATION_TIME = 515;
     uint16_t numberInstructions_ = 0;
     uint16_t currentAdress_ = 0;
     uint16_t loopAddress_ = 0;
