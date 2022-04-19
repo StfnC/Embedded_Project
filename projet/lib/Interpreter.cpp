@@ -14,7 +14,7 @@ memoire_() {
 }
 
 uint8_t Interpreter::read8Bits() {
-    uint8_t* numberPtr;
+    uint8_t* numberPtr = nullptr;
     memoire_.lecture(currentAdress_, numberPtr);
     currentAdress_++;
     return *numberPtr;
