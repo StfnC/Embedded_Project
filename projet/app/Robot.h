@@ -2,6 +2,17 @@
 
 #include <avr/io.h>
 #include <led.h>
+#include <debug.h>
+#include <util/delay.h>
+
+#include <MotorsController.h>
+#include <DistanceSensor.h>
+#include <WallFollower.h>
+#include <LightController.h>
+#include <ButtonPressDetector.h>
+#include <RerunManager.h>
+#include <SystemTimer.h>
+#include <RerunManager.h>
 
 #include "State.h"
 

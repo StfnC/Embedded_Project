@@ -2,20 +2,13 @@
 
 #include "Robot.h"
 
-#include <debug.h>
-#include <util/delay.h>
-
-#include <MotorsController.h>
-#include <DistanceSensor.h>
-#include <WallFollower.h>
-#include <LightController.h>
-#include <ButtonPressDetector.h>
-#include <RerunManager.h>
-
 State Robot::currentState_ = State::INIT;
 led Robot::led_(DDA0, DDA1);
 
 void Robot::init() {
+    SystemTimer::init();
+    SystemTimer::start();
+    RerunManager::initialization();
     MotorsController::initialization();
     DistanceSensor::initialization();
     LightController::initialization();
@@ -24,6 +17,7 @@ void Robot::init() {
 
 void Robot::run() {
     manageStateMachine();
+    RerunManager::manageRerun();
 }
 
 void Robot::manageStateMachine() {
