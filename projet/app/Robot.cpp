@@ -83,7 +83,6 @@ void Robot::manageStateInit() {
 
 void Robot::manageStateStartRerun() {
     DEBUG_PRINT_MESSAGE("Current State : START_RERUN\n");
-    // FIXME: -Maybe use a timer instead
     for (uint8_t i = 0; i < NB_ITER_FOR_THREE_SECONDS_AT_FIVE_HZ; i++) {
         led_.setRed();
         _delay_ms(BLINKING_DELAY_FOR_FIVE_HERZTZ);
@@ -187,7 +186,6 @@ void Robot::manageStateUTurn() {
     
     led_.setOff();;
 
-    // FIXME: Maybe should be Follow_Light?
     currentState_ = State::FOLLOW_WALL;
 }
 
