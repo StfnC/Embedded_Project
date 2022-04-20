@@ -70,7 +70,7 @@ void BuzzerController::initBuzzer() {
 }
 
 void BuzzerController::playNote(uint8_t note) {
-    TCCR1A |= _BV(COM1A0);
+    TCCR1A |= (1 << COM1A0);
 
     OCR1A = OCR_VALUES[note - FIRST_NOTE];
 
@@ -78,6 +78,6 @@ void BuzzerController::playNote(uint8_t note) {
 }
 
 void BuzzerController::stopNote() {
-    TCCR1A &= ~(_BV(COM1A0) | _BV(COM1A1));
+    TCCR1A &= ~((1 << COM1A0) | _(1 << COM1A1));
     OCR1A = 0x0000;
 }
