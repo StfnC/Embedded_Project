@@ -1,3 +1,17 @@
+/**
+ * Implementation of the methods of ConcurrentMusicPlayer Class
+ * 
+ * \file ConcurrentMusicPlayer.cpp
+ * \author Lina Belloui, Stefan Cotargasanu, Faneva Rakotoarivony and Justine Sauquet
+ * \date April 20th 2022
+ * 
+ * PINOUT:
+ *  Input:
+ * 
+ *  Output:
+ * 
+ */
+
 #include "ConcurrentMusicPlayer.h"
 
 Memoire24CXXX ConcurrentMusicPlayer::memory_;

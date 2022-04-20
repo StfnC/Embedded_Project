@@ -1,3 +1,20 @@
+/**
+ * Implementation of DistanceCensor class methods
+ * 
+ * \file DistanceSensor.cpp
+ * \author Lina Belloui, Stefan Cotargasanu, Faneva Rakotoarivony and Justine Sauquet
+ * \date April 20th 2022
+ * 
+ * PINOUT:
+ *  Input:
+ *      DistanceSensor:
+ *          -A2
+ *          -A2
+ *  Output:
+ * 
+ */
+
+
 #include "DistanceSensor.h"
 
 #include <math.h>

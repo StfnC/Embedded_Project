@@ -1,3 +1,18 @@
+/**
+ * Definition of DistanceCensor class methods
+ * 
+ * \file DistanceSensor.h
+ * \author Lina Belloui, Stefan Cotargasanu, Faneva Rakotoarivony and Justine Sauquet
+ * \date April 20th 2022
+ * 
+ * PINOUT:
+ *  Input:
+ *      DistanceSensor:
+ *          -A2
+ * 
+ *  Output:
+ * 
+ */
 #pragma once
 
 #include <avr/io.h>
