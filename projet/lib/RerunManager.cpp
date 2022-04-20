@@ -1,6 +1,7 @@
 #define F_CPU 8000000L
 
 #include "RerunManager.h"
+
 #include <util/delay.h>
 
 uint16_t RerunManager::address_ = 0;
@@ -11,7 +12,7 @@ uint32_t RerunManager::lastMemoryAccess_ = 0;
 void RerunManager::manageRerun() {
     if (SystemTimer::getTimer() >= lastMemoryAccess_ + MEMORY_ACCESS_INTERVAL) {
         lastMemoryAccess_ = SystemTimer::getTimer();
-        
+
         switch (state_) {
             case RerunManagerState::INERT:
             case RerunManagerState::END_MEMORY:
@@ -25,7 +26,6 @@ void RerunManager::manageRerun() {
         }
     }
 }
-
 
 void RerunManager::setRerunManagerState(RerunManagerState state) {
     state_ = state;
@@ -50,7 +50,6 @@ void RerunManager::stopRerun() {
     MotorsController::setRightPercentage(0);
 }
 
-
 void RerunManager::writeMemory() {
     uint8_t storingLeft = (MotorsController::getLeftDirection() << VALUE_FOR_SHIFT_EIGHTH_BIT) | MotorsController::getLeftPercentage();
     memory_.ecriture(address_++, storingLeft);
@@ -66,14 +65,14 @@ void RerunManager::readMemory() {
     if (lecture == UINT8_MAX) {
         stopRerun();
     }
-    
+
     MotorsController::changeLeftDirection(static_cast<Direction>(lecture >> VALUE_FOR_SHIFT_EIGHTH_BIT));
     MotorsController::setLeftPercentage(lecture & SEVEN_FIRST_BITS_MASK);
     _delay_ms(1);
     memory_.lecture(address_++, &lecture);
     MotorsController::changeRightDirection(static_cast<Direction>(lecture >> 7));
     MotorsController::setRightPercentage(lecture & SEVEN_FIRST_BITS_MASK);
-   if (lecture == UINT8_MAX) {
+    if (lecture == UINT8_MAX) {
         stopRerun();
     }
 }
