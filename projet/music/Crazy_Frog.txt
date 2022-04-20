@@ -1,6 +1,6 @@
         dbt;
         
-        dbc 2;
+        dbc 1;
 
         sgo 50;
         att 8;
@@ -60,7 +60,7 @@
         sar;
         att 2;
         
-        sgo 59;
+        sgo 58;
         att 4;
         sar;
         att 4;
@@ -118,9 +118,9 @@
         att 4;
         
         sgo 50;
-        att 20;
+        att 32;
         sar;
-        att 20;
+        att 32;
         
         fbc;
         
@@ -318,7 +318,7 @@
         sar;
         att 2;
         
-        sgo 59;
+        sgo 58;
         att 4;
         sar;
         att 4;
@@ -376,8 +376,8 @@
         att 4;
         
         sgo 50;
-        att 12;
+        att 20;
         sar;
-        att 12;
+        att 20;
         
         fin;
