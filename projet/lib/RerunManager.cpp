@@ -34,8 +34,8 @@ void RerunManager::setRerunManagerState(RerunManagerState state) {
 void RerunManager::stopRegister() {
     state_ = RerunManagerState::END_MEMORY;
 
-    memory_.ecriture(address_++, UINT8_MAX);
-    memory_.ecriture(address_++, UINT8_MAX);
+    memory_.ecriture(address_++, END_OF_RERUN_MARKER);
+    memory_.ecriture(address_++, END_OF_RERUN_MARKER);
 }
 
 void RerunManager::initializationRead() {
@@ -62,7 +62,7 @@ void RerunManager::readMemory() {
     uint8_t lecture;
     memory_.lecture(address_++, &lecture);
 
-    if (lecture == UINT8_MAX) {
+    if (lecture == END_OF_RERUN_MARKER) {
         stopRerun();
     }
 
@@ -72,7 +72,8 @@ void RerunManager::readMemory() {
     memory_.lecture(address_++, &lecture);
     MotorsController::changeRightDirection(static_cast<Direction>(lecture >> 7));
     MotorsController::setRightPercentage(lecture & SEVEN_FIRST_BITS_MASK);
-    if (lecture == UINT8_MAX) {
+    
+    if (lecture == END_OF_RERUN_MARKER) {
         stopRerun();
     }
 }
