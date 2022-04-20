@@ -74,12 +74,10 @@ void Robot::manageStateMachine() {
 void Robot::manageStateInit() {
     DEBUG_PRINT_MESSAGE("Current State : INIT\n");
     
-    if (ButtonPressDetector::wasSmallButtonPressed()) {
+    if (ButtonPressDetector::isSmallButtonPressed()) {
         currentState_ = State::START_AUTONOMOUS;
-        ButtonPressDetector::reset();
-    } else if (ButtonPressDetector::wasBreadButtonPressed()) {
+    } else if (ButtonPressDetector::isBreadButtonPressed()) {
         currentState_ = State::START_RERUN;
-        ButtonPressDetector::reset();
     }
 }
 
@@ -142,15 +140,13 @@ void Robot::manageStateFollowWall() {
 
 void Robot::manageStateFollowLight() {
     DEBUG_PRINT_MESSAGE("Current State : FOLLOW_LIGHT\n");
-    if (ButtonPressDetector::wasSmallButtonPressed()) {
+    if (ButtonPressDetector::isSmallButtonPressed()) {
         currentState_ = State::END_AUTONOMOUS;
-        ButtonPressDetector::reset();
         return;
     }
     
-    if (ButtonPressDetector::wasBreadButtonPressed()) {
+    if (ButtonPressDetector::isBreadButtonPressed()) {
         currentState_ = State::STOP_MEMORIZING;
-        ButtonPressDetector::reset();
         return;
     }    
 
@@ -189,7 +185,6 @@ void Robot::manageStateUTurn() {
     _delay_ms(UTURN_TURNING_DELAY);
     while (DistanceSensor::getDistanceCm() > HIGH_WALL_DETECTION_LIMIT);
     
-
     led_.setOff();;
 
     // FIXME: Maybe should be Follow_Light?
