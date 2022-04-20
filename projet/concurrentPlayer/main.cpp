@@ -1,9 +1,11 @@
-#define F_CPU 8000000L
+#ifndef F_CPU
+# define F_CPU 8000000UL
+#endif
 
 #include <avr/interrupt.h>
 #include <debug.h>
 #include <SystemTimer.h>
-#include <led.h>
+#include <ConcurrentMusicPlayer.h>
 #include <util/delay.h>
 
 ISR(TIMER2_COMPA_vect) {
@@ -12,17 +14,7 @@ ISR(TIMER2_COMPA_vect) {
 
 int main() {
     DEBUG_INIT;
-    led led(DDA0, DDA1);
-    SystemTimer::init();
-    SystemTimer::start();
-
-    while (true) {
-        if (SystemTimer::getTimer() % 2000 == 0) {
-            led.setGreen();
-        } else if (SystemTimer::getTimer() % 2000 == 1000) {
-            led.setRed();
-        }
-    }
-
+    BuzzerController::initBuzzer();
+    ConcurrentMusicPlayer::interpretCode();
     return 0;
 }
