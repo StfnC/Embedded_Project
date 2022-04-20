@@ -6,9 +6,14 @@
         att 4;
 
         sgo 62;
-        att 20;
+        att 16;
         sar;
-        att 20;
+        att 16;
+
+        sgo 62;
+        att 4;
+        sar;
+        att 4;
 
         sgo 52;
         att 6;
@@ -190,9 +195,14 @@
         att 4;
 
         sgo 62;
-        att 20;
+        att 16;
         sar;
-        att 20;
+        att 16;
+
+        sgo 62;
+        att 4;
+        sar;
+        att 4;
 
         sgo 52;
         att 6;
@@ -361,9 +371,10 @@
         sar;
         att 6;
 
-        sgo 58;
-        att 2;
+        sgo 57;
+        att 12;
         sar;
-        att 2;
+        att 12;
         
         fin;
+        

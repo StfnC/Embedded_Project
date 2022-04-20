@@ -6,7 +6,9 @@
 
 #include "Robot.h"
 
-
+ISR(TIMER2_COMPA_vect) {
+    SystemTimer::incrementTimer();
+}
 
 int main() {
     DEBUG_INIT;

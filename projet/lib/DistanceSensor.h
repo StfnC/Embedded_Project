@@ -12,6 +12,9 @@ class DistanceSensor {
         static void calibrate();
         static uint8_t getAnalogReading();
 
-        static const uint8_t PIN_;
+
+        static constexpr double INTERCEPT = 10.03;
+        static constexpr double A_COEFFICENT = 1.6;
+        static const uint8_t PIN_ = 2;
         static can can_;
 };
