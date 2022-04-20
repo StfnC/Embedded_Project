@@ -1,3 +1,13 @@
+/**
+ * 
+ * Define the Robot state enum
+ * 
+ * \file State.h
+ * \author Lina Belloui, Stefan Cotargasanu, Faneva Rakotoarivony and Justine Sauquet
+ * \date April 20th 2022
+ * 
+ */
+
 enum class State {
     INIT,
     START_RERUN,

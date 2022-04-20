@@ -1,3 +1,16 @@
+/**
+ * Definition of DistanceCensor class methods
+ * 
+ * \file RerunManager.cpp
+ * \author Lina Belloui, Stefan Cotargasanu, Faneva Rakotoarivony and Justine Sauquet
+ * \date April 20th 2022
+ * 
+ * PINOUT:
+ *  Input:
+ *
+ *  Output:
+ * 
+ */
 #pragma once
 
 #include <MotorsController.h>

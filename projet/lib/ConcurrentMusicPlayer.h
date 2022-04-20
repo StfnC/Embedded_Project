@@ -1,3 +1,18 @@
+/**
+ * Definition of the methods of ConcurrentMusicPlayer Class
+ * 
+ * \file ConcurrentMusicPlayer.h
+ * \author Lina Belloui, Stefan Cotargasanu, Faneva Rakotoarivony and Justine Sauquet
+ * \date April 20th 2022
+ * 
+ * PINOUT:
+ *  Input:
+ * 
+ *  Output:
+ * 
+ */
+
+
 #pragma once
 
 #include <avr/io.h>

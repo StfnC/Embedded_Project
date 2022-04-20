@@ -1,3 +1,20 @@
+/**
+ * 
+ * Implementation of the RobotProgramDownloader class
+ * 
+ * \file WallFollower.cpp
+ * \author Lina Belloui, Stefan Cotargasanu, Faneva Rakotoarivony and Justine Sauquet
+ * \date April 20th 2022
+ * 
+ * PINOUT:
+ *  Input:
+ *      DistanceSensor:
+ *          -A2
+ *  Output:
+ * 
+ */
+
+
 #include "WallFollower.h"
 
 uint8_t WallFollower::distance_;
