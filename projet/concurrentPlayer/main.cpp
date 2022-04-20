@@ -13,12 +13,10 @@ int main() {
     DEBUG_INIT;
     SystemTimer::init();
     BuzzerController::initBuzzer();
-    ConcurrentMusicPlayer::init(MusicTrack::FIRST_TRACK);
+    ConcurrentMusicPlayer::init(MusicTrack::SECOND_TRACK);
 
     while (true) {
-        if (SystemTimer::getTimer() > 10000) {
-            ConcurrentMusicPlayer::setTrackPlayingStatus(true);
-        }
+        ConcurrentMusicPlayer::setTrackPlayingStatus(true);
         
         ConcurrentMusicPlayer::playMusic();
     }

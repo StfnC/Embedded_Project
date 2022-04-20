@@ -13,11 +13,13 @@
 class RobotProgramDownloader {
     public:
         RobotProgramDownloader();
+        RobotProgramDownloader(uint16_t startingAddress);
 
         void acceptProgramData();
     private:
         Memoire24CXXX memory_;
         uint16_t totalBytes_;
+        uint16_t startingAddress_;
 
         void writeTotalBytes();
         void writeProgramToMemory();
