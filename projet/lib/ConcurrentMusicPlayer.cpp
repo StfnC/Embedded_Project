@@ -1,7 +1,6 @@
 #include "ConcurrentMusicPlayer.h"
 
 Memoire24CXXX ConcurrentMusicPlayer::memory_;
-bool ConcurrentMusicPlayer::execute_ = false;
 uint16_t ConcurrentMusicPlayer::loopInstructionNumber_ = 0;
 uint16_t ConcurrentMusicPlayer::numberInstructions_ = 0;
 uint16_t ConcurrentMusicPlayer::currentAdress_ = 0;
@@ -43,43 +42,40 @@ void ConcurrentMusicPlayer::readNumberInstructions() {
 }
 
 void ConcurrentMusicPlayer::interpreter(uint8_t instruction, uint8_t operand) {
-    if (execute_ || instruction == Operations::dbt) {
-        switch (instruction) {
-            case Operations::dbt:
-                dbt();
-                break;
+    switch (instruction) {
+        case Operations::dbt:
+            dbt();
+            break;
 
-            case Operations::att:
-                att(operand);
-                break;
+        case Operations::att:
+            att(operand);
+            break;
 
-            case Operations::sgo:
-                sgo(operand);
-                break;
+        case Operations::sgo:
+            sgo(operand);
+            break;
 
-            case Operations::sar:
-                sar();
-                break;
+        case Operations::sar:
+            sar();
+            break;
 
-            case Operations::dbc:
-                dbc(operand);
-                break;
+        case Operations::dbc:
+            dbc(operand);
+            break;
 
-            case Operations::fbc:
-                fbc();
-                break;
+        case Operations::fbc:
+            fbc();
+            break;
 
-            case Operations::fin:
-                fin();
-                break;
-            default:
-                break;
-        }
+        case Operations::fin:
+            fin();
+            break;
+        default:
+            break;
     }
 }
 
 void ConcurrentMusicPlayer::dbt() {
-    execute_ = true;
 }
 
 void ConcurrentMusicPlayer::att(uint8_t operand) {
@@ -109,7 +105,7 @@ void ConcurrentMusicPlayer::fbc() {  // fin de boucle
 }
 
 void ConcurrentMusicPlayer::fin() {
-    execute_ = false;
+    currentAdress_ -= (2 * numberInstructions_);
 }
 
 bool ConcurrentMusicPlayer::canPlay() {

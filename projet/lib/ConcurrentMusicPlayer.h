@@ -30,8 +30,6 @@ class ConcurrentMusicPlayer {
 
         static const uint32_t DELAY_MS = 25;
 
-        static bool execute_;
-
         static Memoire24CXXX memory_;
 
         static uint16_t loopInstructionNumber_;
