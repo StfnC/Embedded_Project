@@ -1,16 +1,17 @@
 #pragma once
 
 #include <avr/io.h>
-#include <util/delay.h>
 
 #include "BuzzerController.h"
 #include "memoire_24.h"
 #include "operations.h"
 #include "usart.h"
+#include "SystemTimer.h"
 
 class ConcurrentMusicPlayer {
     public:
-        static void interpretCode();
+        static void init();
+        static void playMusic();
         
     private:
         static uint8_t read8Bits();
@@ -25,8 +26,9 @@ class ConcurrentMusicPlayer {
         static void dbc(uint8_t operand);
         static void fbc();
         static void fin();
+        static bool canPlay();
 
-        static const uint16_t ROTATION_TIME = 515;
+        static const uint32_t DELAY_MS = 25;
 
         static bool execute_;
 
@@ -37,4 +39,5 @@ class ConcurrentMusicPlayer {
         static uint16_t currentAdress_;
         static uint16_t loopAddress_;
         static uint8_t counter_;
+        static uint32_t afterWaitTime_;
 };

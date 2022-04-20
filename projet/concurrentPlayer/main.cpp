@@ -1,6 +1,4 @@
-#ifndef F_CPU
-# define F_CPU 8000000UL
-#endif
+#define F_CPU 8000000UL
 
 #include <avr/interrupt.h>
 #include <debug.h>
@@ -14,7 +12,13 @@ ISR(TIMER2_COMPA_vect) {
 
 int main() {
     DEBUG_INIT;
+    SystemTimer::init();
     BuzzerController::initBuzzer();
-    ConcurrentMusicPlayer::interpretCode();
+    ConcurrentMusicPlayer::init();
+
+    while (true) {
+        ConcurrentMusicPlayer::playMusic();
+    }
+    
     return 0;
 }

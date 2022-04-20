@@ -8,7 +8,7 @@ class SystemTimer {
         static void start();
         static void stop();
         static void incrementTimer();
-        static inline uint16_t getTimer() {
+        static inline uint32_t getTimer() {
             return timerCount_;
         }
 

@@ -1,7 +1,3 @@
-#ifndef F_CPU
-# define F_CPU 8000000UL
-#endif
-
 #include "ConcurrentMusicPlayer.h"
 
 Memoire24CXXX ConcurrentMusicPlayer::memory_;
@@ -11,6 +7,12 @@ uint16_t ConcurrentMusicPlayer::numberInstructions_ = 0;
 uint16_t ConcurrentMusicPlayer::currentAdress_ = 0;
 uint16_t ConcurrentMusicPlayer::loopAddress_ = 0;
 uint8_t ConcurrentMusicPlayer::counter_ = 0;
+uint32_t ConcurrentMusicPlayer::afterWaitTime_ = 0;
+
+void ConcurrentMusicPlayer::init() {
+    afterWaitTime_ = SystemTimer::getTimer();
+    readNumberInstructions();
+}
 
 uint8_t ConcurrentMusicPlayer::read8Bits() {
     uint8_t* numberPtr = nullptr;
@@ -19,18 +21,16 @@ uint8_t ConcurrentMusicPlayer::read8Bits() {
     return *numberPtr;
 }
 
-void ConcurrentMusicPlayer::interpretCode() {
-    readNumberInstructions();
-
-    for (; numberInstructions_ > 0; numberInstructions_--) {
-        interpretLine();
-    }
+void ConcurrentMusicPlayer::playMusic() {
+    interpretLine();
 }
 
 void ConcurrentMusicPlayer::interpretLine() {
-    uint8_t operation = read8Bits();
-    uint8_t operand = read8Bits();
-    interpreter(operation, operand);
+    if (canPlay()) {
+        uint8_t operation = read8Bits();
+        uint8_t operand = read8Bits();
+        interpreter(operation, operand);
+    }
 }
 
 void ConcurrentMusicPlayer::readNumberInstructions() {
@@ -83,9 +83,7 @@ void ConcurrentMusicPlayer::dbt() {
 }
 
 void ConcurrentMusicPlayer::att(uint8_t operand) {
-    for (uint8_t i = 0; i < operand; i++) {
-        _delay_ms(25);
-    }
+    afterWaitTime_ = SystemTimer::getTimer() + operand * DELAY_MS;
 }
 
 void ConcurrentMusicPlayer::sgo(uint8_t operand) {  // jouer une sonorité
@@ -112,4 +110,8 @@ void ConcurrentMusicPlayer::fbc() {  // fin de boucle
 
 void ConcurrentMusicPlayer::fin() {
     execute_ = false;
+}
+
+bool ConcurrentMusicPlayer::canPlay() {
+    return SystemTimer::getTimer() >= afterWaitTime_;
 }
