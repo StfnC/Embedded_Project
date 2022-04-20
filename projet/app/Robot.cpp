@@ -8,7 +8,6 @@ led Robot::led_(DDA0, DDA1);
 void Robot::init() {
     SystemTimer::init();
     SystemTimer::start();
-    RerunManager::initialization();
     MotorsController::initialization();
     DistanceSensor::initialization();
     LightController::initialization();
@@ -125,7 +124,6 @@ void Robot::manageStateStartAutonomous() {
 
 void Robot::manageStateStartMemorizing() {
     DEBUG_PRINT_MESSAGE("Current State : START_MEMORIZING\n");
-    RerunManager::initialization();
     RerunManager::setRerunManagerState(RerunManagerState::MEMORIZING);
     currentState_ = State::FOLLOW_WALL;
 }

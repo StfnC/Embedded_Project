@@ -1,9 +1,8 @@
 #pragma once
+
 #include <MotorsController.h>
-#include <avr/interrupt.h>
 #include <avr/io.h>
 #include <memoire_24.h>
-#include <usart.h>
 #include <SystemTimer.h>
 
 enum class RerunManagerState {
@@ -18,14 +17,11 @@ class RerunManager {
         static void manageRerun();
         static void setRerunManagerState(RerunManagerState state);
         static void initializationRead();
-        static void initialization();
         static void stopRegister();
         static void stopRerun();
         static RerunManagerState getState() { return state_;}
 
     private:
-        static void stopWheels();
-        static void stopRerunManagement();
         static void readMemory();
         static void writeMemory();
 

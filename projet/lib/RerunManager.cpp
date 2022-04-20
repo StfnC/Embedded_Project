@@ -31,46 +31,21 @@ void RerunManager::setRerunManagerState(RerunManagerState state) {
     state_ = state;
 }
 
-
 void RerunManager::stopRegister() {
     state_ = RerunManagerState::END_MEMORY;
 
     memory_.ecriture(address_++, UINT8_MAX);
-    stopRerunManagement();
     memory_.ecriture(address_++, UINT8_MAX);
 }
 
 void RerunManager::initializationRead() {
-    initialization();
     address_ = 0;
     state_ = RerunManagerState::RERUN;
 }
 
-void RerunManager::initialization() {
-    // cli();
-
-    // TCNT2 = 0;
-    // TCCR2A |= (1 << COM2A1) | (1 << COM2A0);
-    // TCCR2B |= (1 << CS22) | (1 << CS21) | (1 << CS20);
-    // TIMSK2 |= (1 << OCIE2A);
-
-    // OCR2A = MEMORY_ACCESS_INTERVAL;
-
-    // sei();
-}
-
-void RerunManager::stopRerunManagement() {
-    // cli();
-
-    // TCCR2A &= ~((1 << COM2A0) | (1 << COM2A1));
-    // OCR2A = 0x0000;
-    // TIMSK2 &= ~(_BV(OCIE2A));
-    // sei();
-}
-
 void RerunManager::stopRerun() {
-    stopRerunManagement();
     state_ = RerunManagerState::END_MEMORY;
+
     MotorsController::setLeftPercentage(0);
     MotorsController::setRightPercentage(0);
 }
