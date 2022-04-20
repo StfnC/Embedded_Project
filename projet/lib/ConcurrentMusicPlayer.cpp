@@ -3,7 +3,7 @@
 Memoire24CXXX ConcurrentMusicPlayer::memory_;
 uint16_t ConcurrentMusicPlayer::loopInstructionNumber_ = 0;
 uint16_t ConcurrentMusicPlayer::numberInstructions_ = 0;
-uint16_t ConcurrentMusicPlayer::currentAdress_ = 0;
+uint16_t ConcurrentMusicPlayer::currentAdress_ = music::START_OF_MUSIC_ADDRESS;
 uint16_t ConcurrentMusicPlayer::loopAddress_ = 0;
 uint8_t ConcurrentMusicPlayer::counter_ = 0;
 uint32_t ConcurrentMusicPlayer::afterWaitTime_ = 0;

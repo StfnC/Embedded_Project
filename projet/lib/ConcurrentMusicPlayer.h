@@ -7,6 +7,7 @@
 #include "operations.h"
 #include "usart.h"
 #include "SystemTimer.h"
+#include "musicPlayerConstants.h"
 
 class ConcurrentMusicPlayer {
     public:
