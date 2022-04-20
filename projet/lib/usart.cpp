@@ -65,7 +65,6 @@ void usart::transmitTextMessage(const char message[]) {
 }
 
 void usart::transmitTextMessage(const char message[], uint8_t value) {
-    // FIXME: Maybe move the sprintf related code in a method
     char buffer[DEFAULT_MESSAGE_BUFFER_SIZE];
 
     int messageLength;

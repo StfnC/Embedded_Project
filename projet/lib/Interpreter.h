@@ -49,7 +49,12 @@ private:
     void fin();
 
     static const uint16_t ROTATION_TIME = 515;
-    
+    static const uint8_t BIT_SHIFT_FOR_UINT8_CONVERSION = 8;
+    static const uint8_t N_BYTES_FOR_PROGRAM_SIZE = 2;
+    static const uint8_t TWENTY_FIVE_SECOND_DELAY = 25;
+    static const uint8_t TWENTY_SECOND_DELAY = 20;
+    static const uint8_t HUNDRED_PERCENT = 100;
+
     bool execute_ = false;
 
     Memoire24CXXX memoire_;

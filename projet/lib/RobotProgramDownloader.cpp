@@ -30,7 +30,7 @@ void RobotProgramDownloader::writeTotalBytes() {
     uint16_t firstByteOfNumberOfBytes = static_cast<uint16_t>(usart::receive());
     uint16_t secondByteOfNumberOfBytes = static_cast<uint16_t>(usart::receive());
 
-    totalBytes_ |= firstByteOfNumberOfBytes << 0x08 | secondByteOfNumberOfBytes;
+    totalBytes_ |= firstByteOfNumberOfBytes << VALUE_TO_SHIFT_EIGHT_FIRST_BITS | secondByteOfNumberOfBytes;
 
     memory_.ecriture(startingAddress_, static_cast<const uint8_t>(totalBytes_ >> 0x08));
     _delay_ms(5);
@@ -41,7 +41,7 @@ void RobotProgramDownloader::writeTotalBytes() {
 void RobotProgramDownloader::writeProgramToMemory() {
     uint8_t dataBuffer;
 
-    for (uint16_t i = 2; i < totalBytes_; i++) {
+    for (uint16_t i = START_OF_INSTRUCTIONS; i < totalBytes_; i++) {
         dataBuffer = usart::receive();
         memory_.ecriture(startingAddress_ + i, dataBuffer);
         _delay_ms(5);

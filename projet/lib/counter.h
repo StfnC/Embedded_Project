@@ -30,4 +30,8 @@ class CounterInterrupt {
     void setDuration(uint16_t duration);
     void setCompareMode(CompareMode compareMode);
     void setGenerationMode(GenerationMode generationMode);
+
+
+    const uint16_t ONE_SECOND_PRESCALER_VALUE = 7812.5;
+
 };

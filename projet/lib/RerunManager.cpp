@@ -30,9 +30,9 @@ void RerunManager::setRerunManagerState(RerunManagerState state) {
 void RerunManager::stopRegister() {
     state_ = RerunManagerState::END_MEMORY;
 
-    memory_.ecriture(address_++, 0xFF);
+    memory_.ecriture(address_++, UINT8_MAX);
     stopRerunManagement();
-    memory_.ecriture(address_++, 0xFF);
+    memory_.ecriture(address_++, UINT8_MAX);
 }
 
 void RerunManager::initializationRead() {
@@ -72,10 +72,10 @@ void RerunManager::stopRerun() {
 
 
 void RerunManager::writeMemory() {
-    uint8_t storingLeft = (MotorsController::getLeftDirection() << 7) | MotorsController::getLeftPercentage();
+    uint8_t storingLeft = (MotorsController::getLeftDirection() << VALUE_FOR_SHIFT_EIGHTH_BIT) | MotorsController::getLeftPercentage();
     memory_.ecriture(address_++, storingLeft);
     _delay_ms(1);
-    uint8_t storingRight = (MotorsController::getRightDirection() << 7) | MotorsController::getRightPercentage();
+    uint8_t storingRight = (MotorsController::getRightDirection() << VALUE_FOR_SHIFT_EIGHTH_BIT) | MotorsController::getRightPercentage();
     memory_.ecriture(address_++, storingRight);
 }
 
@@ -83,17 +83,17 @@ void RerunManager::readMemory() {
     uint8_t lecture;
     memory_.lecture(address_++, &lecture);
 
-    if (lecture == 0xFF) {
+    if (lecture == UINT8_MAX) {
         stopRerun();
     }
     
-    MotorsController::changeLeftDirection(static_cast<Direction>(lecture >> 7));
-    MotorsController::setLeftPercentage(lecture & 0x7F);
+    MotorsController::changeLeftDirection(static_cast<Direction>(lecture >> VALUE_FOR_SHIFT_EIGHTH_BIT));
+    MotorsController::setLeftPercentage(lecture & SEVEN_FIRST_BITS_MASK);
     _delay_ms(1);
     memory_.lecture(address_++, &lecture);
     MotorsController::changeRightDirection(static_cast<Direction>(lecture >> 7));
-    MotorsController::setRightPercentage(lecture & 0x7F);
-   if (lecture == 0xFF) {
+    MotorsController::setRightPercentage(lecture & SEVEN_FIRST_BITS_MASK);
+   if (lecture == UINT8_MAX) {
         stopRerun();
     }
 }

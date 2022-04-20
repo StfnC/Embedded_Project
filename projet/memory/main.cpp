@@ -26,7 +26,6 @@ void wipeMemory() {
         _delay_ms(3);
     }
 }
-
 int main() {
     // wipeMemory();
     DDRA = 0xFF;

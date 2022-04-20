@@ -39,7 +39,8 @@ class MotorsController {
         static bool getRightDirection();
 
     private:
-        static const uint8_t MAX_TIMER_VALUE = 255;
+        static constexpr uint8_t MAX_TIMER_VALUE = 255;
+        static constexpr uint8_t ONE_HUNDRED_PERCENT = 100;
 
         static Direction directionLeft_; 
         static Direction directionRight_; 
