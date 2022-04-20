@@ -78,6 +78,6 @@ void BuzzerController::playNote(uint8_t note) {
 }
 
 void BuzzerController::stopNote() {
-    TCCR1A &= ~((1 << COM1A0) | _(1 << COM1A1));
+    TCCR1A &= ~((1 << COM1A0) | (1 << COM1A1));
     OCR1A = 0x0000;
 }

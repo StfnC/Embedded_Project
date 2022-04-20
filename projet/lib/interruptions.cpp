@@ -28,22 +28,22 @@ ButtonInterrupt::ButtonInterrupt(uint8_t interruptNumber, InterruptMode mode) {
     switch (mode) {
         case InterruptMode::LowLevelInterrupt:
 
-            EICRA &= ~(_BV(ISC00) << (INTERRUPT_NUMBER_MULTIPLIER * interruptNumber));
-            EICRA &= ~(_BV(ISC01) << (INTERRUPT_NUMBER_MULTIPLIER * interruptNumber));
+            EICRA &= ~((1 << ISC00) << (INTERRUPT_NUMBER_MULTIPLIER * interruptNumber));
+            EICRA &= ~((1 << ISC01) << (INTERRUPT_NUMBER_MULTIPLIER * interruptNumber));
             break;
 
         case InterruptMode::AnyEdgeInterrupt:
-            EICRA &= ~(_BV(ISC01) << (INTERRUPT_NUMBER_MULTIPLIER * interruptNumber));
-            EICRA |= (_BV(ISC00) << (INTERRUPT_NUMBER_MULTIPLIER * interruptNumber));
+            EICRA &= ~((1 << ISC01) << (INTERRUPT_NUMBER_MULTIPLIER * interruptNumber));
+            EICRA |= ((1 << ISC00) << (INTERRUPT_NUMBER_MULTIPLIER * interruptNumber));
             break;
 
         case InterruptMode::FallingEdgeInterrupt:
-            EICRA &= ~(_BV(ISC00) << (INTERRUPT_NUMBER_MULTIPLIER * interruptNumber));
-            EICRA |= (_BV(ISC01) << (INTERRUPT_NUMBER_MULTIPLIER * interruptNumber));
+            EICRA &= ~((1 << ISC00) << (INTERRUPT_NUMBER_MULTIPLIER * interruptNumber));
+            EICRA |= ((1 << ISC01) << (INTERRUPT_NUMBER_MULTIPLIER * interruptNumber));
             break;
 
         case InterruptMode::RisingEdgeInterrupt:
-            EICRA |= _BV(ISC00) | _BV(ISC01);
+            EICRA |= (1 << ISC00) | (1 << ISC01);
             break;
     }
 
