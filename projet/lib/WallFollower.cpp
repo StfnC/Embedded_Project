@@ -1,19 +1,10 @@
 #include "WallFollower.h"
 
-#include "usart.h"
-
-// const uint8_t WallFollower::FOLLOWING_DISTANCE_THRESHOLD = 20;
-// const uint8_t WallFollower::FOLLOWING_DISTANCE_ERROR = 1;
-// const uint8_t WallFollower::NO_WALL_THRESHOLD = 40;
-// const uint8_t WallFollower::BASE_SPEED = 40;
-
 uint8_t WallFollower::distance_;
 bool WallFollower::wallDetected_;
 
 void WallFollower::followWall() {
     distance_ = DistanceSensor::getDistanceCm();
-
-    usart::transmitTextMessage("Distance : %d\n", distance_);
 
     if (distance_ > NO_WALL_THRESHOLD) {
         wallDetected_ = false;
