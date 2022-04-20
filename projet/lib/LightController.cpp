@@ -90,7 +90,7 @@ void LightController::noLightRight() {
     MotorsController::changeRightDirection(Direction::Forward);
     MotorsController::changeLeftDirection(Direction::Reverse);
     MotorsController::setLeftPercentage(DEFAULT_SPEED);
-    MotorsController::setRightPower(DEFAULT_SPEED);
+    MotorsController::setRightPercentage(DEFAULT_SPEED);
 }
 
 uint8_t LightController::readValue(uint8_t port) {
