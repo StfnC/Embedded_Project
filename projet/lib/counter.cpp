@@ -8,7 +8,6 @@
  */
 
 #include "counter.h"
-const uint16_t ONE_SECOND_PRESCALER_VALUE = 7812.5;
 
 CounterInterrupt::CounterInterrupt() {
     cli();
@@ -67,7 +66,7 @@ void CounterInterrupt::setCompareMode(CompareMode compareMode) {
 
 void CounterInterrupt::setDuration(uint16_t duration) {
     uint16_t durationTimer = duration * ONE_SECOND_PRESCALER_VALUE;
-    if (durationTimer <= 65535) {
+    if (durationTimer <= UINT16_MAX) {
         OCR1A = durationTimer;
     }
 }

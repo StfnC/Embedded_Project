@@ -23,5 +23,7 @@ class BuzzerController {
         static void playNote(uint8_t note);
         static void stopNote();
 
-        static const uint16_t OCR_VALUES[37];
+        static constexpr uint8_t OCR_VALUES_SIZE = 37;
+        static const uint16_t OCR_VALUES[OCR_VALUES_SIZE];
+        static constexpr uint8_t FIRST_NOTE = 45;
 };

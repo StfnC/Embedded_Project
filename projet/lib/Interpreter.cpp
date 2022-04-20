@@ -34,11 +34,11 @@ void Interpreter::interpretLine() {
 
 void Interpreter::readNumberInstructions() {
     uint8_t firstNumberHalf = read8Bits();
-    numberInstructions_ = static_cast<uint16_t>(firstNumberHalf) << 8;
+    numberInstructions_ = static_cast<uint16_t>(firstNumberHalf) << BIT_SHIFT_FOR_UINT8_CONVERSION;
     uint8_t secondNumberHalf = read8Bits();
     numberInstructions_ |= static_cast<uint16_t>(secondNumberHalf);
-    numberInstructions_ -= 2;
-    numberInstructions_ /= 2;
+    numberInstructions_ -= N_BYTES_FOR_PROGRAM_SIZE;
+    numberInstructions_ /= N_BYTES_FOR_PROGRAM_SIZE;
 }
 
 void Interpreter::interpreter(uint8_t instruction, uint8_t operand) {
@@ -110,7 +110,7 @@ void Interpreter::dbt() {
 
 void Interpreter::att(uint8_t operand) {
     for (uint8_t i = 0; i < operand; i++) {
-        _delay_ms(25);
+        _delay_ms(TWENTY_FIVE_SECOND_DELAY);
     }
 }
 
@@ -138,16 +138,16 @@ void Interpreter::mar() {  // arrête les deux moteurs
 }
 
 void Interpreter::mav(uint8_t operand) {  // avancer
-    uint8_t percentage = (operand / 255) * 100;
+    uint8_t percentage = (operand / UINT8_MAX) * HUNDRED_PERCENT;
     MotorsController::changeLeftDirection(Direction::Forward);
     MotorsController::changeRightDirection(Direction::Forward);
     MotorsController::setLeftPercentage(percentage);
     MotorsController::setRightPercentage(percentage);
-    _delay_ms(20);
+    _delay_ms(TWENTY_SECOND_DELAY);
 }
 
 void Interpreter::mre(uint8_t operand) {  // reculer
-    uint8_t percentage = operand / 255 * 100;
+    uint8_t percentage = operand / UINT8_MAX * HUNDRED_PERCENT;
     MotorsController::changeLeftDirection(Direction::Reverse);
     MotorsController::changeRightDirection(Direction::Reverse);
     MotorsController::setLeftPercentage(percentage);
@@ -158,10 +158,10 @@ void Interpreter::trd() {  // tourner à droite
     uint8_t rightPercent = MotorsController::getRightPercentage();
     uint8_t leftPercent = MotorsController::getLeftPercentage();
 
-    MotorsController::setRightPercentage(100);
+    MotorsController::setRightPercentage(HUNDRED_PERCENT);
     MotorsController::invertRightDirection();
 
-    MotorsController::setLeftPercentage(100);
+    MotorsController::setLeftPercentage(HUNDRED_PERCENT);
 
     _delay_ms(ROTATION_TIME);  // duree de rotation
 
@@ -174,9 +174,9 @@ void Interpreter::trg() {  // tourner à gauche
     uint8_t rightPercent = MotorsController::getRightPercentage();
     uint8_t leftPercent = MotorsController::getLeftPercentage();
 
-    MotorsController::setRightPercentage(100);
+    MotorsController::setRightPercentage(HUNDRED_PERCENT);
 
-    MotorsController::setLeftPercentage(100);
+    MotorsController::setLeftPercentage(HUNDRED_PERCENT);
     MotorsController::invertLeftDirection();
 
     _delay_ms(ROTATION_TIME);  // duree de rotation

@@ -22,6 +22,8 @@ class ButtonInterrupt {
     ~ButtonInterrupt() {}
 
    private:
+    static constexpr uint8_t INTERRUPT_NUMBER_MULTIPLIER = 2;
+
     uint8_t eicraValue_;
     uint8_t eimskValue_;
 };

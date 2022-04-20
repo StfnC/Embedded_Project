@@ -28,17 +28,18 @@ ButtonInterrupt::ButtonInterrupt(uint8_t interruptNumber, InterruptMode mode) {
     switch (mode) {
         case InterruptMode::LowLevelInterrupt:
 
-            EICRA &= ~(_BV(ISC00) << (2 * interruptNumber) | _BV(ISC01) << (2 * interruptNumber));
+            EICRA &= ~(_BV(ISC00) << (INTERRUPT_NUMBER_MULTIPLIER * interruptNumber));
+            EICRA &= ~(_BV(ISC01) << (INTERRUPT_NUMBER_MULTIPLIER * interruptNumber));
             break;
 
         case InterruptMode::AnyEdgeInterrupt:
-            EICRA &= ~(_BV(ISC01) << (2 * interruptNumber));
-            EICRA |= (_BV(ISC00) << (2 * interruptNumber));
+            EICRA &= ~(_BV(ISC01) << (INTERRUPT_NUMBER_MULTIPLIER * interruptNumber));
+            EICRA |= (_BV(ISC00) << (INTERRUPT_NUMBER_MULTIPLIER * interruptNumber));
             break;
 
         case InterruptMode::FallingEdgeInterrupt:
-            EICRA &= ~(_BV(ISC00) << (2 * interruptNumber));
-            EICRA |= (_BV(ISC01) << (2 * interruptNumber));
+            EICRA &= ~(_BV(ISC00) << (INTERRUPT_NUMBER_MULTIPLIER * interruptNumber));
+            EICRA |= (_BV(ISC01) << (INTERRUPT_NUMBER_MULTIPLIER * interruptNumber));
             break;
 
         case InterruptMode::RisingEdgeInterrupt:

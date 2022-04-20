@@ -66,18 +66,18 @@ const uint16_t BuzzerController::OCR_VALUES[] = {
 void BuzzerController::initBuzzer() {
     DDRD |= (1 << DDD5) | (1 << DDD4);
     OCR1A = 0x0000;
-    TCCR1B |= (1 << CS11) | (1 << WGM12);
+    TCCR1B |= (1 << CS11) | _BV(WGM12);
 }
 
 void BuzzerController::playNote(uint8_t note) {
-    TCCR1A |= (1 << COM1A0);
+    TCCR1A |= _BV(COM1A0);
 
-    OCR1A = OCR_VALUES[note - 45];
+    OCR1A = OCR_VALUES[note - FIRST_NOTE];
 
     TCNT1 = 0x0000;
 }
 
 void BuzzerController::stopNote() {
-    TCCR1A &= ~((1 << COM1A0) | (1 << COM1A1));
+    TCCR1A &= ~(_BV(COM1A0) | _BV(COM1A1));
     OCR1A = 0x0000;
 }

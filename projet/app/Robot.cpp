@@ -86,12 +86,11 @@ void Robot::manageStateInit() {
 void Robot::manageStateStartRerun() {
     DEBUG_PRINT_MESSAGE("Current State : START_RERUN\n");
     // FIXME: -Maybe use a timer instead
-    //        -Use constants
-    for (uint8_t i = 0; i < 15; i++) {
+    for (uint8_t i = 0; i < NB_ITER_FOR_THREE_SECONDS_AT_FIVE_HZ; i++) {
         led_.setRed();
-        _delay_ms(100);
+        _delay_ms(BLINKING_DELAY_FOR_FIVE_HERZTZ);
         led_.setOff();
-        _delay_ms(100);
+        _delay_ms(BLINKING_DELAY_FOR_FIVE_HERZTZ);
     }
     RerunManager::initializationRead();
     led_.setOff();
@@ -100,7 +99,6 @@ void Robot::manageStateStartRerun() {
 
 void Robot::manageStateRerun() {
     DEBUG_PRINT_MESSAGE("Current State : RERUN\n");
-    // FIXME: BLOCKING
     if (RerunManager::getState() == RerunManagerState::END_MEMORY) {
         currentState_ = State::END_RERUN;
     }
@@ -114,12 +112,11 @@ void Robot::manageStateEndRerun() {
 
 void Robot::manageStateStartAutonomous() {
     DEBUG_PRINT_MESSAGE("Current State : START_AUTONOMOUS\n");
-    // FIXME: This can be extracted to a function (same code as Start_Rerun)
-    for (uint8_t i = 0; i < 15; i++) {
+    for (uint8_t i = 0; i < NB_ITER_FOR_THREE_SECONDS_AT_FIVE_HZ; i++) {
         led_.setGreen();
-        _delay_ms(100);
+        _delay_ms(BLINKING_DELAY_FOR_FIVE_HERZTZ);
         led_.setOff();
-        _delay_ms(100);
+        _delay_ms(BLINKING_DELAY_FOR_FIVE_HERZTZ);
     }
 
     led_.setOff();
@@ -163,8 +160,7 @@ void Robot::manageStateFollowLight() {
 
     DEBUG_PRINT_MESSAGE_WITH_VALUE("Distance : %d\n", distance);
 
-    // FIXME:-Create constant for when robot is close to wall (10 cm?)
-    if (distance < 15) {
+    if (distance < LOW_WALL_DETECTION_LIMIT) {
         currentState_ = State::FOLLOW_WALL;
     }   
 }
@@ -177,8 +173,7 @@ void Robot::manageStateStopMemorizing() {
 
 void Robot::manageStateStartUTurn() {
     DEBUG_PRINT_MESSAGE("Current State : START_U_TURN\n");
-    // FIXME: Create constant
-    _delay_ms(1000);
+    _delay_ms(ONE_SECOND_DELAY);
     currentState_ = State::U_TURN;
 }
 
@@ -187,13 +182,12 @@ void Robot::manageStateUTurn() {
     led_.setAmber();
     MotorsController::changeLeftDirection(Direction::Forward);
     MotorsController::changeRightDirection(Direction::Forward);
-    MotorsController::setLeftPercentage(80);
-    MotorsController::setRightPercentage(80);
-    _delay_ms(400);
-    MotorsController::setRightPercentage(55);
-    _delay_ms(3000);
-    // FIXME: Constant
-    while (DistanceSensor::getDistanceCm() > 30);
+    MotorsController::setLeftPercentage(UTURN_LEFT_SPEED);
+    MotorsController::setRightPercentage(UTURN_LEFT_SPEED);
+    _delay_ms(FORWARD_DELAY_UTURN);
+    MotorsController::setRightPercentage(UTURN_RIGHT_SPEED);
+    _delay_ms(UTURN_TURNING_DELAY);
+    while (DistanceSensor::getDistanceCm() > HIGH_WALL_DETECTION_LIMIT);
     
 
     led_.setOff();;
