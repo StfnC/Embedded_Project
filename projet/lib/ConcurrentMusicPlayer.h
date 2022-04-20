@@ -5,13 +5,18 @@
 #include "BuzzerController.h"
 #include "memoire_24.h"
 #include "operations.h"
-#include "usart.h"
 #include "SystemTimer.h"
 #include "musicPlayerConstants.h"
 
+enum class MusicTrack {
+    FIRST_TRACK,
+    SECOND_TRACK
+};
+
 class ConcurrentMusicPlayer {
     public:
-        static void init();
+        static void init(MusicTrack track);
+        static void setTrackPlayingStatus(bool trackPlaying);
         static void playMusic();
         
     private:
@@ -39,4 +44,5 @@ class ConcurrentMusicPlayer {
         static uint16_t loopAddress_;
         static uint8_t counter_;
         static uint32_t afterWaitTime_;
+        static bool startTrack_;
 };

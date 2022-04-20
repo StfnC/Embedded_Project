@@ -4,7 +4,6 @@
 #include <debug.h>
 #include <SystemTimer.h>
 #include <ConcurrentMusicPlayer.h>
-#include <util/delay.h>
 
 ISR(TIMER2_COMPA_vect) {
     SystemTimer::incrementTimer();
@@ -14,9 +13,13 @@ int main() {
     DEBUG_INIT;
     SystemTimer::init();
     BuzzerController::initBuzzer();
-    ConcurrentMusicPlayer::init();
+    ConcurrentMusicPlayer::init(MusicTrack::FIRST_TRACK);
 
     while (true) {
+        if (SystemTimer::getTimer() > 10000) {
+            ConcurrentMusicPlayer::setTrackPlayingStatus(true);
+        }
+        
         ConcurrentMusicPlayer::playMusic();
     }
     

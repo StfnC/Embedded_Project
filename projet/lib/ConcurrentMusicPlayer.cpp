@@ -7,10 +7,23 @@ uint16_t ConcurrentMusicPlayer::currentAdress_ = music::START_OF_MUSIC_ADDRESS;
 uint16_t ConcurrentMusicPlayer::loopAddress_ = 0;
 uint8_t ConcurrentMusicPlayer::counter_ = 0;
 uint32_t ConcurrentMusicPlayer::afterWaitTime_ = 0;
+bool ConcurrentMusicPlayer::startTrack_ = false;
 
-void ConcurrentMusicPlayer::init() {
+void ConcurrentMusicPlayer::init(MusicTrack track) {
+    currentAdress_ = music::START_OF_MUSIC_ADDRESS;
     afterWaitTime_ = SystemTimer::getTimer();
+    
     readNumberInstructions();
+
+    switch (track) {
+        case MusicTrack::FIRST_TRACK:
+            break;
+        case MusicTrack::SECOND_TRACK:
+            currentAdress_ += 2 * numberInstructions_;
+            numberInstructions_ = 0;
+            readNumberInstructions();
+            break;
+    }
 }
 
 uint8_t ConcurrentMusicPlayer::read8Bits() {
@@ -109,5 +122,9 @@ void ConcurrentMusicPlayer::fin() {
 }
 
 bool ConcurrentMusicPlayer::canPlay() {
-    return SystemTimer::getTimer() >= afterWaitTime_;
+    return startTrack_ && SystemTimer::getTimer() >= afterWaitTime_;
+}
+
+void ConcurrentMusicPlayer::setTrackPlayingStatus(bool trackPlaying) {
+    startTrack_ = trackPlaying;
 }
