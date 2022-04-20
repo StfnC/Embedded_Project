@@ -13,10 +13,9 @@
 
 #include "debug.h"
 #include "memoire_24.h"
-#include "usart.h"
 #include <util/delay.h>
 
-RobotProgramDownloader::RobotProgramDownloader() : receptor_(), memory_(), totalBytes_(0x0000) {
+RobotProgramDownloader::RobotProgramDownloader() : memory_(), totalBytes_(0x0000) {
 }
 
 void RobotProgramDownloader::acceptProgramData() {
@@ -25,8 +24,8 @@ void RobotProgramDownloader::acceptProgramData() {
 }
 
 void RobotProgramDownloader::writeTotalBytes() {
-    uint16_t firstByteOfNumberOfBytes = static_cast<uint16_t>(receptor_.receive());
-    uint16_t secondByteOfNumberOfBytes = static_cast<uint16_t>(receptor_.receive());
+    uint16_t firstByteOfNumberOfBytes = static_cast<uint16_t>(usart::receive());
+    uint16_t secondByteOfNumberOfBytes = static_cast<uint16_t>(usart::receive());
 
     totalBytes_ |= firstByteOfNumberOfBytes << 0x08 | secondByteOfNumberOfBytes;
 
@@ -40,7 +39,7 @@ void RobotProgramDownloader::writeProgramToMemory() {
     uint8_t dataBuffer;
 
     for (uint16_t i = 2; i < totalBytes_; i++) {
-        dataBuffer = receptor_.receive();
+        dataBuffer = usart::receive();
         memory_.ecriture(0x0000 + i, dataBuffer);
         _delay_ms(5);
     }

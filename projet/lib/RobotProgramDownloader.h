@@ -16,7 +16,6 @@ class RobotProgramDownloader {
 
         void acceptProgramData();
     private:
-        usart receptor_;
         Memoire24CXXX memory_;
         uint16_t totalBytes_;
 
