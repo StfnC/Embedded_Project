@@ -15,7 +15,6 @@ void WallFollower::followWall() {
 
     usart::transmitTextMessage("Distance : %d\n", distance_);
 
-    // FIXME: Create an enum for the different distances
     if (distance_ > NO_WALL_THRESHOLD) {
         wallDetected_ = false;
         fullStop();
