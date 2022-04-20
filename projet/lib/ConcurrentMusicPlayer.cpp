@@ -127,4 +127,8 @@ bool ConcurrentMusicPlayer::canPlay() {
 
 void ConcurrentMusicPlayer::setTrackPlayingStatus(bool trackPlaying) {
     startTrack_ = trackPlaying;
+
+    if (!startTrack_) {
+        BuzzerController::stopNote();
+    }
 }

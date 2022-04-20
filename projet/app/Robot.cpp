@@ -13,11 +13,13 @@ void Robot::init() {
     DistanceSensor::initialization();
     LightController::initialization();
     ButtonPressDetector::init();
+    BuzzerController::initBuzzer();
 }
 
 void Robot::run() {
     manageStateMachine();
     RerunManager::manageRerun();
+    ConcurrentMusicPlayer::playMusic();
 }
 
 void Robot::manageStateMachine() {
@@ -79,8 +81,14 @@ void Robot::manageStateStartRerun() {
         led_.setOff();
         _delay_ms(BLINKING_DELAY_FOR_FIVE_HERZTZ);
     }
+
     RerunManager::initializationRead();
+
+    ConcurrentMusicPlayer::init(MusicTrack::SECOND_TRACK);
+    ConcurrentMusicPlayer::setTrackPlayingStatus(true);
+    
     led_.setOff();
+    
     currentState_ = State::RERUN;
 }
 
@@ -95,6 +103,7 @@ void Robot::manageStateEndRerun() {
     DEBUG_PRINT_MESSAGE("Current State : END_RERUN\n");
     led_.setGreen();
     RerunManager::stopRerun();
+    ConcurrentMusicPlayer::setTrackPlayingStatus(false);
 }
 
 void Robot::manageStateStartAutonomous() {
@@ -107,6 +116,10 @@ void Robot::manageStateStartAutonomous() {
     }
 
     led_.setOff();
+
+    ConcurrentMusicPlayer::init(MusicTrack::FIRST_TRACK);
+    ConcurrentMusicPlayer::setTrackPlayingStatus(true);
+
     currentState_ = State::START_MEMORIZING;
 }
 
@@ -185,6 +198,8 @@ void Robot::manageStateEndAutonomous() {
         led_.setRed();
         RerunManager::stopRegister();
     }
+
+    ConcurrentMusicPlayer::setTrackPlayingStatus(false);
 
     led_.setGreen();
 }

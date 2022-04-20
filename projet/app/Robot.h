@@ -13,6 +13,8 @@
 #include <RerunManager.h>
 #include <SystemTimer.h>
 #include <RerunManager.h>
+#include <BuzzerController.h>
+#include <ConcurrentMusicPlayer.h>
 
 #include "State.h"
 
