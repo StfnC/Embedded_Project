@@ -15,10 +15,6 @@
 State Robot::currentState_ = State::INIT;
 led Robot::led_(DDA0, DDA1);
 
-ISR(TIMER2_COMPA_vect) {
-    RerunManager::manageRerun();
-}
-
 void Robot::init() {
     MotorsController::initialization();
     DistanceSensor::initialization();

@@ -6,18 +6,23 @@
 uint16_t RerunManager::address_ = 0;
 Memoire24CXXX RerunManager::memory_ = Memoire24CXXX();
 RerunManagerState RerunManager::state_ = RerunManagerState::INERT;
+uint32_t RerunManager::lastMemoryAccess_ = 0;
 
 void RerunManager::manageRerun() {
-    switch (state_) {
-        case RerunManagerState::INERT:
-        case RerunManagerState::END_MEMORY:
-            break;
-        case RerunManagerState::MEMORIZING:
-            writeMemory();
-            break;
-        case RerunManagerState::RERUN:
-            readMemory();
-            break;
+    if (SystemTimer::getTimer() >= lastMemoryAccess_ + MEMORY_ACCESS_INTERVAL) {
+        lastMemoryAccess_ = SystemTimer::getTimer();
+        
+        switch (state_) {
+            case RerunManagerState::INERT:
+            case RerunManagerState::END_MEMORY:
+                break;
+            case RerunManagerState::MEMORIZING:
+                writeMemory();
+                break;
+            case RerunManagerState::RERUN:
+                readMemory();
+                break;
+        }
     }
 }
 
@@ -42,25 +47,25 @@ void RerunManager::initializationRead() {
 }
 
 void RerunManager::initialization() {
-    cli();
+    // cli();
 
-    TCNT2 = 0;
-    TCCR2A |= (1 << COM2A1) | (1 << COM2A0);
-    TCCR2B |= (1 << CS22) | (1 << CS21) | (1 << CS20);
-    TIMSK2 |= (1 << OCIE2A);
+    // TCNT2 = 0;
+    // TCCR2A |= (1 << COM2A1) | (1 << COM2A0);
+    // TCCR2B |= (1 << CS22) | (1 << CS21) | (1 << CS20);
+    // TIMSK2 |= (1 << OCIE2A);
 
-    OCR2A = TIMER_DURATION;
+    // OCR2A = MEMORY_ACCESS_INTERVAL;
 
-    sei();
+    // sei();
 }
 
 void RerunManager::stopRerunManagement() {
-    cli();
+    // cli();
 
-    TCCR2A &= ~((1 << COM2A0) | (1 << COM2A1));
-    OCR2A = 0x0000;
-    TIMSK2 &= ~(_BV(OCIE2A));
-    sei();
+    // TCCR2A &= ~((1 << COM2A0) | (1 << COM2A1));
+    // OCR2A = 0x0000;
+    // TIMSK2 &= ~(_BV(OCIE2A));
+    // sei();
 }
 
 void RerunManager::stopRerun() {
